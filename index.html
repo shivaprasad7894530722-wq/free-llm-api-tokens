@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free LLM API Tokens Tracker</title>
+<meta name="description" content="Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day.">
+<style>
+:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--fg:#e6edf3;--mut:#8b949e;--acc:#58a6ff;--ok:#3fb950;--warn:#d29922;--bad:#f85149}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header,main,footer{max-width:1200px;margin:0 auto;padding:16px}
+h1{margin:8px 0 4px;font-size:1.6rem}.mut{color:var(--mut)}.small{font-size:.85rem}
+.disc{background:#1f1a0e;border:1px solid #4d3b0b;border-radius:8px;padding:10px 12px;margin:12px 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0}
+summary{cursor:pointer;font-weight:600}.cl h3{margin:10px 0 2px;font-size:.95rem;color:var(--acc)}.cl ul{margin:0 0 6px;padding-left:20px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+input[type=search],select{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit}
+input[type=search]{flex:1;min-width:220px}label{white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card h2{font-size:1.05rem;margin:0 0 6px}.badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.b{font-size:.72rem;padding:2px 8px;border-radius:99px;border:1px solid var(--line)}
+.b.ok{color:var(--ok);border-color:#238636}.b.no{color:var(--mut)}.b.risk{color:var(--bad);border-color:#8e1519}.b.off{color:var(--acc);border-color:#1f6feb}.b.tpd{color:var(--warn);border-color:#9e6a03}
+dl{display:grid;grid-template-columns:110px 1fr;gap:3px 8px;margin:0;font-size:.88rem}dt{color:var(--mut)}dd{margin:0;word-break:break-word}
+code{background:#0b0f14;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.82rem}
+.copy{cursor:pointer;margin-left:4px;font-size:.75rem;color:var(--mut);background:none;border:none}
+#count{margin-left:auto}
+</style>
+</head>
+<body>
+<header>
+<h1>Free LLM API Tokens Tracker</h1>
+<div class="mut">Sites and providers that give free LLM API tokens, with OpenAI compatibility, base URL and tokens per day. Updated on weekdays.</div>
+<div class="small mut">Last updated: <b id="updated">…</b></div>
+<div class="disc small">⚠️ Figures come from each provider's own pages as of the date shown, and they change often. Check before you rely on them. <b>Never share your API keys.</b> Sites marked <span class="b risk">relay risk</span> are unofficial resellers or relays: avoid sending sensitive data through them.</div>
+<details open class="cl"><summary>Latest updates</summary><div id="changelog"></div></details>
+</header>
+<main>
+<div class="controls">
+<input type="search" id="q" placeholder="Search name, model, notes, base URL…" aria-label="Search">
+<label><input type="checkbox" id="oai"> OpenAI-compatible only</label>
+<label><input type="checkbox" id="norisk"> Hide relay-risk</label>
+<label><input type="checkbox" id="hastpd"> Has published tokens/day</label>
+<select id="sort" aria-label="Sort">
+<option value="new">Sort: newest first</option>
+<option value="tpd">Sort: tokens/day (high→low)</option>
+<option value="name">Sort: name (A→Z)</option>
+<option value="updated">Sort: recently updated</option>
+</select>
+<span id="count" class="mut small"></span>
+</div>
+<div class="grid" id="grid"></div>
+</main>
+<footer class="small mut">Data: <a href="data.json">data.json</a> · Not affiliated with any provider.</footer>
+<script>
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate=d=>{if(!d)return"—";const[y,m,dd]=d.split("-");return new Date(Date.UTC(+y,+m-1,+dd)).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})};
+const fmtNum=n=>n>=1e6?(n/1e6).toFixed(n%1e6?1:0)+"M":n>=1e3?(n/1e3).toFixed(n%1e3?1:0)+"K":String(n);
+let DATA=null;
+function istStamp(iso){const d=new Date(iso);return d.toLocaleString("en-GB",{timeZone:"Asia/Kolkata",day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})+" IST"}
+function render(){
+ const q=document.getElementById("q").value.trim().toLowerCase();
+ const oai=document.getElementById("oai").checked,nr=document.getElementById("norisk").checked,ht=document.getElementById("hastpd").checked,sort=document.getElementById("sort").value;
+ let list=DATA.sites.filter(s=>{
+  if(oai&&s.openai_compatible!=="yes")return false;
+  if(nr&&s.relay_risk)return false;
+  if(ht&&!s.tokens_per_day)return false;
+  if(q){const hay=[s.name,s.url,s.base_url,s.free_allowance,s.limits,s.notes].join(" ").toLowerCase();if(!hay.includes(q))return false}
+  return true});
+ const by={new:(a,b)=>b.first_reported.localeCompare(a.first_reported)||a.name.localeCompare(b.name),
+  tpd:(a,b)=>(b.tokens_per_day||0)-(a.tokens_per_day||0)||a.name.localeCompare(b.name),
+  name:(a,b)=>a.name.localeCompare(b.name),updated:(a,b)=>b.last_updated.localeCompare(a.last_updated)||a.name.localeCompare(b.name)};
+ list.sort(by[sort]);
+ document.getElementById("count").textContent=list.length+" of "+DATA.sites.length+" sites";
+ document.getElementById("grid").innerHTML=list.map(s=>{
+  const oaiB=s.openai_compatible==="yes"?'<span class="b ok">OpenAI compatible</span>':s.openai_compatible==="partial"?'<span class="b tpd">OpenAI: partial</span>':s.openai_compatible==="no"?'<span class="b no">Not OpenAI compatible</span>':'<span class="b no">OpenAI: unspecified</span>';
+  const tpd=s.tokens_per_day?'<span class="b tpd">'+fmtNum(s.tokens_per_day)+' tokens/day</span>':'';
+  const base=s.base_url&&s.base_url!=="Unspecified"?'<code>'+esc(s.base_url)+'</code><button class="copy" title="Copy" data-c="'+esc(s.base_url)+'">⧉</button>':'Unspecified';
+  return '<article class="card"><h2><a href="'+esc(s.url)+'" target="_blank" rel="noopener nofollow">'+esc(s.name)+' ↗</a></h2><div class="badges">'+oaiB+tpd+(s.category==="official"?'<span class="b off">official provider</span>':'')+(s.relay_risk?'<span class="b risk">relay risk</span>':'')+'</div><dl>'+
+  '<dt>Base URL</dt><dd>'+base+'</dd>'+
+  '<dt>Free allowance</dt><dd>'+esc(s.free_allowance)+'</dd>'+
+  '<dt>Tokens/day</dt><dd>'+(s.tokens_per_day?s.tokens_per_day.toLocaleString("en-GB"):"Unspecified")+'</dd>'+
+  '<dt>Limits</dt><dd>'+esc(s.limits)+'</dd>'+
+  '<dt>Card needed</dt><dd>'+esc(s.card_required)+'</dd>'+
+  (s.notes?'<dt>Notes</dt><dd>'+esc(s.notes)+'</dd>':'')+
+  '<dt>First reported</dt><dd>'+fmtDate(s.first_reported)+'</dd>'+
+  '<dt>Last updated</dt><dd>'+fmtDate(s.last_updated)+'</dd></dl></article>'}).join("")||'<p class="mut">No sites match.</p>';
+}
+fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{DATA=d;
+ document.getElementById("updated").textContent=istStamp(d.last_updated);
+ document.getElementById("changelog").innerHTML=d.changelog.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(c=>'<h3>'+fmtDate(c.date)+'</h3><ul>'+c.items.map(i=>'<li>'+esc(i)+'</li>').join("")+'</ul>').join("");
+ ["q","oai","norisk","hastpd","sort"].forEach(id=>document.getElementById(id).addEventListener("input",render));render();
+}).catch(e=>{document.getElementById("grid").textContent="Could not load data.json: "+e});
+document.addEventListener("click",e=>{const b=e.target.closest(".copy");if(b){navigator.clipboard.writeText(b.dataset.c);b.textContent="✓";setTimeout(()=>b.textContent="⧉",1200)}});
+</script>
+</body>
+</html>
