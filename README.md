@@ -1,6 +1,8 @@
 # Free LLM API Tokens Tracker
 
-Live site: https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
+Live sites:
+- Cloudflare Pages (main): https://free-llm-api-tokens.pages.dev/
+- GitHub Pages (mirror): https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
 
 A single-page static site (no build step) listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated on weekdays.
 
@@ -13,6 +15,8 @@ Figures come from each provider's own pages on the date shown. They change often
 | `index.html` | The whole site (vanilla HTML/CSS/JS). It loads `data.json` at runtime. |
 | `data.json` | The single source of truth. Edit only this file (or use `update.py`). |
 | `update.py` | Optional helper for the daily job: add or update a site and write a changelog line. |
+| `deploy.sh` | Validate, commit, push to GitHub, and build the Cloudflare deploy payload. |
+| `build_cf_deploy.py` | Builds `/workspace/cf_deploy_payload.js` for the Cloudflare MCP `execute` tool. |
 | `.nojekyll` | Tells GitHub Pages to serve files as they are. |
 
 ## data.json schema (schema_version 1)
@@ -57,7 +61,23 @@ python3 update.py add --id example --name "Example" --url https://example.com/ -
 python3 update.py set --id apinex --tpd 3000000 --allowance "3M tokens/day on free models" \
   --note-change "APInex free allowance cut from 10M to 3M tokens/day."
 python3 -m json.tool data.json > /dev/null   # validate
-git add data.json && git commit -m "Daily update $(TZ=Asia/Kolkata date +%F)" && git push origin main
+./deploy.sh        # validates, commits, pushes to GitHub, builds /workspace/cf_deploy_payload.js
 ```
 
 GitHub Pages redeploys automatically within a minute or two of the push.
+
+### Cloudflare Pages sync
+
+Project `free-llm-api-tokens` on Cloudflare Pages (direct upload, no Git link: the
+Cloudflare Pages GitHub app is not installed on the account). After `./deploy.sh`:
+
+1. Call the Cloudflare MCP tool `execute` with `code` = `"$file:/workspace/cf_deploy_payload.js"`.
+   It must return `success: true`.
+2. Check: `curl -s https://free-llm-api-tokens.pages.dev/data.json | python3 -c "import json,sys;print(json.load(sys.stdin)['last_updated'])"`
+   should match the local `data.json`.
+
+The payload ships the site as a Pages `_worker.js` that embeds `index.html` and `data.json`
+(the MCP connector can't use the Pages asset-upload endpoint). If a `CLOUDFLARE_API_TOKEN`
+with Pages:Edit is ever set, `deploy.sh` deploys with `wrangler pages deploy` instead.
+To get fully automatic deploys on every push, install the Cloudflare Pages GitHub app in the
+Cloudflare dashboard and connect this repo.
