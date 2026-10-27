@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-26T09:45:00+05:30",
+  "last_updated": "2026-10-27T09:04:20+05:30",
   "changelog": [
+    {
+      "date": "2026-10-27",
+      "items": [
+        "Added Experiential Labs.",
+        "Added Runcrate.",
+        "Added InferAll.",
+        "Added Flux Router."
+      ]
+    },
     {
       "date": "2026-10-26",
       "items": [
@@ -1280,6 +1289,70 @@
       "category": "official",
       "first_reported": "2026-10-26",
       "last_updated": "2026-10-26"
+    },
+    {
+      "id": "experiential-labs",
+      "name": "Experiential Labs",
+      "url": "https://www.experientiallabs.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://api.experientiallabs.ai/v1",
+      "free_allowance": "1M tokens/day shared on free core models (DeepSeek V4.1 Flash, GPT-6 Luna, Clef)",
+      "tokens_per_day": 1000000,
+      "limits": "10 RPM, 250K tokens/min shared",
+      "card_required": "Yes",
+      "notes": "One-time $1 card check needed for free models (credited back as balance). Also Anthropic Messages and Responses API.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-10-27",
+      "last_updated": "2026-10-27"
+    },
+    {
+      "id": "runcrate",
+      "name": "Runcrate",
+      "url": "https://www.runcrate.ai/inference/free",
+      "openai_compatible": "yes",
+      "base_url": "https://api.runcrate.ai/v1",
+      "free_allowance": "Free usage on 5 open models (DeepSeek V4.1 Flash, GLM 5.3, GLM 5.3 Flash, gpt-oss 120B, Qwen3.8 Flash)",
+      "tokens_per_day": null,
+      "limits": "Session cap plus weekly allowance (resets Monday); sizes unpublished",
+      "card_required": "No",
+      "notes": "Needs a GitHub account at least 30 days old. Free requests served by third-party providers.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-10-27",
+      "last_updated": "2026-10-27"
+    },
+    {
+      "id": "inferall",
+      "name": "InferAll",
+      "url": "https://inferall.ai/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.inferall.ai/v1",
+      "free_allowance": "25 free calls, then 25 calls/day free on 10+ NVIDIA NIM open models",
+      "tokens_per_day": null,
+      "limits": "25 calls/day (50 chat/day after one-time $5 starter pack)",
+      "card_required": "No",
+      "notes": "Also Anthropic compatible at https://api.inferall.ai. Run by Kindly Robotics.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-10-27",
+      "last_updated": "2026-10-27"
+    },
+    {
+      "id": "flux-router",
+      "name": "Flux Router",
+      "url": "https://fluxrouter.ai/faq",
+      "openai_compatible": "yes",
+      "base_url": "https://api.fluxrouter.ai/v1",
+      "free_allowance": "$1 of usage per month on the Free plan",
+      "tokens_per_day": null,
+      "limits": "Hard stop at $1/month",
+      "card_required": "Unspecified",
+      "notes": "Smart-routing gateway (flux-auto), 78+ models, also Anthropic compatible.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-10-27",
+      "last_updated": "2026-10-27"
     }
   ]
 }
