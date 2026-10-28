@@ -1,7 +1,15 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-27T09:04:20+05:30",
+  "last_updated": "2026-10-28T09:01:48+05:30",
   "changelog": [
+    {
+      "date": "2026-10-28",
+      "items": [
+        "NaraRouter Free plan cut from 3 models to 1 (laguna-s-2.1); still 7M tokens/day, 15 RPM.",
+        "BazaarLink free models down from 7 to 6.",
+        "Added River AI."
+      ]
+    },
     {
       "date": "2026-10-27",
       "items": [
@@ -416,15 +424,15 @@
       "url": "https://router.bynara.id/",
       "openai_compatible": "yes",
       "base_url": "https://router.bynara.id/v1",
-      "free_allowance": "7M tokens/day on 3 free models",
+      "free_allowance": "7M tokens/day on 1 free model",
       "tokens_per_day": 7000000,
       "limits": "15 requests/min",
       "card_required": "No",
-      "notes": "Free models: Agnes 2.5 Flash, Laguna S 2.1, Nemotron 3.5 Lightning Free (cut 10→5 on 14 Oct, 5→3 on 26 Oct). Also Anthropic compatible.",
+      "notes": "Free plan now only laguna-s-2.1 (cut 10→5 on 14 Oct, 5→3 on 26 Oct, 3→1 on 28 Oct). Also Anthropic compatible.",
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-05",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-28"
     },
     {
       "id": "freeai",
@@ -464,15 +472,15 @@
       "url": "https://bazaarlink.ai/",
       "openai_compatible": "yes",
       "base_url": "https://api.bazaarlink.ai/v1",
-      "free_allowance": "Signup trial credits + 7 free models",
+      "free_allowance": "Signup trial credits + 6 free models",
       "tokens_per_day": null,
       "limits": "10 RPM / 60 units",
       "card_required": "No",
-      "notes": "Free list grew from 2 to 7 models on 20 Oct.",
+      "notes": "Free list grew from 2 to 7 models on 20 Oct, now 6 (28 Oct). Limits shared across free models, resets 00:00 UTC.",
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-07",
-      "last_updated": "2026-10-20"
+      "last_updated": "2026-10-28"
     },
     {
       "id": "yepapi",
@@ -1353,6 +1361,22 @@
       "category": "gateway",
       "first_reported": "2026-10-27",
       "last_updated": "2026-10-27"
+    },
+    {
+      "id": "river",
+      "name": "River AI (River Inference)",
+      "url": "https://river.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://api.river.ai/v1",
+      "free_allowance": "$25 signup credit (launch offer)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Credit announced by CEO Igor Babuschkin on X on 11 Oct 2026 for sign-ups 'right now'; not on the pricing page, may have ended. Models include DeepSeek V4.1 Flash and GLM-5.3 Flash.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-10-28",
+      "last_updated": "2026-10-28"
     }
   ]
 }
