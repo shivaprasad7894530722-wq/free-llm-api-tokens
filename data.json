@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-28T09:01:48+05:30",
+  "last_updated": "2026-10-29T08:59:19+05:30",
   "changelog": [
+    {
+      "date": "2026-10-29",
+      "items": [
+        "Added Tencent EdgeOne Makers Models (500K free tokens/month on 9 built-in models).",
+        "Added Typhoon API (free tier, 200 req/min)."
+      ]
+    },
     {
       "date": "2026-10-28",
       "items": [
@@ -1377,6 +1384,38 @@
       "category": "official",
       "first_reported": "2026-10-28",
       "last_updated": "2026-10-28"
+    },
+    {
+      "id": "edgeone-makers",
+      "name": "Tencent EdgeOne Makers Models",
+      "url": "https://pages.edgeone.ai/document/limits-and-quotas",
+      "openai_compatible": "yes",
+      "base_url": "https://ai-gateway.edgeone.link/v1",
+      "free_allowance": "500K tokens/month shared across built-in models (limited-time)",
+      "tokens_per_day": null,
+      "limits": "300 s max per request; rate limits on abuse",
+      "card_required": "No",
+      "notes": "Built-in models: @makers/hy3, hy3-preview, deepseek-v4-pro, deepseek-v4-flash, deepseek-v4.1-flash, minimax-m3, minimax-m2.7, kimi-k2.6, zhuque-text. Not for production. Also BYOK for OpenAI/Anthropic/Google etc. with no platform fee. Anthropic compatible too.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-10-29",
+      "last_updated": "2026-10-29"
+    },
+    {
+      "id": "typhoon",
+      "name": "Typhoon API (OpenTyphoon)",
+      "url": "https://docs.opentyphoon.ai/en/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.opentyphoon.ai/v1",
+      "free_allowance": "Free tier on Typhoon models (light usage)",
+      "tokens_per_day": null,
+      "limits": "5 req/s, 200 req/min per model",
+      "card_required": "No",
+      "notes": "Thai-first models: typhoon-v2.5-30b-a3b-instruct, typhoon-v2.1-12b-instruct; also OCR and ASR APIs. Key from Typhoon Playground.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-10-29",
+      "last_updated": "2026-10-29"
     }
   ]
 }
