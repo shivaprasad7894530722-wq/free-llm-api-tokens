@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-29T08:59:19+05:30",
+  "last_updated": "2026-10-30T08:57:16+05:30",
   "changelog": [
+    {
+      "date": "2026-10-30",
+      "items": [
+        "Added SenseNova Token Plan.",
+        "Added PEKPIK LLM.",
+        "Added Aevon.",
+        "Added Api.Airforce."
+      ]
+    },
     {
       "date": "2026-10-29",
       "items": [
@@ -1416,6 +1425,70 @@
       "category": "official",
       "first_reported": "2026-10-29",
       "last_updated": "2026-10-29"
+    },
+    {
+      "id": "sensenova",
+      "name": "SenseNova Token Plan",
+      "url": "https://platform.sensenova.cn/",
+      "openai_compatible": "yes",
+      "base_url": "https://token.sensenova.cn/v1",
+      "free_allowance": "Free public-beta Token Plan: shared credit pool across Kimi K3, GLM-5.2, DeepSeek V4.1 Flash and SenseNova models",
+      "tokens_per_day": null,
+      "limits": "Credits per rolling 5 hours and per week (reported 120K/5h and 1.2M/week since 27 Oct); credits, not tokens",
+      "card_required": "No (mobile SMS signup)",
+      "notes": "Also Anthropic Messages compatible. Credit pool figures from third-party trackers; official page is JS-only.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-10-30",
+      "last_updated": "2026-10-30"
+    },
+    {
+      "id": "pekpik",
+      "name": "PEKPIK LLM",
+      "url": "https://aiapiv2.pekpik.com/free-credit",
+      "openai_compatible": "yes",
+      "base_url": "https://aiapiv2.pekpik.com/v1",
+      "free_allowance": "$1 on email verify, then one daily claim (up to $20 over first 40 days, continues after)",
+      "tokens_per_day": null,
+      "limits": "10 requests/min on free tier; daily claim resets balance, no stacking",
+      "card_required": "No",
+      "notes": "Multi-model gateway; one permanent key.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-10-30",
+      "last_updated": "2026-10-30"
+    },
+    {
+      "id": "aevon",
+      "name": "Aevon",
+      "url": "https://aevon.sh/",
+      "openai_compatible": "yes",
+      "base_url": "https://aevon.sh/v1",
+      "free_allowance": "$100 free credits on signup via GitHub; 3 Free Tier models",
+      "tokens_per_day": null,
+      "limits": "Unpublished",
+      "card_required": "No",
+      "notes": "Gateway on Venice AI infra, has its own crypto token; also Anthropic base URL. Treat as prototype-only.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-10-30",
+      "last_updated": "2026-10-30"
+    },
+    {
+      "id": "airforce",
+      "name": "Api.Airforce",
+      "url": "https://api.airforce/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.airforce/v1",
+      "free_allowance": "Free plan $0/month on basic models (e.g. gpt-oss-20b)",
+      "tokens_per_day": null,
+      "limits": "1 request/min, 1,000 requests/day",
+      "card_required": "No",
+      "notes": "Multi-model gateway, 100+ models on paid plans.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-10-30",
+      "last_updated": "2026-10-30"
     }
   ]
 }
