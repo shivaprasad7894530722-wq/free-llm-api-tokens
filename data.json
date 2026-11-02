@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-30T08:57:16+05:30",
+  "last_updated": "2026-11-02T09:04:24+05:30",
   "changelog": [
+    {
+      "date": "2026-11-02",
+      "items": [
+        "Added Infercom (SambaNova EU).",
+        "Added AI21 Labs (Jamba).",
+        "Added Tencent Cloud TokenHub.",
+        "Added Helyx AI."
+      ]
+    },
     {
       "date": "2026-10-30",
       "items": [
@@ -1489,6 +1498,70 @@
       "category": "gateway",
       "first_reported": "2026-10-30",
       "last_updated": "2026-10-30"
+    },
+    {
+      "id": "infercom",
+      "name": "Infercom (SambaNova EU)",
+      "url": "https://cloud.infercom.ai/plans",
+      "openai_compatible": "yes",
+      "base_url": "https://api.infercom.ai/v1",
+      "free_allowance": "€5 free API credit on signup (expires after 90 days)",
+      "tokens_per_day": null,
+      "limits": "Standard free-plan rate limits (see docs.infercom.ai rate limits)",
+      "card_required": "No",
+      "notes": "EU-hosted SambaNova Cloud service; production models only on Free.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-02",
+      "last_updated": "2026-11-02"
+    },
+    {
+      "id": "ai21",
+      "name": "AI21 Labs (Jamba)",
+      "url": "https://www.ai21.com/pricing/",
+      "openai_compatible": "partial",
+      "base_url": "https://api.ai21.com/studio/v1",
+      "free_allowance": "$10 trial credit valid for 7 days",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Jamba Mini and Jamba Large; chat completions in an OpenAI-like format via AI21 SDK.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-02",
+      "last_updated": "2026-11-02"
+    },
+    {
+      "id": "tencent-tokenhub",
+      "name": "Tencent Cloud TokenHub",
+      "url": "https://www.tencentcloud.com/document/product/1300/80423",
+      "openai_compatible": null,
+      "base_url": "Unspecified",
+      "free_allowance": "1M free tokens per language model, one-time, valid 1 year (campaign until 31 Dec 2026)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Top-up",
+      "notes": "Each model claim freezes $10 of account balance or credit limit, returned when endpoints are deleted.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-02",
+      "last_updated": "2026-11-02"
+    },
+    {
+      "id": "helyx-ai",
+      "name": "Helyx AI",
+      "url": "https://helyxai.space/",
+      "openai_compatible": "yes",
+      "base_url": "https://helyxai.space/v1",
+      "free_allowance": "$10 signup credit (one-time) on any listed model",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Third-party aggregator listings say $2 is instant and $8 is released by support; daily free-token claims are mentioned but no figure is published on the official site. Crypto top-ups.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-02",
+      "last_updated": "2026-11-02"
     }
   ]
 }
