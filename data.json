@@ -1,7 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-02T09:04:24+05:30",
+  "last_updated": "2026-11-03T09:00:13+05:30",
   "changelog": [
+    {
+      "date": "2026-11-03",
+      "items": [
+        "New 3 Nov 2026"
+      ]
+    },
     {
       "date": "2026-11-02",
       "items": [
@@ -1562,6 +1568,38 @@
       "category": "gateway",
       "first_reported": "2026-11-02",
       "last_updated": "2026-11-02"
+    },
+    {
+      "id": "joingonka",
+      "name": "JoinGonka Gateway",
+      "url": "https://joingonka.ai/en/knowledge/free-ai-api/",
+      "openai_compatible": "yes",
+      "base_url": "https://gate.joingonka.ai/v1",
+      "free_allowance": "3M one-time starter tokens after email confirmation",
+      "tokens_per_day": null,
+      "limits": "Models: GLM-5.3-Flash, DeepSeek-V4-Flash, MiniMax-M2.7; then pay per token",
+      "card_required": "No card",
+      "notes": "Also Anthropic-format at https://gate.joingonka.ai. One-time bonus, not a daily quota.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-03",
+      "last_updated": "2026-11-03"
+    },
+    {
+      "id": "ngrok-ai",
+      "name": "ngrok.ai AI Gateway",
+      "url": "https://ngrok.com/blog/ai-gateway-api-keys-credits",
+      "openai_compatible": "yes",
+      "base_url": "https://gateway.ngrok.ai/v1",
+      "free_allowance": "$1 credit for new accounts",
+      "tokens_per_day": null,
+      "limits": "ngrok-managed keys cover OpenAI and Anthropic models; credits otherwise prepaid (min $5)",
+      "card_required": "No card stated for the $1 credit",
+      "notes": "Sign in at app.ngrok.ai. Bring-your-own-key also supported.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-03",
+      "last_updated": "2026-11-03"
     }
   ]
 }
