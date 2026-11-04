@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-03T09:00:13+05:30",
+  "last_updated": "2026-11-04T09:02:50+05:30",
   "changelog": [
+    {
+      "date": "2026-11-04",
+      "items": [
+        "Added nabh.cloud.",
+        "Added Mervex.",
+        "Added Orq AI Gateway.",
+        "Added OpenAny."
+      ]
+    },
     {
       "date": "2026-11-03",
       "items": [
@@ -1600,6 +1609,70 @@
       "category": "official",
       "first_reported": "2026-11-03",
       "last_updated": "2026-11-03"
+    },
+    {
+      "id": "nabh-cloud",
+      "name": "nabh.cloud",
+      "url": "https://nabh.cloud/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://api.nabh.cloud/v1",
+      "free_allowance": "Free plan: 50 credits (₹50) on signup, then 50 every month; GPT OSS 20B only",
+      "tokens_per_day": null,
+      "limits": "5 requests/min, 500 requests/day, 1 API key",
+      "card_required": "No card needed",
+      "notes": "Indian prepaid LLM marketplace billed in rupees; top-ups via UPI from ₹500",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-04",
+      "last_updated": "2026-11-04"
+    },
+    {
+      "id": "mervex",
+      "name": "Mervex",
+      "url": "https://mervex.cc.cd",
+      "openai_compatible": "yes",
+      "base_url": "https://api.mervex.cc.cd/v1",
+      "free_allowance": "Free key: 100 requests/day plus one-time +400 welcome bonus (per the team's 3 Nov launch post)",
+      "tokens_per_day": null,
+      "limits": "Extra daily quota for linking Discord/Google/GitHub",
+      "card_required": "No card",
+      "notes": "Small bootstrapped gateway on a free subdomain, 100+ open models (Gemma, Llama, Qwen, GLM, Kimi, DeepSeek)",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-04",
+      "last_updated": "2026-11-04"
+    },
+    {
+      "id": "orq-gateway",
+      "name": "Orq AI Gateway",
+      "url": "https://gateway.orq.ai/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.orq.ai/v2/router",
+      "free_allowance": "$1 free credit on signup",
+      "tokens_per_day": null,
+      "limits": "Pay as you go after the credit; 500+ models",
+      "card_required": "No card",
+      "notes": "EU-hosted gateway, one key for OpenAI, Anthropic, Google, Mistral and more",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-04",
+      "last_updated": "2026-11-04"
+    },
+    {
+      "id": "openany",
+      "name": "OpenAny",
+      "url": "https://openany.si",
+      "openai_compatible": "yes",
+      "base_url": "https://api.openany.si/v1",
+      "free_allowance": "$0.50 signup credit (homepage; launch post said $1), does not expire",
+      "tokens_per_day": null,
+      "limits": "Prepaid pay-per-call after the credit; ~154 models plus data APIs",
+      "card_required": "No card for the signup credit",
+      "notes": "Launched October 2026",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-04",
+      "last_updated": "2026-11-04"
     }
   ]
 }
