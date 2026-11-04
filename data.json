@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-04T09:02:50+05:30",
+  "last_updated": "2026-11-04T09:03:09+05:30",
   "changelog": [
     {
       "date": "2026-11-04",
@@ -8,7 +8,8 @@
         "Added nabh.cloud.",
         "Added Mervex.",
         "Added Orq AI Gateway.",
-        "Added OpenAny."
+        "Added OpenAny.",
+        "Updated Orq AI Gateway."
       ]
     },
     {
@@ -1647,7 +1648,7 @@
       "name": "Orq AI Gateway",
       "url": "https://gateway.orq.ai/",
       "openai_compatible": "yes",
-      "base_url": "https://api.orq.ai/v2/router",
+      "base_url": "https://my.orq.ai/v3/router",
       "free_allowance": "$1 free credit on signup",
       "tokens_per_day": null,
       "limits": "Pay as you go after the credit; 500+ models",
