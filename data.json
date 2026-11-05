@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-04T09:03:09+05:30",
+  "last_updated": "2026-11-05T08:57:10+05:30",
   "changelog": [
+    {
+      "date": "2026-11-05",
+      "items": [
+        "Added Hetzner Inference API (free while experimental).",
+        "Added Lightning AI Model APIs (signup credits)."
+      ]
+    },
     {
       "date": "2026-11-04",
       "items": [
@@ -1674,6 +1681,38 @@
       "category": "gateway",
       "first_reported": "2026-11-04",
       "last_updated": "2026-11-04"
+    },
+    {
+      "id": "hetzner-inference",
+      "name": "Hetzner Inference API (Experiments)",
+      "url": "https://docs.hetzner.com/general/company-and-policy/experiments/inference/",
+      "openai_compatible": "yes",
+      "base_url": "https://inference.hetzner.com/api/v1",
+      "free_allowance": "Free of charge while the API is experimental; models Qwen3.6-35B-A3B-FP8 and Qwen3.8-27B",
+      "tokens_per_day": null,
+      "limits": "Per key per 60s: 10 requests, 4M input tokens, 100K output tokens; no daily token cap published",
+      "card_required": "Unspecified",
+      "notes": "Needs a Hetzner account; create a token at experiments.hetzner.com. Not for production; no availability guarantee.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-05",
+      "last_updated": "2026-11-05"
+    },
+    {
+      "id": "lightning-ai",
+      "name": "Lightning AI Model APIs",
+      "url": "https://lightning.ai/docs/platform/inference/model-apis",
+      "openai_compatible": "yes",
+      "base_url": "https://lightning.ai/api/v1",
+      "free_allowance": "5 free credits on signup (25 more if you add a card); docs say up to 40M free tokens to start; credits expire after 12 months",
+      "tokens_per_day": null,
+      "limits": "Free: 15 RPM, 120K tokens/min",
+      "card_required": "No",
+      "notes": "One key across GPT, Claude, Gemini, DeepSeek, GLM and more. Personal-email accounts can take 1-3 days to activate.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-11-05",
+      "last_updated": "2026-11-05"
     }
   ]
 }
