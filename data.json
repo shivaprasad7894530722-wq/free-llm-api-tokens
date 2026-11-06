@@ -1,7 +1,19 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-05T08:57:10+05:30",
+  "last_updated": "2026-11-06T09:04:08+05:30",
   "changelog": [
+    {
+      "date": "2026-11-06",
+      "items": [
+        "Added OpenPaths.",
+        "Added LLM EU.",
+        "Added Boundless API.",
+        "Added Mango Inference.",
+        "Added LLMCloud.",
+        "Added Nscale.",
+        "Added Maritaca AI (S5-free)."
+      ]
+    },
     {
       "date": "2026-11-05",
       "items": [
@@ -1713,6 +1725,118 @@
       "category": "gateway",
       "first_reported": "2026-11-05",
       "last_updated": "2026-11-05"
+    },
+    {
+      "id": "openpaths",
+      "name": "OpenPaths",
+      "url": "https://openpaths.io/api/free-llm",
+      "openai_compatible": "yes",
+      "base_url": "https://openpaths.io/v1",
+      "free_allowance": "Free models bill $0 per token (OpenRouter :free routes plus OpenPaths Free and others); paid models need credits",
+      "tokens_per_day": null,
+      "limits": "Best-effort rate limits per key; tokens/day unspecified",
+      "card_required": "No",
+      "notes": "Open-source model router. Free catalogue lists many or/*:free models plus nvidia/deepseek-v4-flash and openpaths/free. No card for free routes.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "llmeu",
+      "name": "LLM EU",
+      "url": "https://llmeu.com/en/free-llm-api/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.llmeu.com/v1",
+      "free_allowance": "$5 promotional inference credit per new organisation; expires in 90 days; one grant per org",
+      "tokens_per_day": null,
+      "limits": "Default policy caps $10/org/day; tokens/day unspecified",
+      "card_required": "No",
+      "notes": "European catalogue/router. Partner endpoints (including OpenRouter rows) may need policy turn-on. Card payments not enabled on this deployment.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "boundless-api",
+      "name": "Boundless API",
+      "url": "https://www.boundlessapi.com/en/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.boundlessapi.com/v1",
+      "free_allowance": "$5 signup bonus (Starter model pool); may expire after 30 days if unused",
+      "tokens_per_day": null,
+      "limits": "Starter pool rate limits; tokens/day unspecified",
+      "card_required": "No",
+      "notes": "Unified router for Claude/GPT/Gemini and curated models. Billing policy also notes a 5% platform fee on credit purchases after the bonus.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "mango-inference",
+      "name": "Mango Inference",
+      "url": "https://www.mangoboost.io/platform/mango-inference",
+      "openai_compatible": "yes",
+      "base_url": "https://api.mangoboost.io/v1",
+      "free_allowance": "$10 free credits on signup (launch offer); 30% off models through 11 Nov 2026",
+      "tokens_per_day": null,
+      "limits": "Tokens/day unspecified; credits expire after stated validity period",
+      "card_required": "No",
+      "notes": "MangoBoost first-party OpenAI-compatible (and Anthropic Messages) API for open-weight models such as DeepSeek V4.1 Flash, GLM-5.3, Kimi-K3. Korean infrastructure.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "llmcloud",
+      "name": "LLMCloud",
+      "url": "https://llmcloud.ai/signup",
+      "openai_compatible": "yes",
+      "base_url": "https://api.llmcloud.ai/v1",
+      "free_allowance": "$1 free credits on signup; no card required",
+      "tokens_per_day": null,
+      "limits": "Tokens/day unspecified",
+      "card_required": "No",
+      "notes": "One OpenAI-compatible key across 150+ models with auto:cost / auto:quality / auto:reasoning routing. Signup page states free $1 credit.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "nscale",
+      "name": "Nscale",
+      "url": "https://docs.nscale.com/changelog/changelog",
+      "openai_compatible": "yes",
+      "base_url": "https://inference.api.nscale.com/v1",
+      "free_allowance": "$5 free starter credit for new accounts (stated in docs changelog for Serverless Inference and Fine-tuning); quickstart says early users may be eligible",
+      "tokens_per_day": null,
+      "limits": "Tokens/day unspecified; 429 on insufficient credit",
+      "card_required": "No",
+      "notes": "UK AI cloud OpenAI-compatible serverless inference. Google SSO signup. Confirm free credit still appears in console on signup.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
+    },
+    {
+      "id": "maritaca",
+      "name": "Maritaca AI (S5-free)",
+      "url": "https://www.maritaca.ai/en/api/",
+      "openai_compatible": "yes",
+      "base_url": "https://chat.maritaca.ai/api",
+      "free_allowance": "S5-free model: no token charge for a limited launch window (text only; no Batch/Flex/built-in tools)",
+      "tokens_per_day": null,
+      "limits": "S5-free: 60 RPM, 256K TPM in, 256K TPM out (fixed across tiers)",
+      "card_required": "No",
+      "notes": "Brazilian Sabiá/S5 API. Official pricing docs (maritalk-api) document S5-free as temporary. Paid S5 remains available when free ends. Base URL from Maritaca API docs / community examples.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-06",
+      "last_updated": "2026-11-06"
     }
   ]
 }
