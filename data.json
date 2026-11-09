@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-06T09:04:08+05:30",
+  "last_updated": "2026-11-09T09:02:45+05:30",
   "changelog": [
+    {
+      "date": "2026-11-09",
+      "items": [
+        "Added EXAONE API Platform (LG K-EXAONE 2.5).",
+        "Added Regolo.ai."
+      ]
+    },
     {
       "date": "2026-11-06",
       "items": [
@@ -1837,6 +1844,38 @@
       "category": "official",
       "first_reported": "2026-11-06",
       "last_updated": "2026-11-06"
+    },
+    {
+      "id": "k-exaone",
+      "name": "EXAONE API Platform (LG K-EXAONE 2.5)",
+      "url": "https://docs.exaone.ai/en/docs/k-exaone-2.5",
+      "openai_compatible": "yes",
+      "base_url": "https://api.exaone.ai/v1",
+      "free_allowance": "K-EXAONE 2.5 API free to use with an API key (announced 9 Nov 2026); no quota published",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Official LG AI Research. Model k-exaone_v2.5, 512K context, Korean/English text only. Rate limits and end date not published.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-09",
+      "last_updated": "2026-11-09"
+    },
+    {
+      "id": "regolo",
+      "name": "Regolo.ai",
+      "url": "https://regolo.ai/pricing/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.regolo.ai/v1",
+      "free_allowance": "30-day free trial, 1M tokens/day on all Core models",
+      "tokens_per_day": 1000000,
+      "limits": "Stricter rate limits, fair-usage throttling",
+      "card_required": "No",
+      "notes": "Italian EU hosting. Trial ends after 30 days, then pay-as-you-go. Model multipliers affect how fast the daily allowance is used.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-11-09",
+      "last_updated": "2026-11-09"
     }
   ]
 }
