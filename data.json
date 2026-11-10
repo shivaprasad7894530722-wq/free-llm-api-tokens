@@ -1,7 +1,15 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-09T09:02:45+05:30",
+  "last_updated": "2026-11-10T08:58:10+05:30",
   "changelog": [
+    {
+      "date": "2026-11-10",
+      "items": [
+        "Added FreeInference (Harvard MadSys Lab).",
+        "Added Inferbase.",
+        "Ollama Cloud no longer has a free cloud tier (pay-as-you-go per token)."
+      ]
+    },
     {
       "date": "2026-11-09",
       "items": [
@@ -379,15 +387,15 @@
       "url": "https://ollama.com/",
       "openai_compatible": "yes",
       "base_url": "https://ollama.com/v1",
-      "free_allowance": "Free cloud usage tier",
+      "free_allowance": "No free cloud tier: pay-as-you-go per token ($0 plan); local use free",
       "tokens_per_day": null,
       "limits": "Unspecified",
       "card_required": "Unspecified",
-      "notes": "",
+      "notes": "Pricing page lists every cloud model with per-token prices.",
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-11-10"
     },
     {
       "id": "cerebras",
@@ -1876,6 +1884,38 @@
       "category": "gateway",
       "first_reported": "2026-11-09",
       "last_updated": "2026-11-09"
+    },
+    {
+      "id": "freeinference",
+      "name": "FreeInference (Harvard MadSys Lab)",
+      "url": "https://freeinference.org/",
+      "openai_compatible": "yes",
+      "base_url": "https://freeinference.org/v1",
+      "free_allowance": "Free for research/education, 'generous' quota, tokens/day unpublished",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Email signup. OpenAI and Anthropic compatible endpoints. Research lab, so avoid private data.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-11-10",
+      "last_updated": "2026-11-10"
+    },
+    {
+      "id": "inferbase",
+      "name": "Inferbase",
+      "url": "https://inferbase.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "Unspecified",
+      "free_allowance": "Free plan: 5,000 requests/month, 100 managed requests and $0.50 model usage/day on models up to $2/M output tokens",
+      "tokens_per_day": null,
+      "limits": "60 RPM per key, 10 RPM managed, 8,192 in / 1,024 out tokens per request",
+      "card_required": "No",
+      "notes": "Gateway with smart routing; tokens/day unspecified (daily cap is in dollars).",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-10",
+      "last_updated": "2026-11-10"
     }
   ]
 }
