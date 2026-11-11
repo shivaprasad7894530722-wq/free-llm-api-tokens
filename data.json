@@ -1,7 +1,16 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-10T08:58:10+05:30",
+  "last_updated": "2026-11-11T08:58:28+05:30",
   "changelog": [
+    {
+      "date": "2026-11-11",
+      "items": [
+        "Added Hyperbolic.",
+        "Added ArcaneAPI.",
+        "Added 1vy.",
+        "AI21 Labs Jamba API retired on 9 Aug 2026; free trial gone."
+      ]
+    },
     {
       "date": "2026-11-10",
       "items": [
@@ -1571,7 +1580,7 @@
       "url": "https://www.ai21.com/pricing/",
       "openai_compatible": "partial",
       "base_url": "https://api.ai21.com/studio/v1",
-      "free_allowance": "$10 trial credit valid for 7 days",
+      "free_allowance": "DROPPED: first-party Jamba API and AI21 Studio sunset on 9 Aug 2026; the trial no longer applies",
       "tokens_per_day": null,
       "limits": "Unspecified",
       "card_required": "No",
@@ -1579,7 +1588,7 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-02",
-      "last_updated": "2026-11-02"
+      "last_updated": "2026-11-11"
     },
     {
       "id": "tencent-tokenhub",
@@ -1916,6 +1925,54 @@
       "category": "gateway",
       "first_reported": "2026-11-10",
       "last_updated": "2026-11-10"
+    },
+    {
+      "id": "hyperbolic",
+      "name": "Hyperbolic",
+      "url": "https://www.hyperbolic.ai/docs/general/billing-payments",
+      "openai_compatible": "yes",
+      "base_url": "https://api.hyperbolic.ai/inference/v1",
+      "free_allowance": "One-time $1 credit after phone verification (unlocks inference on Free Tier); credits never expire once bought",
+      "tokens_per_day": null,
+      "limits": "300 req/min per key (per docs via third-party summaries); tokens/day unspecified",
+      "card_required": "No",
+      "notes": "Relaunched serverless API; old api.hyperbolic.xyz is retired. Text and vision models only. Each phone number works for one account.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-11",
+      "last_updated": "2026-11-11"
+    },
+    {
+      "id": "arcaneapi",
+      "name": "ArcaneAPI",
+      "url": "https://arcaneapi.com/",
+      "openai_compatible": "yes",
+      "base_url": "Unspecified",
+      "free_allowance": "$10 free credit on signup, 53 models",
+      "tokens_per_day": null,
+      "limits": "100 req/min on Free; tokens/day unspecified",
+      "card_required": "No",
+      "notes": "Multi-model gateway, OpenAI-compatible format per its page; base URL not stated on homepage. Young unofficial gateway.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-11",
+      "last_updated": "2026-11-11"
+    },
+    {
+      "id": "1vy",
+      "name": "1vy",
+      "url": "https://1vy.ai/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.1vy.ai/v1",
+      "free_allowance": "$1 free credit on signup, 100+ models on one key (15% markup after)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Unofficial multi-model gateway.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-11",
+      "last_updated": "2026-11-11"
     }
   ]
 }
