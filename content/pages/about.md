@@ -39,4 +39,4 @@ If you found a published allowance that does not match our list, include the pro
 
 ## Advertising and analytics
 
-The site may show ads and may use Google Analytics once those services are configured. Details, cookie use and opt-out links are in the [privacy policy](/privacy). The [terms](/terms) explain that the list is provided as-is and that you must check each provider’s current terms before you rely on a free tier.
+The site uses Google Analytics 4. Ads may be added later once a programme such as Google AdSense is approved. Details, cookie use and opt-out links are in the [privacy policy](/privacy). The [terms](/terms) explain that the list is provided as-is and that you must check each provider’s current terms before you rely on a free tier.

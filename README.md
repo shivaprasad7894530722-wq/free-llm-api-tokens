@@ -27,15 +27,13 @@ Figures come from each provider's own pages on the date shown. They change often
 
 Generated routes (do not edit by hand; rerun `python3 build_site.py`): `/`, `/about`, `/contact`, `/privacy`, `/terms`, `/guides/`, each guide under `/guides/<slug>`, `/sitemap.xml`, `/robots.txt`, `/ads.txt`, `/llms.txt`, `/llms-full.txt`, `/404`.
 
-## Analytics and AdSense placeholders (no live IDs yet)
+## Analytics and AdSense
 
-Do **not** activate sample IDs. They are commented out so no third-party script loads until you have real values.
+1. **Google Analytics 4** is live on every generated page. The Measurement ID is `GA4_ID` in `build_site.py` (currently `G-60M3MTCPVQ`). The standard `gtag.js` snippet is printed in the HTML `<head>`.
+2. **Google AdSense** is still a commented placeholder in that same head block. When approved, uncomment the AdSense `<script>` and replace `ca-pub-XXXXXXXXXXXXXXXX` (`ADSENSE_PLACEHOLDER`).
+3. **ads.txt** — when AdSense is approved, uncomment the `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` line and replace the publisher id (`ADS_TXT_PUB_PLACEHOLDER`).
 
-1. **Google Analytics 4** — in the HTML `<head>` of every generated page (see the comment block that `build_site.py` inserts, labelled “Analytics and ads placeholders”). Uncomment the `gtag` snippet and replace `G-XXXXXXXXXX` with your real Measurement ID.
-2. **Google AdSense** — in the same comment block, uncomment the AdSense `<script>` and replace `ca-pub-XXXXXXXXXXXXXXXX` with your real publisher client id.
-3. **ads.txt** — edit `ads.txt` (or the template string in `build_site.py`, then regenerate) and uncomment the `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` line after replacing the publisher id.
-
-Constants for those placeholders live at the top of `build_site.py` (`GA4_PLACEHOLDER`, `ADSENSE_PLACEHOLDER`, `ADS_TXT_PUB_PLACEHOLDER`). After editing real IDs, run `python3 build_site.py` and deploy so every page picks them up.
+After changing these values, run `python3 build_site.py` and deploy so every page picks them up.
 
 The contact address on the site is `shivaprasad2515@mail.grokbot.com`. There is no form that collects secrets.
 

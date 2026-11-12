@@ -23,13 +23,13 @@ Provider figures shown on the site come from public web pages and are stored in 
 
 The site itself stores your theme preference (light or dark) in your browser’s `localStorage`. That value stays on your device and is not sent to us as a login or tracking identifier.
 
-If Google Analytics or Google AdSense (or another advertising partner) is enabled, those services may set cookies or similar identifiers on your device, including advertising cookies, as described below. Until those services are switched on, their scripts are not loaded by this site.
+Google Analytics 4 is active on this site and may set cookies or similar identifiers, as described below. Google AdSense is not active yet; its script is not loaded. If AdSense (or another advertising partner) is enabled later, those services may also set cookies, including advertising cookies.
 
 ## Google Analytics
 
-We may use Google Analytics 4 to understand how the site is used — for example, which pages are read and from which types of device. Google Analytics uses cookies or similar technology and may collect identifiers, approximate location, device information and usage data. Google processes that data under its own policies.
+We use Google Analytics 4 to understand how the site is used — for example, which pages are read and from which types of device. Google Analytics uses cookies or similar technology and may collect identifiers, approximate location, device information and usage data. Google processes that data under its own policies.
 
-If Analytics is enabled, you can learn more and review Google’s controls in [Google’s Analytics privacy documentation](https://support.google.com/analytics/answer/6004245) and the [Google Privacy Policy](https://policies.google.com/privacy). Many browsers also let you block or delete cookies, and Google provides an [opt-out browser add-on](https://tools.google.com/dlpage/gaoptout) for some Analytics uses.
+You can learn more and review Google’s controls in [Google’s Analytics privacy documentation](https://support.google.com/analytics/answer/6004245) and the [Google Privacy Policy](https://policies.google.com/privacy). Many browsers also let you block or delete cookies, and Google provides an [opt-out browser add-on](https://tools.google.com/dlpage/gaoptout) for some Analytics uses.
 
 We do not use Analytics to collect API keys. Please do not paste keys into this site or into emails.
 
@@ -51,7 +51,7 @@ When AdSense is approved, this site’s [ads.txt](/ads.txt) file will list the a
 
 ## Legal bases and retention (where those laws apply)
 
-If you email us, we process the message in order to respond to your request. Server logs and security data are processed to operate and protect the site. Analytics and advertising, if enabled, are used to understand traffic and to fund the site; where consent is required for non-essential cookies, we will only use those cookies in line with that consent tool once it is in place.
+If you email us, we process the message in order to respond to your request. Server logs and security data are processed to operate and protect the site. Google Analytics is used to understand traffic. Advertising cookies will only be used if AdSense or another ad partner is enabled later. Where consent is required for non-essential cookies, we will only use those cookies in line with that consent tool once it is in place.
 
 We keep email correspondence only as long as needed to deal with the request and any follow-up correction to the list. We do not have access to cookie stores on your device; you can delete those yourself in your browser.
 

@@ -29,8 +29,9 @@ SHORT = "Free LLM API Tokens"
 CONTACT_EMAIL = "shivaprasad2515@mail.grokbot.com"
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 
-# Placeholders only — never written into live <script src> tags.
-GA4_PLACEHOLDER = "G-XXXXXXXXXX"
+# Google Analytics 4 is live on every generated page.
+GA4_ID = "G-60M3MTCPVQ"
+# AdSense remains a commented placeholder until the account is approved.
 ADSENSE_PLACEHOLDER = "ca-pub-XXXXXXXXXXXXXXXX"
 ADS_TXT_PUB_PLACEHOLDER = "pub-XXXXXXXXXXXXXXXX"
 
@@ -508,24 +509,19 @@ def generated_tables(data: dict) -> dict:
 
 # --- HTML shell -----------------------------------------------------------
 
-ANALYTICS_COMMENT = f"""<!--
-  Analytics and ads placeholders. Leave these commented until you have real IDs.
-  Sample IDs must not be activated — they would load third-party scripts.
-
-  1) Google Analytics 4 — replace {GA4_PLACEHOLDER} then uncomment:
-  <script async src="https://www.googletagmanager.com/gtag/js?id={GA4_PLACEHOLDER}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){{dataLayer.push(arguments);}}
-    gtag('js', new Date());
-    gtag('config', '{GA4_PLACEHOLDER}');
-  </script>
-
-  2) Google AdSense — replace {ADSENSE_PLACEHOLDER} then uncomment:
+ANALYTICS_HEAD = f"""<script async src="https://www.googletagmanager.com/gtag/js?id={GA4_ID}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+  gtag('config', '{GA4_ID}');
+</script>
+<!--
+  Google AdSense is not active yet. When approved, uncomment the script below
+  and replace {ADSENSE_PLACEHOLDER} with the real publisher client id.
+  Also edit /ads.txt and uncomment the google.com line with your publisher ID
+  ({ADS_TXT_PUB_PLACEHOLDER}).
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_PLACEHOLDER}" crossorigin="anonymous"></script>
-
-  3) ads.txt — when AdSense is approved, edit /ads.txt and uncomment the google.com line
-     with your publisher ID ({ADS_TXT_PUB_PLACEHOLDER}).
 -->"""
 
 
@@ -652,7 +648,7 @@ def render_page(
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
 <script>{theme_boot}</script>
-{ANALYTICS_COMMENT}
+{ANALYTICS_HEAD}
 {jsonld_script(ld)}
 {extra_head}
 </head>
