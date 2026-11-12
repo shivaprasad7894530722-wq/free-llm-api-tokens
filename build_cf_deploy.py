@@ -9,7 +9,7 @@ Why: the Cloudflare MCP connector cannot use the Pages asset-upload endpoint
 Usage:  python3 build_cf_deploy.py [out_path]   (default /workspace/cf_deploy_payload.js)
 Then call the Cloudflare MCP tool `execute` with code = "$file:<out_path>".
 """
-import json, subprocess, sys, os
+import base64, json, subprocess, sys, os
 from pathlib import Path
 
 here = Path(__file__).resolve().parent
@@ -23,7 +23,9 @@ CT = {
     ".xml": "application/xml; charset=utf-8",
     ".txt": "text/plain; charset=utf-8",
     ".md": "text/plain; charset=utf-8",
+    ".png": "image/png",
 }
+BINARY_SUFFIXES = {".png"}
 
 SKIP_DIRS = {".git", "content", "templates", "__pycache__"}
 SKIP_FILES = {"build_site.py", "build_cf_deploy.py", "update.py", "deploy.sh", "README.md"}
@@ -59,14 +61,24 @@ for p in sorted(here.rglob("*")):
     rel = p.relative_to(here)
     if should_skip(rel):
         continue
-    body = p.read_text(encoding="utf-8")
     ct = CT[rel.suffix]
+    if rel.suffix in BINARY_SUFFIXES:
+        rec = {"body": base64.b64encode(p.read_bytes()).decode("ascii"), "ct": ct, "bin": True}
+    else:
+        rec = {"body": p.read_text(encoding="utf-8"), "ct": ct}
     for route in routes_for(rel):
-        if route in blobs and blobs[route]["body"] != body:
+        if route in blobs and blobs[route] != rec:
             raise SystemExit(f"route collision at {route} ({rel})")
-        blobs[route] = {"body": body, "ct": ct}
+        blobs[route] = rec
 
 worker = """const FILES = %s;
+function bodyOf(f) {
+  if (!f || !f.bin) return f && f.body;
+  const bin = atob(f.body);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
 export default {
   async fetch(request) {
     const url = new URL(request.url);
@@ -75,12 +87,12 @@ export default {
     let f = FILES[p] || FILES[p + '/'] || FILES[url.pathname];
     if (!f) {
       const nf = FILES['/404'] || FILES['/404.html'];
-      return new Response(nf ? nf.body : 'Not found', {
+      return new Response(nf ? bodyOf(nf) : 'Not found', {
         status: 404,
         headers: { 'content-type': nf ? nf.ct : 'text/plain; charset=utf-8', 'cache-control': 'no-store' }
       });
     }
-    return new Response(f.body, { headers: { 'content-type': f.ct, 'cache-control': 'public, max-age=300', 'access-control-allow-origin': '*' } });
+    return new Response(bodyOf(f), { headers: { 'content-type': f.ct, 'cache-control': 'public, max-age=300', 'access-control-allow-origin': '*' } });
   }
 };
 """ % json.dumps(blobs)

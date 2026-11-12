@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate static pages, sitemap, robots.txt, ads.txt and llms.txt.
+"""Generate static pages, sitemap, robots.txt, ads.txt, llms.txt, og.png and the IndexNow key file.
 
 Run from the repo root (or any cwd; paths are relative to this file):
 
@@ -17,10 +17,13 @@ from __future__ import annotations
 
 import datetime as dt
 import html
+import io
 import json
 import re
 import sys
 from pathlib import Path
+
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 HERE = Path(__file__).resolve().parent
 SITE = "https://freellmapi.link"
@@ -34,6 +37,13 @@ GA4_ID = "G-60M3MTCPVQ"
 # AdSense remains a commented placeholder until the account is approved.
 ADSENSE_PLACEHOLDER = "ca-pub-XXXXXXXXXXXXXXXX"
 ADS_TXT_PUB_PLACEHOLDER = "pub-XXXXXXXXXXXXXXXX"
+
+# Stable IndexNow key. Served at /<key>.txt (the file body is the key itself).
+INDEXNOW_KEY = "8ba0054ef7ffc7621e5321a380b67bb8"
+OG_IMAGE_PATH = "/og.png"
+OG_IMAGE_URL = SITE + OG_IMAGE_PATH
+OG_IMAGE_WIDTH = 1200
+OG_IMAGE_HEIGHT = 630
 
 NAV = [
     ("/", "Tracker"),
@@ -588,6 +598,149 @@ def website_ld():
     }
 
 
+def write_bytes(path: Path, data: bytes):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists() and path.read_bytes() == data:
+        return False
+    path.write_bytes(data)
+    return True
+
+
+_FONT_CANDIDATES = [
+    Path("/usr/share/fonts/truetype/sand-box/google/Inter/Inter-VariableFont_opsz,wght.ttf"),
+    Path("/usr/share/fonts/truetype/sand-box/google/Inter Tight/InterTight-VariableFont_wght.ttf"),
+    Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"),
+    Path("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"),
+]
+
+
+def _sans_font_path() -> Path:
+    for cand in _FONT_CANDIDATES:
+        if cand.is_file():
+            return cand
+    raise SystemExit("No usable sans font found for og.png")
+
+
+def _font(path: Path, size: int, weight: int = 400):
+    font = ImageFont.truetype(str(path), size)
+    try:
+        axes = font.get_variation_axes()
+        values = []
+        for axis in axes:
+            name = axis["name"]
+            if isinstance(name, bytes):
+                name = name.decode("utf-8", "ignore")
+            lname = name.lower()
+            if "weight" in lname or lname == "wght":
+                values.append(weight)
+            else:
+                values.append(axis["default"])
+        font.set_variation_by_axes(values)
+    except Exception:
+        pass
+    return font
+
+
+def _draw_spaced(draw, xy, text, font, fill, spacing=5):
+    x, y = xy
+    box = draw.textbbox((0, 0), text, font=font)
+    y = y - (box[3] - box[1]) / 2 - 2
+    for ch in text:
+        draw.text((x, y), ch, font=font, fill=fill)
+        x += draw.textbbox((0, 0), ch, font=font)[2] + spacing
+    return x
+
+
+def make_og_png() -> bytes:
+    """1200x630 Open Graph image in the site's dark theme."""
+    w, h = OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT
+    bg = (7, 9, 16, 255)
+    fg = (238, 242, 255, 255)
+    mut = (154, 163, 184, 255)
+    acc = (139, 164, 255, 255)
+    acc2 = (34, 211, 238, 255)
+    font_path = _sans_font_path()
+
+    img = Image.new("RGBA", (w, h), bg)
+
+    glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(glow)
+    gd.ellipse((-280, -260, 620, 420), fill=(99, 102, 241, 70))
+    gd.ellipse((620, -200, 1400, 420), fill=(34, 211, 238, 48))
+    gd.ellipse((500, 420, 1280, 900), fill=(139, 92, 246, 36))
+    img = Image.alpha_composite(img, glow.filter(ImageFilter.GaussianBlur(90)))
+
+    grid = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    gdraw = ImageDraw.Draw(grid)
+    for x in range(0, w, 52):
+        gdraw.line([(x, 0), (x, h)], fill=(255, 255, 255, 255), width=1)
+    for y in range(0, h, 52):
+        gdraw.line([(0, y), (w, y)], fill=(255, 255, 255, 255), width=1)
+    alpha = grid.split()[-1].point(lambda p: int(p * 0.09) if p else 0)
+    fade = Image.new("L", (w, h), 0)
+    fd = ImageDraw.Draw(fade)
+    for y in range(h):
+        a = int(255 * max(0, 1 - (y / (h * 0.8)) ** 1.15))
+        fd.line([(0, y), (w, y)], fill=a)
+    grid.putalpha(Image.composite(alpha, Image.new("L", (w, h), 0), fade))
+    img = Image.alpha_composite(img, grid)
+
+    # Logo: rounded tile, gradient ring, cyan centre dot (same motif as the site mark).
+    size = 88
+    logo = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(logo)
+    ld.rounded_rectangle((0, 0, size - 1, size - 1), radius=int(size * 0.25), fill=(255, 255, 255, 20))
+    grad = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    gdd = ImageDraw.Draw(grad)
+    for y in range(size):
+        t = y / max(size - 1, 1)
+        colour = (
+            int(acc2[0] + (acc[0] - acc2[0]) * t),
+            int(acc2[1] + (acc[1] - acc2[1]) * t),
+            int(acc2[2] + (acc[2] - acc2[2]) * t),
+            255,
+        )
+        gdd.line([(0, y), (size, y)], fill=colour)
+    ring = Image.new("L", (size, size), 0)
+    rd = ImageDraw.Draw(ring)
+    cx = cy = size / 2
+    r_out = size * 0.31
+    rd.ellipse((cx - r_out, cy - r_out, cx + r_out, cy + r_out), outline=255, width=int(size * 0.095))
+    logo = Image.alpha_composite(logo, Image.composite(grad, Image.new("RGBA", (size, size)), ring))
+    ld = ImageDraw.Draw(logo)
+    r = size * 0.095
+    ld.ellipse((cx - r, cy - r, cx + r, cy + r), fill=acc2)
+
+    pad_x, top = 96, 130
+    img.paste(logo, (pad_x, top), logo)
+
+    draw = ImageDraw.Draw(img)
+    _draw_spaced(
+        draw,
+        (pad_x + size + 20, top + size / 2),
+        "WEEKDAY-UPDATED",
+        _font(font_path, 20, 650),
+        acc2,
+        spacing=5,
+    )
+    title_font = _font(font_path, 84, 800)
+    title = "Free LLM API Tokens"
+    ty = top + size + 40
+    draw.text((pad_x, ty), title, font=title_font, fill=fg)
+    sub_font = _font(font_path, 32, 500)
+    sub = "OpenAI compatibility, published allowances,\nand tokens per day — from official docs only."
+    title_h = draw.textbbox((pad_x, ty), title, font=title_font)
+    sy = title_h[3] + 28
+    draw.multiline_text((pad_x, sy), sub, font=sub_font, fill=mut, spacing=10)
+    uy = h - 90
+    draw.line([(pad_x, uy - 24), (pad_x + 72, uy - 24)], fill=acc2, width=3)
+    draw.text((pad_x, uy), "freellmapi.link", font=_font(font_path, 26, 600), fill=fg)
+
+    buf = io.BytesIO()
+    img.convert("RGB").save(buf, format="PNG", optimize=True)
+    return buf.getvalue()
+
+
 def render_page(
     *,
     title: str,
@@ -637,9 +790,15 @@ def render_page(
 <meta property="og:title" content="{attr_esc(page_title)}">
 <meta property="og:description" content="{attr_esc(description)}">
 <meta property="og:site_name" content="{attr_esc(NAME)}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{attr_esc(OG_IMAGE_URL)}">
+<meta property="og:image:width" content="{OG_IMAGE_WIDTH}">
+<meta property="og:image:height" content="{OG_IMAGE_HEIGHT}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="{attr_esc(NAME)}">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{attr_esc(page_title)}">
 <meta name="twitter:description" content="{attr_esc(description)}">
+<meta name="twitter:image" content="{attr_esc(OG_IMAGE_URL)}">
 <meta name="theme-color" content="#070910">
 <meta name="color-scheme" content="dark light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
@@ -1027,6 +1186,13 @@ Sitemap: https://freellmapi.link/sitemap.xml
     if write(HERE / "robots.txt", robots):
         changed += 1
     routes.append(("/robots.txt", data["last_updated"][:10], "yearly", "0.1"))
+
+    # Open Graph share image (1200x630) and IndexNow key file.
+    if write_bytes(HERE / "og.png", make_og_png()):
+        changed += 1
+    key_name = f"{INDEXNOW_KEY}.txt"
+    if write(HERE / key_name, INDEXNOW_KEY + "\n"):
+        changed += 1
 
     # ads.txt placeholder — no live publisher ID
     ads = f"""# ads.txt for {SITE}
