@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-11T08:58:28+05:30",
+  "last_updated": "2026-11-12T08:59:49+05:30",
   "changelog": [
+    {
+      "date": "2026-11-12",
+      "items": [
+        "Added NovAI.",
+        "Added Zro (MoonMath)."
+      ]
+    },
     {
       "date": "2026-11-11",
       "items": [
@@ -1973,6 +1980,38 @@
       "category": "gateway",
       "first_reported": "2026-11-11",
       "last_updated": "2026-11-11"
+    },
+    {
+      "id": "novai",
+      "name": "NovAI",
+      "url": "https://aiapi-pro.com/free/index.html",
+      "openai_compatible": "yes",
+      "base_url": "https://aiapi-pro.com/v1",
+      "free_allowance": "$2 signup credit after email verify; 5 free Zhipu Flash models (glm-4.7-flash etc.)",
+      "tokens_per_day": null,
+      "limits": "10 free-model calls/day, 5 RPM before first top-up",
+      "card_required": "No",
+      "notes": "Gateway relaying Chinese providers; no daily token figure published.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-12",
+      "last_updated": "2026-11-12"
+    },
+    {
+      "id": "zro",
+      "name": "Zro (MoonMath)",
+      "url": "https://zro.moonmath.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://zro.moonmath.ai/v1",
+      "free_allowance": "Free plan: daily usage on DeepSeek V4.1 Flash only (GLM-5.3 Flash no longer free)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Daily amount not published; zero request retention; EU/US inference.",
+      "relay_risk": false,
+      "category": "gateway",
+      "first_reported": "2026-11-12",
+      "last_updated": "2026-11-12"
     }
   ]
 }
