@@ -26,7 +26,7 @@ HERE = Path(__file__).resolve().parent
 SITE = "https://freellmapi.link"
 NAME = "Free LLM API Tokens Tracker"
 SHORT = "Free LLM API Tokens"
-CONTACT_EMAIL = "shivaprasad2515@mail.grokbot.com"
+CONTACT_EMAIL = "hello@lumiono.com"
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 
 # Google Analytics 4 is live on every generated page.

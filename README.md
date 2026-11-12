@@ -35,7 +35,7 @@ Generated routes (do not edit by hand; rerun `python3 build_site.py`): `/`, `/ab
 
 After changing these values, run `python3 build_site.py` and deploy so every page picks them up.
 
-The contact address on the site is `shivaprasad2515@mail.grokbot.com`. There is no form that collects secrets.
+The contact address on the site is `hello@lumiono.com`. There is no form that collects secrets.
 
 ## data.json schema (schema_version 1)
 
