@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SambaNova Cloud free plan — published caps and card notes — Free LLM API Tokens</title>
+<meta name="description" content="SambaNova Cloud API snapshot from this tracker: 200,000 tokens/day per model (as of 3 Oct), 20 requests/day, card required, and the OpenAI-compatible base URL.">
+<link rel="canonical" href="https://freellmapi.link/guides/sambanova-cloud">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://freellmapi.link/guides/sambanova-cloud">
+<meta property="og:title" content="SambaNova Cloud free plan — published caps and card notes — Free LLM API Tokens">
+<meta property="og:description" content="SambaNova Cloud API snapshot from this tracker: 200,000 tokens/day per model (as of 3 Oct), 20 requests/day, card required, and the OpenAI-compatible base URL.">
+<meta property="og:site_name" content="Free LLM API Tokens Tracker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SambaNova Cloud free plan — published caps and card notes — Free LLM API Tokens">
+<meta name="twitter:description" content="SambaNova Cloud API snapshot from this tracker: 200,000 tokens/day per model (as of 3 Oct), 20 requests/day, card required, and the OpenAI-compatible base URL.">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script>(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+<!--
+  Analytics and ads placeholders. Leave these commented until you have real IDs.
+  Sample IDs must not be activated — they would load third-party scripts.
+
+  1) Google Analytics 4 — replace G-XXXXXXXXXX then uncomment:
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  2) Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX then uncomment:
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  3) ads.txt — when AdSense is approved, edit /ads.txt and uncomment the google.com line
+     with your publisher ID (pub-XXXXXXXXXXXXXXXX).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "SambaNova Cloud free plan — published caps and card notes",
+  "description": "SambaNova Cloud API snapshot from this tracker: 200,000 tokens/day per model (as of 3 Oct), 20 requests/day, card required, and the OpenAI-compatible base URL.",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-12",
+  "author": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "mainEntityOfPage": "https://freellmapi.link/guides/sambanova-cloud",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://freellmapi.link/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://freellmapi.link/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "SambaNova Cloud free plan — published caps and card notes",
+      "item": "https://freellmapi.link/guides/sambanova-cloud"
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="/">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#7c9cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/>
+        <circle cx="16" cy="16" r="6.5" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <circle cx="16" cy="16" r="2.1" fill="#22d3ee"/>
+      </svg>
+      Free LLM API Tokens
+    </a>
+    <nav class="nav" aria-label="Primary"><a href="/">Tracker</a><a href="/guides/" aria-current="page">Guides</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
+    <div class="top-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>SambaNova Cloud free plan — published caps and card notes</span></nav><h1 class="page-title">SambaNova Cloud free plan — published caps and card notes</h1><p class="page-lede">SambaNova Cloud is an official, OpenAI-compatible API. Our row records a per-model daily token cap and notes that the free plan has required a card and a purchase since mid-October.</p><p class="page-updated">Last updated 12 Nov 2026. The provider figures on this page follow the tracker snapshot of 12 Nov 2026, 08:59 IST.</p><h2 id="what-is-sambanova-cloud-on-this-tracker">What is SambaNova Cloud on this tracker?</h2>
+<p>SambaNova Cloud is listed as an <strong>official provider</strong> with OpenAI compatibility <strong>Yes</strong>. The recorded free allowance is “200,000 tokens/day per model (as of 3 Oct)”. Tokens per day are <strong>200,000</strong>. Limits are “20 requests/day”. Card required is <strong>Yes</strong>. Relay warning: <strong>no</strong>. Our notes say: Since 15 Oct the Free plan requires a card and a purchase.</p>
+<p>Those notes matter as much as the daily token figure. The official URL we store is <a href="https://cloud.sambanova.ai/plans">https://cloud.sambanova.ai/plans</a>. The entry was first listed on 3 Oct 2026 and last updated on 15 Oct 2026 — later than many neighbouring official rows, because of the card-and-purchase change recorded in the notes. List snapshot: 12 Nov 2026, 08:59 IST.</p>
+<div class="callout"><strong>Snapshot from this tracker</strong>Figures below are copied from our <a href="/">provider list</a> (entry last updated 15 Oct 2026). They change often — confirm on the official site before you rely on them.</div><table><tr><th>Official site</th><td><a href="https://cloud.sambanova.ai/plans" rel="noopener">Visit SambaNova Cloud</a></td></tr><tr><th>Category</th><td>Official provider</td></tr><tr><th>OpenAI compatible</th><td>Yes</td></tr><tr><th>Free allowance</th><td>200,000 tokens/day per model (as of 3 Oct)</td></tr><tr><th>Tokens per day</th><td>200,000</td></tr><tr><th>Rate limits</th><td>20 requests/day</td></tr><tr><th>Card required</th><td>Yes</td></tr><tr><th>Base URL</th><td><code>https://api.sambanova.ai/v1</code></td></tr><tr><th>Relay warning</th><td>No</td></tr><tr><th>First listed</th><td>3 Oct 2026</td></tr><tr><th>Entry updated</th><td>15 Oct 2026</td></tr><tr><th>Notes</th><td>Since 15 Oct the Free plan requires a card and a purchase.</td></tr></table>
+<h2 id="how-should-i-read-per-model-together-with-a-request-cap">How should I read “per model” together with a request cap?</h2>
+<p>The daily token figure we store is described as applying <strong>per model</strong>, as of the official wording we saw on 3 October. That is not necessarily a single shared pool, and it is not a licence to assume every current model is in the free plan. Official plans may add, remove or re-price models later.</p>
+<p>Separately, we record a limit of 20 requests/day. A 20-requests-per-day cap, if still accurate on the official page, can stop a <a href="/guides/free-llm-apis-for-coding">coding assistant</a> long before the token cap does. Always compare both fields, and confirm both on the official plans page. Background: <a href="/guides/rate-limits-explained">Rate limits explained</a>.</p>
+<h2 id="what-changed-in-the-card-requirement">What changed in the card requirement?</h2>
+<p>Our notes record that since 15 October the Free plan requires a card and a purchase. The card field is therefore <strong>Yes</strong>. We do not invent the size of that purchase, or whether a past no-card account was grandfathered; those details, if they exist, belong on the official site. If you signed up earlier, do not assume our older memory of a no-card plan still applies — look at the live plans page.</p>
+<p>This is an example of why the tracker stores an entry-level <code>last_updated</code> date and a changelog on the home page, instead of treating every official free tier as frozen.</p>
+<h2 id="how-do-i-call-the-published-base-url">How do I call the published base URL?</h2>
+<p>The base URL we record is <code>https://api.sambanova.ai/v1</code>. Use a SambaNova key in the environment, the official OpenAI SDK, and a model id from SambaNova’s official documentation.</p>
+<h3>Python</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.sambanova.ai/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,  # copy the model id from the provider&#x27;s docs
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}],
+)
+print(resp.choices[0].message.content)
+">Copy</button><pre>import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.sambanova.ai/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,  # copy the model id from the provider&#x27;s docs
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}],
+)
+print(resp.choices[0].message.content)
+</pre></div><h3>JavaScript</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.sambanova.ai/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;, // copy the model id from the provider&#x27;s docs
+  messages: [{ role: &quot;user&quot;, content: &quot;Hello&quot; }],
+});
+console.log(resp.choices[0].message.content);
+">Copy</button><pre>import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.sambanova.ai/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;, // copy the model id from the provider&#x27;s docs
+  messages: [{ role: &quot;user&quot;, content: &quot;Hello&quot; }],
+});
+console.log(resp.choices[0].message.content);
+</pre></div><h3>curl</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="curl https://api.sambanova.ai/v1/chat/completions \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;model&quot;:&quot;MODEL_ID&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Hello&quot;}]}&#x27;
+">Copy</button><pre>curl https://api.sambanova.ai/v1/chat/completions \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;model&quot;:&quot;MODEL_ID&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Hello&quot;}]}&#x27;
+</pre></div><p>The <code>MODEL_ID</code> string is not guessed here. Copy it from the provider’s dashboard or official model list, because catalogues change.</p>
+<p>If the official console requires you to attach a card or complete a purchase before the key can call a model, the SDK will not bypass that. Handle 401, 403 and payment errors by reading the official account page, not by retrying in a loop.</p>
+<h2 id="is-sambanova-a-relay">Is SambaNova a relay?</h2>
+<p>No. It is official in our category, with <strong>no</strong> relay warning. You still accept SambaNova’s terms when you create an account. For private prompts, official providers are the default we recommend over flagged relays, as explained in <a href="/guides/official-vs-gateway-providers">Official providers vs gateways</a>.</p>
+<h2 id="how-does-this-compare-with-groq-and-cerebras">How does this compare with Groq and Cerebras?</h2>
+<p>In our file, Groq also has a recorded daily token figure of 200,000 on listed models, with a much higher recorded daily request cap and a card field of No — see <a href="/guides/groq-free-api">Groq</a> and confirm both official pages, because those numbers can change. Cerebras records a higher daily token figure but only during a 30-day card-required trial — see <a href="/guides/cerebras-api">Cerebras</a>. SambaNova’s distinctive recorded constraints are the <strong>per-model</strong> wording, the <strong>20 requests/day</strong> limit, and the <strong>card and purchase</strong> note on the free plan.</p>
+<p>None of these comparisons is a quality ranking. They are a reading of published fields.</p>
+<h2 id="how-do-i-verify-this-row">How do I verify this row?</h2>
+<p>Open <a href="https://cloud.sambanova.ai/plans">https://cloud.sambanova.ai/plans</a> and check the allowance, the per-model language, the request cap, the card rule and the base URL. If something has changed, <a href="/contact">send the official link</a>. We will not drop the card note to make the row look easier, and we will not convert “per model” into a shared pool unless an official page says that.</p>
+<h2 id="what-should-i-do-on-signup-day">What should I do on signup day?</h2>
+<p>Open the official plans page first, not only this guide. Confirm whether a card and a purchase are still required, which models are in the free plan, and whether the 20-requests-per-day figure still holds. Then create the account, store the key in the environment, and make one short request with an official model id.</p>
+<p>If you are doing this to run an editor assistant, do the maths in requests, not only in tokens: twenty official requests is a small number for an agent that retries. You may want a provider with a higher published request cap for that workflow, or you may want to use SambaNova only for single, careful calls.</p>
+<h2 id="how-should-teams-record-this-provider-internally">How should teams record this provider internally?</h2>
+<p>Write down the official plan name, the date you confirmed the card-and-purchase rule, and the two caps (tokens per model per day, requests per day) as they appeared on the official page. Link to the official plans URL. You can also link to this tracker row, but treat our snapshot date as a hint to re-check, not as a contract. If SambaNova’s official wording changes, update your internal note even if this page has not yet caught up.</p><aside class="related"><h2>Related guides</h2><ul><li><a href="/guides/cerebras-api">Cerebras API trial allowance and compatible base URL</a></li><li><a href="/guides/groq-free-api">Groq free API — allowance, base URL and limits</a></li><li><a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a></li><li><a href="/guides/rate-limits-explained">Rate limits on free LLM APIs, explained</a></li></ul></aside></article></main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-links"><a href="/">Tracker</a> <a href="/guides/">Guides</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/data.json">data.json</a></div>
+    <div class="footer-note">
+      Not affiliated with any provider. Figures come from each provider’s own pages on the date shown and change often.
+      Never share your API keys.
+      Contact: <a href="mailto:shivaprasad2515@mail.grokbot.com">shivaprasad2515@mail.grokbot.com</a>.
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

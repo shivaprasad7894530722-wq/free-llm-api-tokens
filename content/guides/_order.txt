@@ -1,0 +1,16 @@
+# Editorial order for /guides/
+how-to-use-free-openai-compatible-apis
+best-free-llm-apis
+what-is-an-openai-compatible-api
+free-llm-api-for-beginners
+keep-api-keys-safe
+relay-gateway-risks
+rate-limits-explained
+free-llm-apis-for-coding
+official-vs-gateway-providers
+groq-free-api
+gemini-api
+cloudflare-workers-ai
+cerebras-api
+sambanova-cloud
+mistral-api

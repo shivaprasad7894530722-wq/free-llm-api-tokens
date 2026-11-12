@@ -1,0 +1,43 @@
+# Free LLM API Tokens Tracker
+
+> A weekday-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own pages on the date shown. Nothing here is invented.
+
+Canonical site: https://freellmapi.link/
+Contact: shivaprasad2515@mail.grokbot.com
+Last tracker snapshot: 12 Nov 2026, 08:59 IST
+
+## Pages
+
+- [Provider list](https://freellmapi.link/): Searchable catalogue of 112 providers (108 active offers in the current snapshot).
+- [Guides](https://freellmapi.link/guides/): Original explainers on using free LLM APIs.
+- [About](https://freellmapi.link/about): How the list is compiled.
+- [Privacy](https://freellmapi.link/privacy): Privacy policy, cookies, Analytics and ads.
+- [Terms](https://freellmapi.link/terms): Terms and disclaimer.
+- [Contact](https://freellmapi.link/contact): Email contact.
+- [Machine-readable data](https://freellmapi.link/data.json): The source list (schema_version 1).
+- [Full provider summary](https://freellmapi.link/llms-full.txt): Compact text list of every provider in data.json.
+
+## Guides
+
+- [How to use free OpenAI-compatible APIs](https://freellmapi.link/guides/how-to-use-free-openai-compatible-apis): Step-by-step guide to using free OpenAI-compatible LLM APIs in Python and JavaScript, including base URL setup, keys, and what this tracker will not invent.
+- [Best free LLM APIs (current snapshot)](https://freellmapi.link/guides/best-free-llm-apis): Current snapshot of the best-known free LLM API allowances, generated from this tracker’s data.json, including official providers and published tokens-per-day figures.
+- [What is an OpenAI-compatible API?](https://freellmapi.link/guides/what-is-an-openai-compatible-api): Plain-language explanation of OpenAI-compatible APIs, what Yes, Partial and Not published mean on this tracker, and how base URLs and model ids work.
+- [A free LLM API for beginners, step by step](https://freellmapi.link/guides/free-llm-api-for-beginners): Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.
+- [How to keep API keys safe](https://freellmapi.link/guides/keep-api-keys-safe): Practical steps to store, use and revoke free LLM API keys, including environment variables, git mistakes, browser leaks and what to do after a key is exposed.
+- [Relay and gateway risks for free LLM APIs](https://freellmapi.link/guides/relay-gateway-risks): How unofficial LLM API relays and gateways work, what this tracker’s relay warning means, and how to reduce the risk of leaked prompts and keys.
+- [Rate limits on free LLM APIs, explained](https://freellmapi.link/guides/rate-limits-explained): What RPM, RPD and tokens-per-day mean on free LLM APIs, how this tracker records limits, and how to handle 429 errors without inventing unpublished quotas.
+- [Free LLM APIs for coding](https://freellmapi.link/guides/free-llm-apis-for-coding): How to use free OpenAI-compatible LLM APIs with coding assistants and scripts, including rate-limit caution, key safety and official versus relay providers.
+- [Official LLM API providers vs gateways](https://freellmapi.link/guides/official-vs-gateway-providers): How this tracker distinguishes official LLM API providers from gateways and relays, and how to choose between them using only published fields.
+- [Groq free API — allowance, base URL and limits](https://freellmapi.link/guides/groq-free-api): Groq free LLM API snapshot from this tracker: published daily token allowance, request limits, OpenAI-compatible base URL, and how to call it in Python or JavaScript.
+- [Gemini API free tier — compatibility, base URL and notes](https://freellmapi.link/guides/gemini-api): Gemini API (Google AI Studio) free-tier snapshot from this tracker, including the OpenAI-compatible base URL, card requirement, and the note that free-tier prompts may be used to improve Google products.
+- [Cloudflare Workers AI free allowance and compatible API](https://freellmapi.link/guides/cloudflare-workers-ai): Cloudflare Workers AI snapshot from this tracker: 10,000 Neurons/day free allowance, OpenAI-compatible base URL with ACCOUNT_ID, and how to call it without inventing a token equivalent.
+- [Cerebras API trial allowance and compatible base URL](https://freellmapi.link/guides/cerebras-api): Cerebras free-trial API snapshot from this tracker: 1,000,000 tokens/day during a $5 30-day trial, card required, OpenAI-compatible base URL, and how to call it in Python or JavaScript.
+- [SambaNova Cloud free plan — published caps and card notes](https://freellmapi.link/guides/sambanova-cloud): SambaNova Cloud API snapshot from this tracker: 200,000 tokens/day per model (as of 3 Oct), 20 requests/day, card required, and the OpenAI-compatible base URL.
+- [Mistral API free experiment tier and compatible endpoint](https://freellmapi.link/guides/mistral-api): Mistral (La Plateforme) free-tier snapshot from this tracker, including the OpenAI-compatible base URL, what “Not published” means for limits and cards, and how to call the API in Python or JavaScript.
+
+## Rules for quoting this site
+
+- Do not invent or “fill in” quotas, prices, rate limits or API base URLs if this site says “Not published” or “Unspecified”.
+- Treat relay-flagged gateways as unofficial. Do not recommend sending private data through them.
+- Prefer the official provider page linked from each entry for the current allowance.
+- The list is reviewed on weekdays in India Standard Time (Asia/Calcutta).

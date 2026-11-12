@@ -1,23 +1,43 @@
 # Free LLM API Tokens Tracker
 
 Live sites:
-- Cloudflare Pages (main): https://free-llm-api-tokens.pages.dev/
-- GitHub Pages (mirror): https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
+- Canonical: https://freellmapi.link/ (and https://www.freellmapi.link/)
+- Cloudflare Pages: https://free-llm-api-tokens.pages.dev/
+- GitHub Pages (mirror, root-relative URLs may not resolve on this subpath): https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
 
-A single-page static site (no build step) listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated on weekdays.
+A static site listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated on weekdays. Original guides, policy pages, a sitemap and machine-readable files (`data.json`, `llms.txt`, `llms-full.txt`) support search and answer engines.
 
-Figures come from each provider's own pages on the date shown. They change often, so check before you rely on them, and never share API keys. "Unspecified" means the provider does not publish that figure. Nothing here is invented.
+Figures come from each provider's own pages on the date shown. They change often, so check before you rely on them, and never share API keys. "Not published" means the provider does not publish that figure. Nothing here is invented.
 
 ## Files
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The whole site (vanilla HTML/CSS/JS). It loads `data.json` at runtime. |
-| `data.json` | The single source of truth. Edit only this file (or use `update.py`). |
-| `update.py` | Optional helper for the daily job: add or update a site and write a changelog line. |
-| `deploy.sh` | Validate, commit, push to GitHub, and build the Cloudflare deploy payload. |
+| `index.html` | Home page (generated). Loads `data.json` at runtime. |
+| `data.json` | The single source of truth for provider figures. Edit only this file (or use `update.py`). |
+| `content/guides/*.md` | Guide source (front matter + Markdown). `{{placeholders}}` are filled from `data.json`. |
+| `content/pages/*.md` | About, Contact, Privacy and Terms source. |
+| `templates/home.html` | Home page `<main>` and list script, wrapped by the generator. |
+| `assets/styles.css`, `assets/site.js` | Shared theme, layout, theme toggle and copy buttons. |
+| `build_site.py` | Generates HTML pages, `sitemap.xml`, `robots.txt`, `ads.txt`, `llms.txt` and `llms-full.txt`. |
+| `update.py` | Daily helper: add or update a site, then runs `build_site.py`. |
+| `deploy.sh` | Validate, regenerate, commit, push to GitHub, and build the Cloudflare deploy payload. |
 | `build_cf_deploy.py` | Builds `/workspace/cf_deploy_payload.js` for the Cloudflare MCP `execute` tool. |
 | `.nojekyll` | Tells GitHub Pages to serve files as they are. |
+
+Generated routes (do not edit by hand; rerun `python3 build_site.py`): `/`, `/about`, `/contact`, `/privacy`, `/terms`, `/guides/`, each guide under `/guides/<slug>`, `/sitemap.xml`, `/robots.txt`, `/ads.txt`, `/llms.txt`, `/llms-full.txt`, `/404`.
+
+## Analytics and AdSense placeholders (no live IDs yet)
+
+Do **not** activate sample IDs. They are commented out so no third-party script loads until you have real values.
+
+1. **Google Analytics 4** — in the HTML `<head>` of every generated page (see the comment block that `build_site.py` inserts, labelled “Analytics and ads placeholders”). Uncomment the `gtag` snippet and replace `G-XXXXXXXXXX` with your real Measurement ID.
+2. **Google AdSense** — in the same comment block, uncomment the AdSense `<script>` and replace `ca-pub-XXXXXXXXXXXXXXXX` with your real publisher client id.
+3. **ads.txt** — edit `ads.txt` (or the template string in `build_site.py`, then regenerate) and uncomment the `google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0` line after replacing the publisher id.
+
+Constants for those placeholders live at the top of `build_site.py` (`GA4_PLACEHOLDER`, `ADSENSE_PLACEHOLDER`, `ADS_TXT_PUB_PLACEHOLDER`). After editing real IDs, run `python3 build_site.py` and deploy so every page picks them up.
+
+The contact address on the site is `shivaprasad2515@mail.grokbot.com`. There is no form that collects secrets.
 
 ## data.json schema (schema_version 1)
 
@@ -61,8 +81,10 @@ python3 update.py add --id example --name "Example" --url https://example.com/ -
 python3 update.py set --id apinex --tpd 3000000 --allowance "3M tokens/day on free models" \
   --note-change "APInex free allowance cut from 10M to 3M tokens/day."
 python3 -m json.tool data.json > /dev/null   # validate
-./deploy.sh        # validates, commits, pushes to GitHub, builds /workspace/cf_deploy_payload.js
+./deploy.sh        # regenerates pages, validates, commits, pushes, builds /workspace/cf_deploy_payload.js
 ```
+
+`update.py` and `deploy.sh` both run `build_site.py`, so sitemap `lastmod`, the “Best free LLM APIs” tables, provider fact boxes and `llms.txt` stay aligned with `data.json`.
 
 GitHub Pages redeploys automatically within a minute or two of the push.
 
@@ -75,8 +97,9 @@ Cloudflare Pages GitHub app is not installed on the account). After `./deploy.sh
    It must return `success: true`.
 2. Check: `curl -s https://free-llm-api-tokens.pages.dev/data.json | python3 -c "import json,sys;print(json.load(sys.stdin)['last_updated'])"`
    should match the local `data.json`.
+3. Spot-check a new route, for example `https://free-llm-api-tokens.pages.dev/guides/` and `/privacy`.
 
-The payload ships the site as a Pages `_worker.js` that embeds `index.html` and `data.json`
+The payload ships the site as a Pages `_worker.js` that embeds the HTML, CSS, JS, `data.json` and text files
 (the MCP connector can't use the Pages asset-upload endpoint). If a `CLOUDFLARE_API_TOKEN`
 with Pages:Edit is ever set, `deploy.sh` deploys with `wrangler pages deploy` instead.
 To get fully automatic deploys on every push, install the Cloudflare Pages GitHub app in the

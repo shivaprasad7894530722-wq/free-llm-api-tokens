@@ -1,0 +1,4 @@
+# ads.txt for https://freellmapi.link
+# When Google AdSense is approved, uncomment the next line and replace
+# pub-XXXXXXXXXXXXXXXX with your real publisher ID. Do not publish a fake ID.
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

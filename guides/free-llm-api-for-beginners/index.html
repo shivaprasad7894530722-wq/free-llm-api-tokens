@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A free LLM API for beginners, step by step — Free LLM API Tokens</title>
+<meta name="description" content="Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.">
+<link rel="canonical" href="https://freellmapi.link/guides/free-llm-api-for-beginners">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://freellmapi.link/guides/free-llm-api-for-beginners">
+<meta property="og:title" content="A free LLM API for beginners, step by step — Free LLM API Tokens">
+<meta property="og:description" content="Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.">
+<meta property="og:site_name" content="Free LLM API Tokens Tracker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A free LLM API for beginners, step by step — Free LLM API Tokens">
+<meta name="twitter:description" content="Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script>(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+<!--
+  Analytics and ads placeholders. Leave these commented until you have real IDs.
+  Sample IDs must not be activated — they would load third-party scripts.
+
+  1) Google Analytics 4 — replace G-XXXXXXXXXX then uncomment:
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  2) Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX then uncomment:
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  3) ads.txt — when AdSense is approved, edit /ads.txt and uncomment the google.com line
+     with your publisher ID (pub-XXXXXXXXXXXXXXXX).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A free LLM API for beginners, step by step",
+  "description": "Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-12",
+  "author": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "mainEntityOfPage": "https://freellmapi.link/guides/free-llm-api-for-beginners",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "A free LLM API for beginners, step by step",
+  "description": "Beginner walkthrough for using a free LLM API: pick a provider, create a key, set the OpenAI SDK base URL, send a first request, and read common errors.",
+  "url": "https://freellmapi.link/guides/free-llm-api-for-beginners",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Pick a provider from the list",
+      "text": "Open the tracker, hide relays, and choose an official OpenAI-compatible provider with a published base URL."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Create an account and key",
+      "text": "Sign up on the official site and copy the API key into an environment variable."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Install the SDK",
+      "text": "Install the official OpenAI library for Python or JavaScript."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Send one test request",
+      "text": "Call chat completions with the published base URL and a model id copied from the provider’s docs."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Read the result or error",
+      "text": "If it works, inspect usage; if it fails, fix the key, URL or model id before writing a loop."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://freellmapi.link/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://freellmapi.link/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "A free LLM API for beginners, step by step",
+      "item": "https://freellmapi.link/guides/free-llm-api-for-beginners"
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="/">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#7c9cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/>
+        <circle cx="16" cy="16" r="6.5" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <circle cx="16" cy="16" r="2.1" fill="#22d3ee"/>
+      </svg>
+      Free LLM API Tokens
+    </a>
+    <nav class="nav" aria-label="Primary"><a href="/">Tracker</a><a href="/guides/" aria-current="page">Guides</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
+    <div class="top-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>A free LLM API for beginners, step by step</span></nav><h1 class="page-title">A free LLM API for beginners, step by step</h1><p class="page-lede">You do not need to train a model. You create an account, copy a key, point a short script at the published base URL, and send one small request.</p><p class="page-updated">Last updated 12 Nov 2026. The provider figures on this page follow the tracker snapshot of 12 Nov 2026, 08:59 IST.</p><h2 id="what-is-a-free-llm-api-in-one-paragraph">What is a free LLM API, in one paragraph?</h2>
+<p>A free LLM API lets a program send text to a language model over the internet and get text back, using an allowance the provider currently advertises as free. You are not running the model on your laptop unless you choose a local tool. You are calling a remote service with a key. This tracker lists those allowances as they were published, with the snapshot at 12 Nov 2026, 08:59 IST. Figures change, so the official site is the last word.</p>
+<p>If you have never used an API before, this page is the slow path. The short path for people who already use the OpenAI SDK is <a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a>.</p>
+<h2 id="what-do-i-need-on-my-computer">What do I need on my computer?</h2>
+<p>You need a way to run a short Python or JavaScript program, a text editor, and a web browser to sign up with a provider. You do not need a GPU. You do not need to pay just to follow this page, but some providers in our list do require a card even for a trial. If you want to avoid that for a first test, use the home-page filter <strong>No card needed</strong>, then still confirm on the official signup screen.</p>
+<p>You should also be willing to store a secret. An API key works like a password. Read <a href="/guides/keep-api-keys-safe">How to keep API keys safe</a> before you paste anything into a file.</p>
+<h2 id="how-do-i-pick-a-first-provider">How do I pick a first provider?</h2>
+<p>Open the <a href="/">provider list</a> and keep these defaults for a first attempt:</p>
+<ol><li>Hide relays, so you are not sending a test through an unofficial middleman. See <a href="/guides/relay-gateway-risks">Relay and gateway risks</a>.</li><li>Filter to OpenAI compatible, so the code below applies.</li><li>Prefer a row marked Official provider, with a published base URL rather than “Not published.”</li><li>Read the allowance in words. A daily token cap, a monthly call cap and a one-time credit are different.</li><li>Click through to the official site and read the current free-tier or pricing page.</li></ol>
+<p>The <a href="/guides/best-free-llm-apis">current snapshot</a> groups the same data into tables if you prefer to scan that way. Individual walkthroughs exist for <a href="/guides/groq-free-api">Groq</a>, <a href="/guides/gemini-api">Gemini</a>, <a href="/guides/cloudflare-workers-ai">Cloudflare Workers AI</a>, <a href="/guides/cerebras-api">Cerebras</a>, <a href="/guides/sambanova-cloud">SambaNova</a> and <a href="/guides/mistral-api">Mistral</a>. Those pages use the same fields as the list and will not invent a quota that the list does not have.</p>
+<h2 id="how-do-i-create-a-key-and-keep-it-local">How do I create a key and keep it local?</h2>
+<p>On the official site, create an account, find the API key or console page, and create a key. Copy it once into your terminal as an environment variable:</p>
+<div class="snippet"><button type="button" class="copy copy-snip" data-c="export API_KEY=&quot;paste-your-key-here&quot;">Copy</button><pre>export API_KEY=&quot;paste-your-key-here&quot;</pre></div>
+<p>Do not put the key in the script you might later upload to GitHub. Do not send it to this site. If you use a <code>.env</code> file, add that file name to <code>.gitignore</code> first.</p>
+<p>If the official site asks for a mobile number or a card, that matches (or may update) the “card required” field in our list. You can stop and pick a different official provider if you do not want to continue.</p>
+<h2 id="how-do-i-send-the-first-request-in-python">How do I send the first request in Python?</h2>
+<p>Install the official library in a virtual environment if you use one:</p>
+<div class="snippet"><button type="button" class="copy copy-snip" data-c="pip install openai">Copy</button><pre>pip install openai</pre></div>
+<p>Then run a script that sets <code>base_url</code> to the <strong>exact</strong> string from the provider card. The value <code>https://api.example.com/v1</code> below is a placeholder, not a real host.</p>
+<div class="snippet"><button type="button" class="copy copy-snip" data-c="import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.example.com/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Reply with the word ok.&quot;}],
+)
+print(resp.choices[0].message.content)">Copy</button><pre>import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.example.com/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Reply with the word ok.&quot;}],
+)
+print(resp.choices[0].message.content)</pre></div>
+<p>Copy <code>MODEL_ID</code> from the provider’s official model list or dashboard. Do not invent it, and do not assume an OpenAI model name will work. If the base URL in our list contains <code>{ACCOUNT_ID}</code>, replace that part with the account id the provider shows you.</p>
+<h2 id="how-do-i-do-the-same-in-javascript">How do I do the same in JavaScript?</h2>
+<div class="snippet"><button type="button" class="copy copy-snip" data-c="npm install openai">Copy</button><pre>npm install openai</pre></div>
+<div class="snippet"><button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.example.com/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;Reply with the word ok.&quot; }],
+});
+console.log(resp.choices[0].message.content);">Copy</button><pre>import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.example.com/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;,
+  messages: [{ role: &quot;user&quot;, content: &quot;Reply with the word ok.&quot; }],
+});
+console.log(resp.choices[0].message.content);</pre></div>
+<p>Run this on your computer or a server. Do not put the secret key into a public web page.</p>
+<h2 id="what-should-i-do-if-the-first-request-fails">What should I do if the first request fails?</h2>
+<p>Read the error text slowly. These are the usual causes:</p>
+<ul><li><strong>Authentication error:</strong> the environment variable is missing, has a space or quote stuck to it, or the key was revoked.</li><li><strong>Unknown model:</strong> the model id is for a different provider, or it is not on the free tier.</li><li><strong>Not found or connection error:</strong> the base URL is mistyped, or an extra <code>/v1</code> was added.</li><li><strong>429 or rate limit:</strong> you have hit a cap, or a previous typo retried too often. Wait and see <a href="/guides/rate-limits-explained">Rate limits explained</a>.</li><li><strong>Payment required:</strong> the official free allowance does not include this request, or the offer has ended.</li></ul>
+<p>If the official docs disagree with our card, follow the official docs and <a href="/contact">tell us</a> with a link.</p>
+<h2 id="what-should-i-do-after-a-request-succeeds">What should I do after a request succeeds?</h2>
+<p>Check the provider dashboard, if it shows usage. Then decide whether this provider’s published allowance is enough for a small project. Keep using short prompts until you understand how fast the cap moves. If you are writing code with an assistant, see <a href="/guides/free-llm-apis-for-coding">Free LLM APIs for coding</a>, because tools can send many hidden requests.</p>
+<p>When you are finished experimenting, delete unused keys. If you pasted a key anywhere public by mistake, revoke it immediately.</p>
+<h2 id="what-this-first-project-is-not">What this first project is not</h2>
+<p>It is not a way to get an unlimited commercial API. It is not permission to ignore the provider’s terms. It is not a reason to put private customer data into a free tier, especially one that may use prompts to improve a product — our Gemini notes, for example, record that free-tier prompts may be used to improve Google products. Always read the official privacy text for the tier you are on.</p>
+<p>Once the first request works, you already know the whole pattern: official account, secret key, published base URL, official model id. Everything else is product detail, which belongs on the provider’s site and, for a snapshot of allowances, on this tracker.</p><aside class="related"><h2>Related guides</h2><ul><li><a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a></li><li><a href="/guides/keep-api-keys-safe">How to keep API keys safe</a></li><li><a href="/guides/best-free-llm-apis">Best free LLM APIs (current snapshot)</a></li><li><a href="/guides/rate-limits-explained">Rate limits on free LLM APIs, explained</a></li></ul></aside></article></main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-links"><a href="/">Tracker</a> <a href="/guides/">Guides</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/data.json">data.json</a></div>
+    <div class="footer-note">
+      Not affiliated with any provider. Figures come from each provider’s own pages on the date shown and change often.
+      Never share your API keys.
+      Contact: <a href="mailto:shivaprasad2515@mail.grokbot.com">shivaprasad2515@mail.grokbot.com</a>.
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

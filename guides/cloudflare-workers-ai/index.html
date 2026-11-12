@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cloudflare Workers AI free allowance and compatible API — Free LLM API Tokens</title>
+<meta name="description" content="Cloudflare Workers AI snapshot from this tracker: 10,000 Neurons/day free allowance, OpenAI-compatible base URL with ACCOUNT_ID, and how to call it without inventing a token equivalent.">
+<link rel="canonical" href="https://freellmapi.link/guides/cloudflare-workers-ai">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://freellmapi.link/guides/cloudflare-workers-ai">
+<meta property="og:title" content="Cloudflare Workers AI free allowance and compatible API — Free LLM API Tokens">
+<meta property="og:description" content="Cloudflare Workers AI snapshot from this tracker: 10,000 Neurons/day free allowance, OpenAI-compatible base URL with ACCOUNT_ID, and how to call it without inventing a token equivalent.">
+<meta property="og:site_name" content="Free LLM API Tokens Tracker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cloudflare Workers AI free allowance and compatible API — Free LLM API Tokens">
+<meta name="twitter:description" content="Cloudflare Workers AI snapshot from this tracker: 10,000 Neurons/day free allowance, OpenAI-compatible base URL with ACCOUNT_ID, and how to call it without inventing a token equivalent.">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script>(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+<!--
+  Analytics and ads placeholders. Leave these commented until you have real IDs.
+  Sample IDs must not be activated — they would load third-party scripts.
+
+  1) Google Analytics 4 — replace G-XXXXXXXXXX then uncomment:
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  2) Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX then uncomment:
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  3) ads.txt — when AdSense is approved, edit /ads.txt and uncomment the google.com line
+     with your publisher ID (pub-XXXXXXXXXXXXXXXX).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Cloudflare Workers AI free allowance and compatible API",
+  "description": "Cloudflare Workers AI snapshot from this tracker: 10,000 Neurons/day free allowance, OpenAI-compatible base URL with ACCOUNT_ID, and how to call it without inventing a token equivalent.",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-12",
+  "author": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "mainEntityOfPage": "https://freellmapi.link/guides/cloudflare-workers-ai",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://freellmapi.link/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://freellmapi.link/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cloudflare Workers AI free allowance and compatible API",
+      "item": "https://freellmapi.link/guides/cloudflare-workers-ai"
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="/">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#7c9cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/>
+        <circle cx="16" cy="16" r="6.5" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <circle cx="16" cy="16" r="2.1" fill="#22d3ee"/>
+      </svg>
+      Free LLM API Tokens
+    </a>
+    <nav class="nav" aria-label="Primary"><a href="/">Tracker</a><a href="/guides/" aria-current="page">Guides</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
+    <div class="top-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Cloudflare Workers AI free allowance and compatible API</span></nav><h1 class="page-title">Cloudflare Workers AI free allowance and compatible API</h1><p class="page-lede">Cloudflare Workers AI is an official, OpenAI-compatible API. Its published free cap is in Neurons per day, not tokens, and the base URL includes your account id.</p><p class="page-updated">Last updated 12 Nov 2026. The provider figures on this page follow the tracker snapshot of 12 Nov 2026, 08:59 IST.</p><h2 id="what-is-cloudflare-workers-ai-on-this-tracker">What is Cloudflare Workers AI on this tracker?</h2>
+<p>Cloudflare Workers AI is listed as an <strong>official provider</strong>, with OpenAI compatibility <strong>Yes</strong>. The recorded free allowance is “10,000 Neurons/day (not tokens)”. Tokens per day are <strong>Not published</strong>, because the cap is not published as tokens. Limits are <strong>Not published</strong>. Card required is <strong>No</strong>. Relay warning: <strong>no</strong>. Our notes say: Allowance is in Neurons; token equivalent depends on model.</p>
+<p>The official URL we store is <a href="https://developers.cloudflare.com/workers-ai/platform/pricing/">https://developers.cloudflare.com/workers-ai/platform/pricing/</a>. The entry was first listed on 3 Oct 2026 and last updated on 3 Oct 2026. The list snapshot is 12 Nov 2026, 08:59 IST.</p>
+<div class="callout"><strong>Snapshot from this tracker</strong>Figures below are copied from our <a href="/">provider list</a> (entry last updated 3 Oct 2026). They change often — confirm on the official site before you rely on them.</div><table><tr><th>Official site</th><td><a href="https://developers.cloudflare.com/workers-ai/platform/pricing/" rel="noopener">Visit Cloudflare Workers AI</a></td></tr><tr><th>Category</th><td>Official provider</td></tr><tr><th>OpenAI compatible</th><td>Yes</td></tr><tr><th>Free allowance</th><td>10,000 Neurons/day (not tokens)</td></tr><tr><th>Tokens per day</th><td>Not published</td></tr><tr><th>Rate limits</th><td>Not published</td></tr><tr><th>Card required</th><td>No</td></tr><tr><th>Base URL</th><td><code>https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1</code></td></tr><tr><th>Relay warning</th><td>No</td></tr><tr><th>First listed</th><td>3 Oct 2026</td></tr><tr><th>Entry updated</th><td>3 Oct 2026</td></tr><tr><th>Notes</th><td>Allowance is in Neurons; token equivalent depends on model.</td></tr></table>
+<h2 id="why-does-this-page-refuse-to-convert-neurons-into-tokens">Why does this page refuse to convert Neurons into tokens?</h2>
+<p>Because our notes say the token equivalent depends on the model, and the official unit is Neurons. A homemade conversion would be an invented quota, which this site does not publish. If you need to know how a specific model spends Neurons, use Cloudflare’s official pricing documentation. For the wider idea that not every cap is a token cap, see <a href="/guides/rate-limits-explained">Rate limits explained</a>.</p>
+<p>When you compare this row with providers that publish tokens per day, do not sort them as if the units were the same. The <a href="/guides/best-free-llm-apis">current snapshot</a> will show Cloudflare in the official table with its Neuron wording, and it will be absent from the tokens-per-day table — that is expected.</p>
+<h2 id="how-do-i-use-the-published-base-url">How do I use the published base URL?</h2>
+<p>The base URL in our list is <code>https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1</code>. The <code>{ACCOUNT_ID}</code> portion is a placeholder, not the literal text you should send. Replace it with the Cloudflare account id from your official dashboard. If you leave the braces in place, the request will not reach the API.</p>
+<p>Once the URL is complete, the OpenAI SDK pattern is the same as for other compatible official providers. Copy the model id from Cloudflare’s official Workers AI model list.</p>
+<h3>Python</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,  # copy the model id from the provider&#x27;s docs
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}],
+)
+print(resp.choices[0].message.content)
+">Copy</button><pre>import os
+from openai import OpenAI
+
+client = OpenAI(
+    api_key=os.environ[&quot;API_KEY&quot;],
+    base_url=&quot;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1&quot;,
+)
+
+resp = client.chat.completions.create(
+    model=&quot;MODEL_ID&quot;,  # copy the model id from the provider&#x27;s docs
+    messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Hello&quot;}],
+)
+print(resp.choices[0].message.content)
+</pre></div><h3>JavaScript</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;, // copy the model id from the provider&#x27;s docs
+  messages: [{ role: &quot;user&quot;, content: &quot;Hello&quot; }],
+});
+console.log(resp.choices[0].message.content);
+">Copy</button><pre>import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1&quot;,
+});
+
+const resp = await client.chat.completions.create({
+  model: &quot;MODEL_ID&quot;, // copy the model id from the provider&#x27;s docs
+  messages: [{ role: &quot;user&quot;, content: &quot;Hello&quot; }],
+});
+console.log(resp.choices[0].message.content);
+</pre></div><h3>curl</h3><div class="snippet"><button type="button" class="copy copy-snip" data-c="# Replace the URL with the provider&#x27;s published base URL, then append /chat/completions
+# Base URL in our list: https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1
+curl &quot;$BASE_URL/chat/completions&quot; \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;model&quot;:&quot;MODEL_ID&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Hello&quot;}]}&#x27;
+">Copy</button><pre># Replace the URL with the provider&#x27;s published base URL, then append /chat/completions
+# Base URL in our list: https://api.cloudflare.com/client/v4/accounts/{ACCOUNT_ID}/ai/v1
+curl &quot;$BASE_URL/chat/completions&quot; \
+  -H &quot;Authorization: Bearer $API_KEY&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#x27;{&quot;model&quot;:&quot;MODEL_ID&quot;,&quot;messages&quot;:[{&quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;Hello&quot;}]}&#x27;
+</pre></div><p>The <code>MODEL_ID</code> string is not guessed here. Copy it from the provider’s dashboard or official model list, because catalogues change.</p>
+<p>Some official Cloudflare examples use their own Workers or bindings instead of an external SDK. Those are valid ways to call the same product. This page shows the compatible HTTP interface we recorded, because it is the one you need to point an existing OpenAI client at the published URL.</p>
+<h2 id="what-else-should-i-check-in-the-official-docs">What else should I check in the official docs?</h2>
+<p>Look for the current Neuron allowance, whether it still applies to the models you want, any request-rate limits that are not in our limits field (ours is <strong>Not published</strong>), and how authentication is expressed. Cloudflare APIs often use account-scoped credentials; follow their current quickstart for the compatible endpoint rather than assuming that a generic bearer token setup is complete.</p>
+<p>We will not invent extra headers or token-exchange steps that are not in our notes. If the official quickstart requires a different auth header than <code>Authorization: Bearer</code>, use the official quickstart.</p>
+<h2 id="is-this-an-official-provider-or-a-gateway">Is this an official provider or a gateway?</h2>
+<p>It is an official provider in our category field, with <strong>no</strong> relay warning. You still need to read Cloudflare’s terms for how inputs are handled. Official hosting is a reason to prefer it over an unofficial relay for private text, not a waiver of the provider’s own policy. See <a href="/guides/official-vs-gateway-providers">Official providers vs gateways</a> and <a href="/guides/keep-api-keys-safe">How to keep API keys safe</a>.</p>
+<p>Card required is recorded as <strong>No</strong>. Confirm on the official signup and billing pages, especially if you already have a Cloudflare account with a card on file for other products.</p>
+<h2 id="how-might-i-try-it-safely">How might I try it safely?</h2>
+<p>Create or use a Cloudflare account, copy the account id, create the official API credential the docs require, and put that credential in an environment variable. Substitute the account id into the base URL. Send a one-line prompt with a model id from the official list. Then check the official usage or Neuron display, if one is shown, before connecting an agent that might loop.</p>
+<p>If you are choosing among official compatible APIs, compare this Neuron-based allowance with <a href="/guides/groq-free-api">Groq</a>’s published daily token and request caps and <a href="/guides/gemini-api">Gemini</a>’s selected-model free tier. They are different shapes of “free,” not three sizes of the same cap.</p>
+<h2 id="how-do-i-report-a-change">How do I report a change?</h2>
+<p>If Cloudflare’s official pricing page no longer matches the fact box, <a href="/contact">send the public URL</a>. We review the list on weekdays and will not update a Neuron figure from a forum post or from a conversion formula.</p>
+<h2 id="how-is-this-different-from-other-cloudflare-products-on-a-free-plan">How is this different from other Cloudflare products on a free plan?</h2>
+<p>Cloudflare offers many products, and a free plan on one product is not automatically a free LLM allowance on Workers AI. Our row is only about the Workers AI allowance we recorded — “10,000 Neurons/day (not tokens)” — and the compatible API URL. Do not treat this page as a guide to Workers, Pages, DNS or billing for the rest of the account.</p>
+<p>If you already use Cloudflare for hosting, you may still need to enable Workers AI and create the credential the official AI docs describe. Follow those docs rather than reusing an unrelated API token that does not have the right permission. This site cannot see your account and cannot tell you which token permission checkbox to tick if official docs change.</p>
+<h2 id="what-should-i-do-after-a-first-successful-call">What should I do after a first successful call?</h2>
+<p>Check any official usage or Neuron display. If you plan to call the API from a Worker as well as from an external SDK, confirm in the official docs whether those paths share the same daily Neuron allowance. We do not invent a split or a combined cap. Keep the credential in the environment, and do not put <code>{ACCOUNT_ID}</code> or the token into a public repository.</p><aside class="related"><h2>Related guides</h2><ul><li><a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a></li><li><a href="/guides/gemini-api">Gemini API free tier — compatibility, base URL and notes</a></li><li><a href="/guides/rate-limits-explained">Rate limits on free LLM APIs, explained</a></li><li><a href="/guides/official-vs-gateway-providers">Official LLM API providers vs gateways</a></li></ul></aside></article></main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-links"><a href="/">Tracker</a> <a href="/guides/">Guides</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/data.json">data.json</a></div>
+    <div class="footer-note">
+      Not affiliated with any provider. Figures come from each provider’s own pages on the date shown and change often.
+      Never share your API keys.
+      Contact: <a href="mailto:shivaprasad2515@mail.grokbot.com">shivaprasad2515@mail.grokbot.com</a>.
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

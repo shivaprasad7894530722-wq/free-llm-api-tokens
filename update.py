@@ -11,7 +11,7 @@ Add a free-text changelog line only:
   python3 update.py log "Something changed"
 Every add/set bumps last_updated (IST) and writes a changelog line for today.
 """
-import argparse, json, sys, datetime as dt
+import argparse, json, sys, os, subprocess, datetime as dt
 IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
 F = "data.json"
 
@@ -19,6 +19,10 @@ def load(): return json.load(open(F, encoding="utf-8"))
 def save(d):
     d["last_updated"] = dt.datetime.now(IST).replace(microsecond=0).isoformat()
     json.dump(d, open(F, "w", encoding="utf-8"), indent=2, ensure_ascii=False); open(F, "a").write("\n")
+    # Keep sitemap lastmod, generated guide tables and llms.txt in sync.
+    gen = os.path.join(os.path.dirname(os.path.abspath(__file__)), "build_site.py")
+    if os.path.exists(gen):
+        subprocess.check_call([sys.executable, gen], cwd=os.path.dirname(gen))
 def today(): return dt.datetime.now(IST).date().isoformat()
 def log(d, msg):
     t = today()

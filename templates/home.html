@@ -1,0 +1,242 @@
+<main>
+  <section class="wrap hero" aria-labelledby="hero-title">
+    <div class="eyebrow">Updated on weekdays</div>
+    <h1 id="hero-title"><span>Free API credits for AI models, in one place.</span></h1>
+    <p class="lede">A daily-updated list of sites that give free LLM API tokens — with what you get, whether they work like OpenAI, and the base URL you need.</p>
+    <div class="stats">
+      <div class="stat"><b id="statCount">…</b><span>providers listed</span></div>
+      <div class="stat"><b id="updated">…</b><span>last checked (IST)</span></div>
+    </div>
+    <p class="note">Figures come from each provider’s own pages on the date shown, and they change often. Check before you rely on them. Never share your API keys.</p>
+  </section>
+
+  <section class="wrap" aria-labelledby="how-title">
+    <div class="how">
+      <article class="step">
+        <span class="num">1</span>
+        <h2 id="how-title">Sign up</h2>
+        <p>Open a provider from the list and create a free account. Prefer official providers if you are sending anything private.</p>
+      </article>
+      <article class="step">
+        <span class="num">2</span>
+        <h2>Get your API key</h2>
+        <p>Copy the key from their dashboard and keep it secret — on your computer or in an environment variable, never in a public chat or repo.</p>
+      </article>
+      <article class="step">
+        <span class="num">3</span>
+        <h2>Set the base URL</h2>
+        <p>Point the OpenAI SDK (or any OpenAI-compatible client) at the provider’s base URL:</p>
+        <div class="snippet">
+          <button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.example.com/v1&quot;,
+});">Copy</button>
+          <pre>import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: "https://api.example.com/v1",
+});</pre>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="browse" aria-labelledby="browse-title">
+    <h2 id="browse-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Browse providers</h2>
+    <div class="panel">
+      <div class="controls">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="q" placeholder="Search providers, models, or base URLs…" aria-label="Search providers">
+        </div>
+        <select id="sort" aria-label="Sort providers">
+          <option value="new">Newest first</option>
+          <option value="tpd">Tokens/day, high to low</option>
+          <option value="name">Name, A to Z</option>
+          <option value="updated">Recently updated</option>
+        </select>
+        <div class="filters">
+          <label class="chip"><input type="checkbox" id="oai"> OpenAI compatible</label>
+          <label class="chip"><input type="checkbox" id="nocard"> No card needed</label>
+          <label class="chip"><input type="checkbox" id="hastpd"> Has daily tokens</label>
+          <label class="chip"><input type="checkbox" id="norisk"> Hide relays</label>
+          <label class="chip"><input type="checkbox" id="showdropped"> Show ended offers</label>
+          <span id="count"></span>
+        </div>
+      </div>
+      <details class="news">
+        <summary>Latest updates</summary>
+        <div class="news-body" id="changelog"></div>
+      </details>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap home-guides" aria-labelledby="guides-teaser-title">
+    <h2 id="guides-teaser-title">Guides</h2>
+    <p class="lede" style="margin:0 0 16px;text-align:left">Short explainers on OpenAI-compatible APIs, safety, rate limits and individual providers. Every figure is taken from the list above or from official docs — never invented.</p>
+    <!-- GUIDES_TEASER -->
+    <p><a href="/guides/">Browse all guides →</a></p>
+  </section>
+
+  <section class="wrap faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Common questions</h2>
+    <details open>
+      <summary>What does OpenAI compatible mean?</summary>
+      <p>You can use the official OpenAI SDK or any client that talks to OpenAI’s API. Just change the base URL and use the provider’s API key. “Partial” means only some features or models work that way.</p>
+    </details>
+    <details>
+      <summary>What are tokens per day?</summary>
+      <p>A token is a small chunk of text the model reads or writes — a few characters or a short word. The daily figure is the provider’s published free limit, when they publish one. If they do not, we show “Not published” rather than guessing.</p>
+    </details>
+    <details>
+      <summary>What does the relay warning mean?</summary>
+      <p>Those sites are unofficial gateways or resellers. They forward your prompts to other providers. Do not send private or sensitive data through them.</p>
+    </details>
+    <details>
+      <summary>Do I need a credit card?</summary>
+      <p>It depends on the provider. Use the “No card needed” filter to narrow the list, then confirm on their site — some ask for a card later, or after a trial credit runs out.</p>
+    </details>
+    <details>
+      <summary>Why does it say “Not published”?</summary>
+      <p>The provider has not published that figure on their public pages. We never invent quotas, prices or endpoints.</p>
+    </details>
+    <details>
+      <summary>How often is this list updated?</summary>
+      <p>On weekdays. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).</p>
+    </details>
+  </section>
+</main>
+
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = d => {
+  if (!d) return "—";
+  const [y, m, dd] = d.split("-");
+  return new Date(Date.UTC(+y, +m - 1, +dd)).toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"});
+};
+const fmtNum = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0) + "M" : n >= 1e3 ? (n / 1e3).toFixed(n % 1e3 ? 1 : 0) + "K" : String(n);
+const published = v => (v == null || v === "" || String(v).toLowerCase() === "unspecified") ? "Not published" : String(v);
+const istStamp = iso => {
+  const d = new Date(iso);
+  return d.toLocaleString("en-GB", {timeZone:"Asia/Kolkata", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) + " IST";
+};
+const isDropped = s => {
+  const a = (s.free_allowance || "").trim();
+  return /^DROPPED\b/i.test(a) || /^None\b/i.test(a) || /^No free (cloud )?tier\b/i.test(a);
+};
+const cardNotNeeded = s => {
+  const c = (s.card_required || "").trim().toLowerCase();
+  if (!c || c === "unspecified" || c === "yes" || c === "top-up" || c.startsWith("yes ")) return false;
+  return /^(no\b|no card)/i.test(s.card_required.trim());
+};
+const allowanceText = s => published((s.free_allowance || "").replace(/^DROPPED:\s*/i, ""));
+const hasBase = s => s.base_url && String(s.base_url).toLowerCase() !== "unspecified";
+
+let DATA = null;
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const oai = document.getElementById("oai").checked;
+  const nocard = document.getElementById("nocard").checked;
+  const nr = document.getElementById("norisk").checked;
+  const ht = document.getElementById("hastpd").checked;
+  const showDropped = document.getElementById("showdropped").checked;
+  const sort = document.getElementById("sort").value;
+  const droppedCount = DATA.sites.filter(isDropped).length;
+
+  let list = DATA.sites.filter(s => {
+    if (!showDropped && isDropped(s)) return false;
+    if (oai && s.openai_compatible !== "yes") return false;
+    if (nocard && !cardNotNeeded(s)) return false;
+    if (nr && s.relay_risk) return false;
+    if (ht && !s.tokens_per_day) return false;
+    if (q) {
+      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const by = {
+    new: (a, b) => b.first_reported.localeCompare(a.first_reported) || a.name.localeCompare(b.name),
+    tpd: (a, b) => (b.tokens_per_day || 0) - (a.tokens_per_day || 0) || a.name.localeCompare(b.name),
+    name: (a, b) => a.name.localeCompare(b.name),
+    updated: (a, b) => b.last_updated.localeCompare(a.last_updated) || a.name.localeCompare(b.name)
+  };
+  list.sort(by[sort]);
+
+  const hidden = (!showDropped && droppedCount) ? " · " + droppedCount + " ended " + (droppedCount === 1 ? "offer" : "offers") + " hidden" : "";
+  document.getElementById("count").textContent = "Showing " + list.length + " of " + DATA.sites.length + hidden;
+
+  document.getElementById("grid").innerHTML = list.map(s => {
+    const dropped = isDropped(s);
+    const oaiB = s.openai_compatible === "yes"
+      ? '<span class="b ok">OpenAI compatible</span>'
+      : s.openai_compatible === "partial"
+        ? '<span class="b part">OpenAI: partial</span>'
+        : s.openai_compatible === "no"
+          ? '<span class="b no">Not OpenAI compatible</span>'
+          : '<span class="b no">OpenAI: not published</span>';
+    const tpdB = s.tokens_per_day ? '<span class="b tpd">' + esc(fmtNum(s.tokens_per_day)) + ' / day</span>' : "";
+    const base = hasBase(s)
+      ? '<code title="' + esc(s.base_url) + '">' + esc(s.base_url) + '</code><button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="' + esc(s.base_url) + '">Copy</button>'
+      : '<span class="mut">Not published</span>';
+    const notes = s.notes ? '<div class="extra"><dt>Notes</dt><dd>' + esc(s.notes) + '</dd></div>' : "";
+    return '<article class="card' + (dropped ? ' dropped' : '') + '">' +
+      '<div class="card-top"><h2><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.name) + '</a></h2>' +
+      '<a class="visit" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">Visit site ↗</a></div>' +
+      '<div class="badges">' + oaiB + tpdB +
+        (s.category === "official" ? '<span class="b off">Official provider</span>' : '') +
+        (s.relay_risk ? '<span class="b risk">Relay warning</span>' : '') +
+        (dropped ? '<span class="b end">Ended</span>' : '') +
+      '</div>' +
+      '<dl class="free"><dt>What you get free</dt><dd>' + esc(allowanceText(s)) + '</dd></dl>' +
+      '<div class="meta">' +
+        '<div><dt>Tokens per day</dt><dd>' + (s.tokens_per_day ? s.tokens_per_day.toLocaleString("en-GB") : "Not published") + '</dd></div>' +
+        '<div><dt>Card needed</dt><dd>' + esc(published(s.card_required)) + '</dd></div>' +
+      '</div>' +
+      '<div class="base"><dt>Base URL</dt><div class="base-row">' + base + '</div></div>' +
+      '<div class="extra"><dt>Limits</dt><dd>' + esc(published(s.limits)) + '</dd></div>' +
+      notes +
+      '<div class="extra"><dt>First listed</dt><dd>' + fmtDate(s.first_reported) + '</dd> · <dt>Updated</dt><dd>' + fmtDate(s.last_updated) + '</dd></div>' +
+    '</article>';
+  }).join("") || '<p class="empty">No providers match those filters. Try clearing search or showing ended offers.</p>';
+}
+
+function copyText(btn) {
+  const text = btn.getAttribute("data-c") || "";
+  const done = () => { const old = btn.textContent; btn.textContent = "Copied"; btn.classList.add("done"); setTimeout(() => { btn.textContent = old; btn.classList.remove("done"); }, 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement("textarea");
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {}
+  ta.remove();
+}
+
+fetch("/data.json", {cache:"no-store"}).then(r => {
+  if (!r.ok) throw new Error(r.status + " " + r.statusText);
+  return r.json();
+}).then(d => {
+  DATA = d;
+  document.getElementById("statCount").textContent = String(d.sites.length);
+  document.getElementById("updated").textContent = istStamp(d.last_updated);
+  document.getElementById("changelog").innerHTML = d.changelog.slice().sort((a, b) => b.date.localeCompare(a.date)).map(c =>
+    "<h3>" + fmtDate(c.date) + "</h3><ul>" + c.items.map(i => "<li>" + esc(i) + "</li>").join("") + "</ul>"
+  ).join("");
+  ["q","oai","nocard","norisk","hastpd","showdropped","sort"].forEach(id =>
+    document.getElementById(id).addEventListener("input", render)
+  );
+  render();
+}).catch(e => {
+  document.getElementById("grid").innerHTML = '<p class="empty">Could not load the provider list. Please refresh the page.</p>';
+  console.error(e);
+});
+</script>

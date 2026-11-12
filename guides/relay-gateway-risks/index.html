@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Relay and gateway risks for free LLM APIs — Free LLM API Tokens</title>
+<meta name="description" content="How unofficial LLM API relays and gateways work, what this tracker’s relay warning means, and how to reduce the risk of leaked prompts and keys.">
+<link rel="canonical" href="https://freellmapi.link/guides/relay-gateway-risks">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://freellmapi.link/guides/relay-gateway-risks">
+<meta property="og:title" content="Relay and gateway risks for free LLM APIs — Free LLM API Tokens">
+<meta property="og:description" content="How unofficial LLM API relays and gateways work, what this tracker’s relay warning means, and how to reduce the risk of leaked prompts and keys.">
+<meta property="og:site_name" content="Free LLM API Tokens Tracker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Relay and gateway risks for free LLM APIs — Free LLM API Tokens">
+<meta name="twitter:description" content="How unofficial LLM API relays and gateways work, what this tracker’s relay warning means, and how to reduce the risk of leaked prompts and keys.">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/styles.css">
+<script>(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>
+<!--
+  Analytics and ads placeholders. Leave these commented until you have real IDs.
+  Sample IDs must not be activated — they would load third-party scripts.
+
+  1) Google Analytics 4 — replace G-XXXXXXXXXX then uncomment:
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  2) Google AdSense — replace ca-pub-XXXXXXXXXXXXXXXX then uncomment:
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  3) ads.txt — when AdSense is approved, edit /ads.txt and uncomment the google.com line
+     with your publisher ID (pub-XXXXXXXXXXXXXXXX).
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Relay and gateway risks for free LLM APIs",
+  "description": "How unofficial LLM API relays and gateways work, what this tracker’s relay warning means, and how to reduce the risk of leaked prompts and keys.",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-12",
+  "author": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/"
+  },
+  "mainEntityOfPage": "https://freellmapi.link/guides/relay-gateway-risks",
+  "inLanguage": "en"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://freellmapi.link/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Guides",
+      "item": "https://freellmapi.link/guides/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Relay and gateway risks for free LLM APIs",
+      "item": "https://freellmapi.link/guides/relay-gateway-risks"
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="/">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#7c9cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/>
+        <circle cx="16" cy="16" r="6.5" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <circle cx="16" cy="16" r="2.1" fill="#22d3ee"/>
+      </svg>
+      Free LLM API Tokens
+    </a>
+    <nav class="nav" aria-label="Primary"><a href="/">Tracker</a><a href="/guides/" aria-current="page">Guides</a><a href="/about">About</a><a href="/contact">Contact</a></nav>
+    <div class="top-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides/">Guides</a> / <span>Relay and gateway risks for free LLM APIs</span></nav><h1 class="page-title">Relay and gateway risks for free LLM APIs</h1><p class="page-lede">A relay can look like an official API while forwarding your prompt to another service. Treat flagged sites as public, and prefer official providers for anything private.</p><p class="page-updated">Last updated 12 Nov 2026. The provider figures on this page follow the tracker snapshot of 12 Nov 2026, 08:59 IST.</p><h2 id="what-is-a-relay-or-unofficial-gateway">What is a relay or unofficial gateway?</h2>
+<p>A relay is a site that gives you an API key and a base URL, then forwards your prompts to other model providers rather than running the models itself as the named official host. Some relays are clear about that. Others present a long model list and a generous free allowance without saying where the request actually goes. On this tracker, entries that we treat as unofficial resellers or unknown operators carry a <strong>Relay warning</strong>.</p>
+<p>A “gateway” in our category field is broader. It includes documented routers and official multi-model gateways as well as unofficial relays. The warning flag, not the word “gateway” alone, is the signal to be careful with private data.</p>
+<h2 id="why-can-a-relay-be-a-problem">Why can a relay be a problem?</h2>
+<p>The practical risks are about data and control, not about whether a sample “hello” request works.</p>
+<p>Your prompt, system instructions and any files you attach may be visible to the relay operator, and may be logged or reused. The operator may also send that text to a third-party model host with its own logging policy. If you pasted customer data, private source code, or an API key inside the prompt, you have now shared it with at least one extra party.</p>
+<p>You also have less control over the route. A model name can be mapped to a different model than the one you expected. A free cap can disappear. A site can start charging, change its domain, or shut down. Billing disputes and abuse reports are harder when the operator is unclear.</p>
+<p>A relay can also collect <strong>your</strong> API keys if you are tricked into pasting a key from another provider into their dashboard. This tracker will never ask you for a key. If a site does, stop and read <a href="/guides/keep-api-keys-safe">How to keep API keys safe</a>.</p>
+<h2 id="what-does-the-relay-warning-on-this-site-mean">What does the relay warning on this site mean?</h2>
+<p>It means that, from public information, we treat the operator as an unofficial reseller, an unknown middleman, or a service whose routing we cannot describe as official. It is a caution, not a legal finding and not a claim that every flagged site is malicious. Absence of a warning is also not a certification. New sites appear often; the list was last snapshotted at 12 Nov 2026, 08:59 IST.</p>
+<p>Use the home-page filter <strong>Hide relays</strong> when you want the list without those rows. The <a href="/guides/best-free-llm-apis">current snapshot</a> also shows a relay column on several tables so a large published token cap is not mistaken for a safe default.</p>
+<h2 id="how-do-official-providers-documented-gateways-and-relays-differ">How do official providers, documented gateways and relays differ?</h2>
+<p>An <strong>official provider</strong> in our data is a model maker or cloud selling or giving access under its own name — for example a first-party API with docs on that company’s domain. You still need to read their privacy and training policy. Some official free tiers state that prompts may be used to improve the product.</p>
+<p>A <strong>documented gateway</strong> routes to many models and says so. It may be useful as a single base URL. It may still log prompts, and the underlying model host may log them too. A well-known example in our list is OpenRouter, which we record as a gateway (not official), OpenAI compatible, with <code>:free</code> models and a published daily request cap until credits are bought, plus a note that free-model providers may log prompts. That note is a reason to keep private data out of <code>:free</code> routes, even without a relay flag.</p>
+<p>An <strong>unofficial relay</strong> often has the weakest public documentation, the most aggressive advertised caps, and the least clarity about logging. Those are the rows we try to flag.</p>
+<p>The comparison is spelled out further in <a href="/guides/official-vs-gateway-providers">Official providers vs gateways</a>.</p>
+<h2 id="what-should-i-never-send-through-a-flagged-relay">What should I never send through a flagged relay?</h2>
+<p>Do not send anything you would not be willing to post in a public forum. In particular:</p>
+<ul><li>API keys, passwords, cookies, or private tokens (including keys for other providers)</li><li>Customer records, health, financial or government identifiers</li><li>Confidential source code, unreleased product plans, or internal documents</li><li>Personal data about other people</li><li>Content that the upstream provider would forbid, such as abuse of their models</li></ul>
+<p>If your workflow needs those inputs, use an official provider whose policy you accept, a contract that matches your requirements, or a model you run locally.</p>
+<h2 id="how-can-i-reduce-risk-if-i-still-want-to-try-a-gateway">How can I reduce risk if I still want to try a gateway?</h2>
+<p>Use a throwaway prompt and a key that exists only on that site. Do not reuse a production key. Do not point a production app at a new base URL until you have read the terms and privacy policy.</p>
+<p>Check who is named as the operator, whether a company or legal entity is published, and whether the docs describe routing and logging. Prefer HTTPS base URLs from our list or from official docs — we do not invent endpoints. Watch for typo-squatting domains.</p>
+<p>If the service asks you to paste an OpenAI, Google or other first-party key so they can “bring your own key,” understand that you are trusting them with a credential that can spend money or read projects on the first-party account. That is a different, higher risk than using a key they issued for their own endpoint.</p>
+<p>Revoke the key when you are done experimenting.</p>
+<h2 id="can-a-generous-tokens-per-day-figure-offset-the-risk">Can a generous tokens-per-day figure offset the risk?</h2>
+<p>No. A large published cap is a usage number, not a security control. Some of the highest daily figures in our snapshot belong to relay-flagged gateways. That is why the tokens-per-day table on the <a href="/guides/best-free-llm-apis">best free LLM APIs</a> page includes a relay column, and why this guide exists beside it.</p>
+<p>Cost can also appear later: a card on file, a quiet change from free to paid, or a key that is reused on a paid upstream. We only record card requirements that are published. If the field is Not published, we do not treat that as “no card.”</p>
+<h2 id="how-should-teams-use-this-warning">How should teams use this warning?</h2>
+<p>Put the relay flag into your own checklist. If you maintain a shared allow-list of base URLs, do not add a flagged host for data that is not public. If you publish a tutorial, do not tell readers to paste secrets into a relay “just to try it.” If you correct our flag, send a <a href="/contact">public official source</a> that shows who operates the service and how routing works.</p>
+<h2 id="what-this-site-will-not-do">What this site will not do</h2>
+<p>We will not hide a relay warning to make a page look more inviting. We will not invent a logging policy for a site that does not publish one. We will not promise that official providers never train on free-tier prompts — some disclose that they may. The safe default is the same in every case: treat undocumented routes as public, keep keys in environment variables, and confirm terms on the official page before you rely on a free tier.</p><aside class="related"><h2>Related guides</h2><ul><li><a href="/guides/keep-api-keys-safe">How to keep API keys safe</a></li><li><a href="/guides/official-vs-gateway-providers">Official LLM API providers vs gateways</a></li><li><a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a></li><li><a href="/guides/best-free-llm-apis">Best free LLM APIs (current snapshot)</a></li></ul></aside></article></main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-links"><a href="/">Tracker</a> <a href="/guides/">Guides</a> <a href="/about">About</a> <a href="/contact">Contact</a> <a href="/privacy">Privacy</a> <a href="/terms">Terms</a> <a href="/data.json">data.json</a></div>
+    <div class="footer-note">
+      Not affiliated with any provider. Figures come from each provider’s own pages on the date shown and change often.
+      Never share your API keys.
+      Contact: <a href="mailto:shivaprasad2515@mail.grokbot.com">shivaprasad2515@mail.grokbot.com</a>.
+    </div>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
