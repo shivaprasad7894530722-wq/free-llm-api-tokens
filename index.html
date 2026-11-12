@@ -11,94 +11,448 @@
 <meta property="og:title" content="Free LLM API Tokens Tracker">
 <meta property="og:description" content="Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day.">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Free LLM API Tokens Tracker">
+<meta name="twitter:description" content="Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day.">
+<meta name="theme-color" content="#070910">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%237c9cff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%23070910'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2' fill='%2322d3ee'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"Free LLM API Tokens Tracker","url":"https://free-llm-api-tokens.pages.dev/","description":"Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day."}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+(function(){try{var t=localStorage.getItem("theme")||"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();
+</script>
 <style>
-:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--fg:#e6edf3;--mut:#8b949e;--acc:#58a6ff;--ok:#3fb950;--warn:#d29922;--bad:#f85149}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
-header,main,footer{max-width:1200px;margin:0 auto;padding:16px}
-h1{margin:8px 0 4px;font-size:1.6rem}.mut{color:var(--mut)}.small{font-size:.85rem}
-.disc{background:#1f1a0e;border:1px solid #4d3b0b;border-radius:8px;padding:10px 12px;margin:12px 0}
-details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:12px 0}
-summary{cursor:pointer;font-weight:600}.cl h3{margin:10px 0 2px;font-size:.95rem;color:var(--acc)}.cl ul{margin:0 0 6px;padding-left:20px}
-.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
-input[type=search],select{background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;font:inherit}
-input[type=search]{flex:1;min-width:220px}label{white-space:nowrap}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
-.card h2{font-size:1.05rem;margin:0 0 6px}.badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
-.b{font-size:.72rem;padding:2px 8px;border-radius:99px;border:1px solid var(--line)}
-.b.ok{color:var(--ok);border-color:#238636}.b.no{color:var(--mut)}.b.risk{color:var(--bad);border-color:#8e1519}.b.off{color:var(--acc);border-color:#1f6feb}.b.tpd{color:var(--warn);border-color:#9e6a03}
-dl{display:grid;grid-template-columns:110px 1fr;gap:3px 8px;margin:0;font-size:.88rem}dt{color:var(--mut)}dd{margin:0;word-break:break-word}
-code{background:#0b0f14;border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.82rem}
-.copy{cursor:pointer;margin-left:4px;font-size:.75rem;color:var(--mut);background:none;border:none}
-#count{margin-left:auto}
+:root{
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --bg:#070910;--fg:#eef2ff;--mut:#9aa3b8;--faint:#6b7388;
+  --line:rgba(255,255,255,.09);--card:rgba(14,18,32,.72);--card-hover:rgba(20,26,46,.88);
+  --acc:#8ba4ff;--acc2:#22d3ee;--ok:#34d399;--warn:#fbbf24;--bad:#fb7185;
+  --ok-bg:rgba(52,211,153,.12);--warn-bg:rgba(251,191,36,.12);--bad-bg:rgba(251,113,133,.12);--acc-bg:rgba(139,164,255,.12);
+  --glow:rgba(99,102,241,.38);--shadow:0 18px 50px rgba(0,0,0,.38);
+  --radius:18px;--max:1140px;
+}
+html[data-theme="light"]{
+  --bg:#f3f5fb;--fg:#0f172a;--mut:#5b6478;--faint:#7a8398;
+  --line:rgba(15,23,42,.1);--card:rgba(255,255,255,.78);--card-hover:#fff;
+  --acc:#3b5bdb;--acc2:#0891b2;--ok:#059669;--warn:#b45309;--bad:#be123c;
+  --ok-bg:rgba(5,150,105,.1);--warn-bg:rgba(180,83,9,.1);--bad-bg:rgba(190,18,60,.1);--acc-bg:rgba(59,91,219,.1);
+  --glow:rgba(99,102,241,.18);--shadow:0 16px 40px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--font);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;isolation:isolate}
+body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1}
+body::before{
+  background:
+    radial-gradient(900px 520px at 8% -8%, var(--glow), transparent 58%),
+    radial-gradient(780px 460px at 100% 0%, rgba(34,211,238,.16), transparent 52%),
+    radial-gradient(640px 420px at 70% 110%, rgba(139,92,246,.14), transparent 58%);
+}
+body::after{
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse at 50% 0%, #000 25%, transparent 72%);
+  opacity:.7;
+}
+html[data-theme="light"] body::before{
+  background:
+    radial-gradient(900px 520px at 8% -8%, rgba(59,91,219,.16), transparent 58%),
+    radial-gradient(780px 460px at 100% 0%, rgba(8,145,178,.1), transparent 52%);
+}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--acc2);outline-offset:3px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--card);color:var(--fg);padding:8px 12px;border-radius:8px;z-index:20}
+.skip:focus{left:8px}
+.wrap{width:min(var(--max), calc(100% - 32px));margin:0 auto}
+header.top{position:sticky;top:0;z-index:10;backdrop-filter:blur(16px) saturate(1.2);background:color-mix(in srgb, var(--bg) 72%, transparent);border-bottom:1px solid var(--line)}
+.top-inner{display:flex;align-items:center;gap:12px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:10px;color:inherit;font-weight:700;letter-spacing:-.02em;text-decoration:none}
+.brand:hover{text-decoration:none}
+.logo{width:32px;height:32px;flex:none}
+.top-actions{margin-left:auto;display:flex;align-items:center;gap:8px}
+.icon-btn{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--fg);width:38px;height:38px;border-radius:12px;display:grid;place-items:center;cursor:pointer}
+.icon-btn:hover{background:var(--card-hover)}
+.icon-btn svg{width:18px;height:18px}
+html[data-theme="dark"] .icon-moon,html[data-theme="light"] .icon-sun{display:none}
+
+.hero{padding:48px 0 28px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2);background:var(--acc-bg);border:1px solid color-mix(in srgb, var(--acc2) 35%, transparent);border-radius:999px;padding:5px 12px;margin-bottom:16px}
+.hero h1{margin:0 0 12px;font-size:clamp(1.7rem, 4vw, 2.7rem);line-height:1.15;letter-spacing:-.04em;font-weight:800}
+.hero h1 span{background:linear-gradient(120deg, var(--fg) 10%, var(--acc2) 50%, var(--acc) 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{max-width:640px;margin:0 auto 22px;color:var(--mut);font-size:1.05rem}
+.stats{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0}
+.stat{display:flex;flex-direction:column;min-width:150px;padding:12px 18px;border:1px solid var(--line);border-radius:16px;background:var(--card);backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+.stat b{font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+.stat span{font-size:.78rem;color:var(--mut)}
+.note{max-width:720px;margin:18px auto 0;color:var(--mut);font-size:.86rem}
+
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0 36px}
+.step{position:relative;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;box-shadow:var(--shadow);text-align:left}
+.step .num{display:grid;place-items:center;width:28px;height:28px;border-radius:9px;margin-bottom:10px;font-size:.8rem;font-weight:800;color:#041016;background:linear-gradient(135deg,var(--acc2),var(--acc))}
+.step h2{margin:0 0 6px;font-size:1rem}
+.step p{margin:0;color:var(--mut);font-size:.9rem}
+.snippet{margin:12px 0 0;position:relative;background:color-mix(in srgb, var(--bg) 70%, #000);border:1px solid var(--line);border-radius:12px;padding:12px 40px 12px 12px;overflow:auto}
+.snippet pre{margin:0;font:0.75rem/1.5 var(--mono);color:var(--fg);white-space:pre}
+.copy-snip{position:absolute;top:8px;right:8px}
+
+.panel{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:18px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{flex:1 1 280px;position:relative;min-width:min(100%,240px)}
+.search input{width:100%;padding:11px 12px 11px 38px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb, var(--bg) 55%, transparent);color:var(--fg);font:inherit}
+.search input::placeholder{color:var(--faint)}
+.search svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--mut);pointer-events:none}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex:1 1 100%}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--fg);font:500 .82rem var(--font);cursor:pointer;user-select:none}
+.chip input{accent-color:var(--acc2);margin:0}
+.chip:has(input:checked){background:var(--acc-bg);border-color:color-mix(in srgb, var(--acc) 40%, var(--line))}
+select#sort{background:color-mix(in srgb, var(--bg) 55%, transparent);color:var(--fg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:500 .85rem var(--font);flex:0 0 auto}
+#count{margin-left:auto;font-size:.85rem;color:var(--mut)}
+details.news{margin-top:12px}
+details.news summary{cursor:pointer;font-weight:600;color:var(--mut);font-size:.9rem;list-style:none}
+details.news summary::-webkit-details-marker{display:none}
+details.news summary::after{content:" ▾";color:var(--faint)}
+.news-body h3{margin:14px 0 4px;font-size:.9rem;color:var(--acc)}
+.news-body ul{margin:0 0 4px;padding-left:18px;color:var(--mut);font-size:.9rem}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-bottom:48px}
+.card{background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px;transition:transform .2s ease, border-color .2s ease, background .2s ease;animation:rise .45s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card:hover{transform:translateY(-2px);background:var(--card-hover);border-color:color-mix(in srgb, var(--acc) 35%, var(--line))}
+.card.dropped{opacity:.62;filter:saturate(.7)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.card h2{margin:0;font-size:1.08rem;letter-spacing:-.02em;line-height:1.3}
+.card h2 a{color:inherit}
+.visit{flex:none;font-size:.78rem;font-weight:600;color:var(--acc);border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.visit:hover{text-decoration:none;border-color:var(--acc)}
+.badges{display:flex;flex-wrap:wrap;gap:6px}
+.b{font-size:.7rem;font-weight:600;letter-spacing:.01em;padding:3px 8px;border-radius:999px;border:1px solid transparent}
+.b.ok{color:var(--ok);background:var(--ok-bg);border-color:color-mix(in srgb, var(--ok) 35%, transparent)}
+.b.part{color:var(--warn);background:var(--warn-bg);border-color:color-mix(in srgb, var(--warn) 35%, transparent)}
+.b.no{color:var(--mut);background:transparent;border-color:var(--line)}
+.b.risk{color:var(--bad);background:var(--bad-bg);border-color:color-mix(in srgb, var(--bad) 40%, transparent)}
+.b.off{color:var(--acc);background:var(--acc-bg);border-color:color-mix(in srgb, var(--acc) 35%, transparent)}
+.b.tpd{color:var(--warn);background:var(--warn-bg);border-color:color-mix(in srgb, var(--warn) 35%, transparent)}
+.b.end{color:var(--bad);background:var(--bad-bg);border-color:color-mix(in srgb, var(--bad) 40%, transparent)}
+.free{margin:0}
+.free dt{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.free dd{margin:0;font-size:.95rem}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.meta div dt{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.meta div dd{margin:0;font-weight:600;font-size:.92rem}
+.base dt{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:0 0 5px}
+.base-row{display:flex;align-items:center;gap:6px}
+.base code{flex:1;min-width:0;font:0.75rem/1.4 var(--mono);background:color-mix(in srgb, var(--bg) 70%, transparent);border:1px solid var(--line);border-radius:8px;padding:6px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{appearance:none;border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:8px;padding:6px 8px;font:600 .72rem var(--font);cursor:pointer;white-space:nowrap}
+.copy:hover,.copy-snip:hover{color:var(--fg);border-color:var(--acc)}
+.copy.done{color:var(--ok);border-color:color-mix(in srgb, var(--ok) 40%, transparent)}
+.extra{margin:0;font-size:.82rem;color:var(--mut)}
+.extra dt{color:var(--faint);font-weight:600;display:inline}
+.extra dd{display:inline;margin:0 0 0 4px}
+.empty{grid-column:1/-1;text-align:center;padding:40px 16px;color:var(--mut)}
+
+.faq{margin:0 0 56px}
+.faq h2{margin:0 0 14px;font-size:1.35rem;letter-spacing:-.03em}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 8px}
+.faq summary{cursor:pointer;font-weight:600}
+.faq details p{margin:8px 0 0;color:var(--mut);font-size:.95rem}
+
+footer{border-top:1px solid var(--line);padding:22px 0 36px;color:var(--mut);font-size:.85rem;display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between}
+
+@media (max-width:800px){
+  .how{grid-template-columns:1fr}
+  .hero{padding:32px 0 20px;text-align:left}
+  .lede,.note{margin-left:0;margin-right:0}
+  .stats{justify-content:flex-start}
+  #count{margin-left:0}
+  .meta{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .card{transition:none;animation:none}
+  .card:hover{transform:none}
+}
 </style>
 </head>
 <body>
-<header>
-<h1>Free LLM API Tokens Tracker</h1>
-<div class="mut">Sites and providers that give free LLM API tokens, with OpenAI compatibility, base URL and tokens per day. Updated on weekdays.</div>
-<div class="small mut">Last updated: <b id="updated">…</b></div>
-<div class="disc small">⚠️ Figures come from each provider's own pages as of the date shown, and they change often. Check before you rely on them. <b>Never share your API keys.</b> Sites marked <span class="b risk">relay risk</span> are unofficial resellers or relays: avoid sending sensitive data through them.</div>
-<details open class="cl"><summary>Latest updates</summary><div id="changelog"></div></details>
+<a class="skip" href="#browse">Skip to list</a>
+<header class="top">
+  <div class="wrap top-inner">
+    <a class="brand" href="#">
+      <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#7c9cff"/></linearGradient></defs>
+        <rect width="32" height="32" rx="8" fill="currentColor" opacity=".08"/>
+        <circle cx="16" cy="16" r="6.5" fill="none" stroke="url(#lg)" stroke-width="2"/>
+        <circle cx="16" cy="16" r="2.1" fill="#22d3ee"/>
+      </svg>
+      Free LLM API Tokens
+    </a>
+    <div class="top-actions">
+      <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/></svg>
+      </button>
+    </div>
+  </div>
 </header>
+
 <main>
-<div class="controls">
-<input type="search" id="q" placeholder="Search name, model, notes, base URL…" aria-label="Search">
-<label><input type="checkbox" id="oai"> OpenAI-compatible only</label>
-<label><input type="checkbox" id="norisk"> Hide relay-risk</label>
-<label><input type="checkbox" id="hastpd"> Has published tokens/day</label>
-<select id="sort" aria-label="Sort">
-<option value="new">Sort: newest first</option>
-<option value="tpd">Sort: tokens/day (high→low)</option>
-<option value="name">Sort: name (A→Z)</option>
-<option value="updated">Sort: recently updated</option>
-</select>
-<span id="count" class="mut small"></span>
-</div>
-<div class="grid" id="grid"></div>
+  <section class="wrap hero" aria-labelledby="hero-title">
+    <div class="eyebrow">Updated on weekdays</div>
+    <h1 id="hero-title"><span>Free API credits for AI models, in one place.</span></h1>
+    <p class="lede">A daily-updated list of sites that give free LLM API tokens — with what you get, whether they work like OpenAI, and the base URL you need.</p>
+    <div class="stats">
+      <div class="stat"><b id="statCount">…</b><span>providers listed</span></div>
+      <div class="stat"><b id="updated">…</b><span>last checked (IST)</span></div>
+    </div>
+    <p class="note">Figures come from each provider’s own pages on the date shown, and they change often. Check before you rely on them. Never share your API keys.</p>
+  </section>
+
+  <section class="wrap" aria-labelledby="how-title">
+    <div class="how">
+      <article class="step">
+        <span class="num">1</span>
+        <h2 id="how-title">Sign up</h2>
+        <p>Open a provider from the list and create a free account. Prefer official providers if you are sending anything private.</p>
+      </article>
+      <article class="step">
+        <span class="num">2</span>
+        <h2>Get your API key</h2>
+        <p>Copy the key from their dashboard and keep it secret — on your computer or in an environment variable, never in a public chat or repo.</p>
+      </article>
+      <article class="step">
+        <span class="num">3</span>
+        <h2>Set the base URL</h2>
+        <p>Point the OpenAI SDK (or any OpenAI-compatible client) at the provider’s base URL:</p>
+        <div class="snippet">
+          <button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: &quot;https://api.example.com/v1&quot;,
+});">Copy</button>
+          <pre>import OpenAI from "openai";
+
+const client = new OpenAI({
+  apiKey: process.env.API_KEY,
+  baseURL: "https://api.example.com/v1",
+});</pre>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="browse" aria-labelledby="browse-title">
+    <h2 id="browse-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Browse providers</h2>
+    <div class="panel">
+      <div class="controls">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="q" placeholder="Search providers, models, or base URLs…" aria-label="Search providers">
+        </div>
+        <select id="sort" aria-label="Sort providers">
+          <option value="new">Newest first</option>
+          <option value="tpd">Tokens/day, high to low</option>
+          <option value="name">Name, A to Z</option>
+          <option value="updated">Recently updated</option>
+        </select>
+        <div class="filters">
+          <label class="chip"><input type="checkbox" id="oai"> OpenAI compatible</label>
+          <label class="chip"><input type="checkbox" id="nocard"> No card needed</label>
+          <label class="chip"><input type="checkbox" id="hastpd"> Has daily tokens</label>
+          <label class="chip"><input type="checkbox" id="norisk"> Hide relays</label>
+          <label class="chip"><input type="checkbox" id="showdropped"> Show ended offers</label>
+          <span id="count"></span>
+        </div>
+      </div>
+      <details class="news">
+        <summary>Latest updates</summary>
+        <div class="news-body" id="changelog"></div>
+      </details>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">Common questions</h2>
+    <details open>
+      <summary>What does OpenAI compatible mean?</summary>
+      <p>You can use the official OpenAI SDK or any client that talks to OpenAI’s API. Just change the base URL and use the provider’s API key. “Partial” means only some features or models work that way.</p>
+    </details>
+    <details>
+      <summary>What are tokens per day?</summary>
+      <p>A token is a small chunk of text the model reads or writes — a few characters or a short word. The daily figure is the provider’s published free limit, when they publish one. If they do not, we show “Not published” rather than guessing.</p>
+    </details>
+    <details>
+      <summary>What does the relay warning mean?</summary>
+      <p>Those sites are unofficial gateways or resellers. They forward your prompts to other providers. Do not send private or sensitive data through them.</p>
+    </details>
+    <details>
+      <summary>Do I need a credit card?</summary>
+      <p>It depends on the provider. Use the “No card needed” filter to narrow the list, then confirm on their site — some ask for a card later, or after a trial credit runs out.</p>
+    </details>
+    <details>
+      <summary>Why does it say “Not published”?</summary>
+      <p>The provider has not published that figure on their public pages. We never invent quotas, prices or endpoints.</p>
+    </details>
+    <details>
+      <summary>How often is this list updated?</summary>
+      <p>On weekdays. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).</p>
+    </details>
+  </section>
 </main>
-<footer class="small mut">Data: <a href="data.json">data.json</a> · Not affiliated with any provider.</footer>
+
+<footer class="wrap">
+  <div>Data: <a href="data.json">data.json</a>. Not affiliated with any provider.</div>
+  <div>Never share your API keys.</div>
+</footer>
+
 <script>
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmtDate=d=>{if(!d)return"—";const[y,m,dd]=d.split("-");return new Date(Date.UTC(+y,+m-1,+dd)).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"})};
-const fmtNum=n=>n>=1e6?(n/1e6).toFixed(n%1e6?1:0)+"M":n>=1e3?(n/1e3).toFixed(n%1e3?1:0)+"K":String(n);
-let DATA=null;
-function istStamp(iso){const d=new Date(iso);return d.toLocaleString("en-GB",{timeZone:"Asia/Kolkata",day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})+" IST"}
-function render(){
- const q=document.getElementById("q").value.trim().toLowerCase();
- const oai=document.getElementById("oai").checked,nr=document.getElementById("norisk").checked,ht=document.getElementById("hastpd").checked,sort=document.getElementById("sort").value;
- let list=DATA.sites.filter(s=>{
-  if(oai&&s.openai_compatible!=="yes")return false;
-  if(nr&&s.relay_risk)return false;
-  if(ht&&!s.tokens_per_day)return false;
-  if(q){const hay=[s.name,s.url,s.base_url,s.free_allowance,s.limits,s.notes].join(" ").toLowerCase();if(!hay.includes(q))return false}
-  return true});
- const by={new:(a,b)=>b.first_reported.localeCompare(a.first_reported)||a.name.localeCompare(b.name),
-  tpd:(a,b)=>(b.tokens_per_day||0)-(a.tokens_per_day||0)||a.name.localeCompare(b.name),
-  name:(a,b)=>a.name.localeCompare(b.name),updated:(a,b)=>b.last_updated.localeCompare(a.last_updated)||a.name.localeCompare(b.name)};
- list.sort(by[sort]);
- document.getElementById("count").textContent=list.length+" of "+DATA.sites.length+" sites";
- document.getElementById("grid").innerHTML=list.map(s=>{
-  const oaiB=s.openai_compatible==="yes"?'<span class="b ok">OpenAI compatible</span>':s.openai_compatible==="partial"?'<span class="b tpd">OpenAI: partial</span>':s.openai_compatible==="no"?'<span class="b no">Not OpenAI compatible</span>':'<span class="b no">OpenAI: unspecified</span>';
-  const tpd=s.tokens_per_day?'<span class="b tpd">'+fmtNum(s.tokens_per_day)+' tokens/day</span>':'';
-  const base=s.base_url&&s.base_url!=="Unspecified"?'<code>'+esc(s.base_url)+'</code><button class="copy" title="Copy" data-c="'+esc(s.base_url)+'">⧉</button>':'Unspecified';
-  return '<article class="card"><h2><a href="'+esc(s.url)+'" target="_blank" rel="noopener nofollow">'+esc(s.name)+' ↗</a></h2><div class="badges">'+oaiB+tpd+(s.category==="official"?'<span class="b off">official provider</span>':'')+(s.relay_risk?'<span class="b risk">relay risk</span>':'')+'</div><dl>'+
-  '<dt>Base URL</dt><dd>'+base+'</dd>'+
-  '<dt>Free allowance</dt><dd>'+esc(s.free_allowance)+'</dd>'+
-  '<dt>Tokens/day</dt><dd>'+(s.tokens_per_day?s.tokens_per_day.toLocaleString("en-GB"):"Unspecified")+'</dd>'+
-  '<dt>Limits</dt><dd>'+esc(s.limits)+'</dd>'+
-  '<dt>Card needed</dt><dd>'+esc(s.card_required)+'</dd>'+
-  (s.notes?'<dt>Notes</dt><dd>'+esc(s.notes)+'</dd>':'')+
-  '<dt>First reported</dt><dd>'+fmtDate(s.first_reported)+'</dd>'+
-  '<dt>Last updated</dt><dd>'+fmtDate(s.last_updated)+'</dd></dl></article>'}).join("")||'<p class="mut">No sites match.</p>';
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtDate = d => {
+  if (!d) return "—";
+  const [y, m, dd] = d.split("-");
+  return new Date(Date.UTC(+y, +m - 1, +dd)).toLocaleDateString("en-GB", {day:"numeric", month:"short", year:"numeric", timeZone:"UTC"});
+};
+const fmtNum = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0) + "M" : n >= 1e3 ? (n / 1e3).toFixed(n % 1e3 ? 1 : 0) + "K" : String(n);
+const published = v => (v == null || v === "" || String(v).toLowerCase() === "unspecified") ? "Not published" : String(v);
+const istStamp = iso => {
+  const d = new Date(iso);
+  return d.toLocaleString("en-GB", {timeZone:"Asia/Kolkata", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) + " IST";
+};
+const isDropped = s => {
+  const a = (s.free_allowance || "").trim();
+  return /^DROPPED\b/i.test(a) || /^None\b/i.test(a) || /^No free (cloud )?tier\b/i.test(a);
+};
+const cardNotNeeded = s => {
+  const c = (s.card_required || "").trim().toLowerCase();
+  if (!c || c === "unspecified" || c === "yes" || c === "top-up" || c.startsWith("yes ")) return false;
+  return /^(no\b|no card)/i.test(s.card_required.trim());
+};
+const allowanceText = s => published((s.free_allowance || "").replace(/^DROPPED:\s*/i, ""));
+const hasBase = s => s.base_url && String(s.base_url).toLowerCase() !== "unspecified";
+
+let DATA = null;
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const oai = document.getElementById("oai").checked;
+  const nocard = document.getElementById("nocard").checked;
+  const nr = document.getElementById("norisk").checked;
+  const ht = document.getElementById("hastpd").checked;
+  const showDropped = document.getElementById("showdropped").checked;
+  const sort = document.getElementById("sort").value;
+  const droppedCount = DATA.sites.filter(isDropped).length;
+
+  let list = DATA.sites.filter(s => {
+    if (!showDropped && isDropped(s)) return false;
+    if (oai && s.openai_compatible !== "yes") return false;
+    if (nocard && !cardNotNeeded(s)) return false;
+    if (nr && s.relay_risk) return false;
+    if (ht && !s.tokens_per_day) return false;
+    if (q) {
+      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  const by = {
+    new: (a, b) => b.first_reported.localeCompare(a.first_reported) || a.name.localeCompare(b.name),
+    tpd: (a, b) => (b.tokens_per_day || 0) - (a.tokens_per_day || 0) || a.name.localeCompare(b.name),
+    name: (a, b) => a.name.localeCompare(b.name),
+    updated: (a, b) => b.last_updated.localeCompare(a.last_updated) || a.name.localeCompare(b.name)
+  };
+  list.sort(by[sort]);
+
+  const hidden = (!showDropped && droppedCount) ? " · " + droppedCount + " ended " + (droppedCount === 1 ? "offer" : "offers") + " hidden" : "";
+  document.getElementById("count").textContent = "Showing " + list.length + " of " + DATA.sites.length + hidden;
+
+  document.getElementById("grid").innerHTML = list.map(s => {
+    const dropped = isDropped(s);
+    const oaiB = s.openai_compatible === "yes"
+      ? '<span class="b ok">OpenAI compatible</span>'
+      : s.openai_compatible === "partial"
+        ? '<span class="b part">OpenAI: partial</span>'
+        : s.openai_compatible === "no"
+          ? '<span class="b no">Not OpenAI compatible</span>'
+          : '<span class="b no">OpenAI: not published</span>';
+    const tpdB = s.tokens_per_day ? '<span class="b tpd">' + esc(fmtNum(s.tokens_per_day)) + ' / day</span>' : "";
+    const base = hasBase(s)
+      ? '<code title="' + esc(s.base_url) + '">' + esc(s.base_url) + '</code><button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="' + esc(s.base_url) + '">Copy</button>'
+      : '<span class="mut">Not published</span>';
+    const notes = s.notes ? '<div class="extra"><dt>Notes</dt><dd>' + esc(s.notes) + '</dd></div>' : "";
+    return '<article class="card' + (dropped ? ' dropped' : '') + '">' +
+      '<div class="card-top"><h2><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.name) + '</a></h2>' +
+      '<a class="visit" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">Visit site ↗</a></div>' +
+      '<div class="badges">' + oaiB + tpdB +
+        (s.category === "official" ? '<span class="b off">Official provider</span>' : '') +
+        (s.relay_risk ? '<span class="b risk">Relay warning</span>' : '') +
+        (dropped ? '<span class="b end">Ended</span>' : '') +
+      '</div>' +
+      '<dl class="free"><dt>What you get free</dt><dd>' + esc(allowanceText(s)) + '</dd></dl>' +
+      '<div class="meta">' +
+        '<div><dt>Tokens per day</dt><dd>' + (s.tokens_per_day ? s.tokens_per_day.toLocaleString("en-GB") : "Not published") + '</dd></div>' +
+        '<div><dt>Card needed</dt><dd>' + esc(published(s.card_required)) + '</dd></div>' +
+      '</div>' +
+      '<div class="base"><dt>Base URL</dt><div class="base-row">' + base + '</div></div>' +
+      '<div class="extra"><dt>Limits</dt><dd>' + esc(published(s.limits)) + '</dd></div>' +
+      notes +
+      '<div class="extra"><dt>First listed</dt><dd>' + fmtDate(s.first_reported) + '</dd> · <dt>Updated</dt><dd>' + fmtDate(s.last_updated) + '</dd></div>' +
+    '</article>';
+  }).join("") || '<p class="empty">No providers match those filters. Try clearing search or showing ended offers.</p>';
 }
-fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(d=>{DATA=d;
- document.getElementById("updated").textContent=istStamp(d.last_updated);
- document.getElementById("changelog").innerHTML=d.changelog.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(c=>'<h3>'+fmtDate(c.date)+'</h3><ul>'+c.items.map(i=>'<li>'+esc(i)+'</li>').join("")+'</ul>').join("");
- ["q","oai","norisk","hastpd","sort"].forEach(id=>document.getElementById(id).addEventListener("input",render));render();
-}).catch(e=>{document.getElementById("grid").textContent="Could not load data.json: "+e});
-document.addEventListener("click",e=>{const b=e.target.closest(".copy");if(b){navigator.clipboard.writeText(b.dataset.c);b.textContent="✓";setTimeout(()=>b.textContent="⧉",1200)}});
+
+function copyText(btn) {
+  const text = btn.getAttribute("data-c") || "";
+  const done = () => { const old = btn.textContent; btn.textContent = "Copied"; btn.classList.add("done"); setTimeout(() => { btn.textContent = old; btn.classList.remove("done"); }, 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement("textarea");
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch (e) {}
+  ta.remove();
+}
+
+document.getElementById("themeBtn").addEventListener("click", () => {
+  const next = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem("theme", next); } catch (e) {}
+  document.querySelector('meta[name="theme-color"]').setAttribute("content", next === "light" ? "#f3f5fb" : "#070910");
+});
+
+document.addEventListener("click", e => {
+  const b = e.target.closest(".copy");
+  if (b) copyText(b);
+});
+
+fetch("data.json", {cache:"no-store"}).then(r => {
+  if (!r.ok) throw new Error(r.status + " " + r.statusText);
+  return r.json();
+}).then(d => {
+  DATA = d;
+  document.getElementById("statCount").textContent = String(d.sites.length);
+  document.getElementById("updated").textContent = istStamp(d.last_updated);
+  document.getElementById("changelog").innerHTML = d.changelog.slice().sort((a, b) => b.date.localeCompare(a.date)).map(c =>
+    "<h3>" + fmtDate(c.date) + "</h3><ul>" + c.items.map(i => "<li>" + esc(i) + "</li>").join("") + "</ul>"
+  ).join("");
+  ["q","oai","nocard","norisk","hastpd","showdropped","sort"].forEach(id =>
+    document.getElementById(id).addEventListener("input", render)
+  );
+  render();
+}).catch(e => {
+  document.getElementById("grid").innerHTML = '<p class="empty">Could not load the provider list. Please refresh the page.</p>';
+  console.error(e);
+});
 </script>
 </body>
 </html>
