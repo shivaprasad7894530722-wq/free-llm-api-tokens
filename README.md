@@ -5,7 +5,7 @@ Live sites:
 - Cloudflare Pages: https://free-llm-api-tokens.pages.dev/
 - GitHub Pages (mirror, root-relative URLs may not resolve on this subpath): https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
 
-A static site listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated daily. Original guides, policy pages, a sitemap and machine-readable files (`data.json`, `llms.txt`, `llms-full.txt`) support search and answer engines.
+A static site listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated daily. Original guides, a What’s new page with an RSS feed, per-model pages, a sitemap and machine-readable files (`data.json`, `changes.json`, `llms.txt`, `llms-full.txt`) support search and answer engines.
 
 Figures come from each provider's own pages on the date shown. They change often, so check before you rely on them, and never share API keys. "Not published" means the provider does not publish that figure. Nothing here is invented.
 
@@ -19,13 +19,15 @@ Figures come from each provider's own pages on the date shown. They change often
 | `content/pages/*.md` | About, Contact, Privacy and Terms source. |
 | `templates/home.html` | Home page `<main>` and list script, wrapped by the generator. |
 | `assets/styles.css`, `assets/site.js` | Shared theme, layout, theme toggle and copy buttons. |
-| `build_site.py` | Generates HTML pages, `sitemap.xml`, `robots.txt`, `ads.txt`, `llms.txt` and `llms-full.txt`. |
+| `build_site.py` | Generates HTML pages, `sitemap.xml`, `robots.txt`, `ads.txt`, `llms.txt`, `llms-full.txt`, `/new`, `/feed.xml` and `/models`. |
+| `site_features.py` | Git-derived changelog and model-family mapping used by the generator. Dates and model availability are never invented. |
+| `changes.json` | Machine-readable changelog written by the build from git history of `data.json`. |
 | `update.py` | Daily helper: add or update a site, then runs `build_site.py`. |
 | `deploy.sh` | Validate, regenerate, commit, push to GitHub, and build the Cloudflare deploy payload. |
 | `build_cf_deploy.py` | Builds `/workspace/cf_deploy_payload.js` for the Cloudflare MCP `execute` tool. |
 | `.nojekyll` | Tells GitHub Pages to serve files as they are. |
 
-Generated routes (do not edit by hand; rerun `python3 build_site.py`): `/`, `/about`, `/contact`, `/privacy`, `/terms`, `/guides/`, each guide under `/guides/<slug>`, `/sitemap.xml`, `/robots.txt`, `/ads.txt`, `/llms.txt`, `/llms-full.txt`, `/404`.
+Generated routes (do not edit by hand; rerun `python3 build_site.py`): `/`, `/new`, `/feed.xml`, `/models`, each model family under `/models/<slug>`, `/about`, `/contact`, `/privacy`, `/terms`, `/guides/`, each guide under `/guides/<slug>`, `/sitemap.xml`, `/robots.txt`, `/ads.txt`, `/llms.txt`, `/llms-full.txt`, `/changes.json`, `/404`.
 
 ## Analytics and AdSense
 

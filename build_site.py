@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate static pages, sitemap, robots.txt, _headers, ads.txt, llms.txt, llms-full.txt, og.png and the IndexNow key file.
+"""Generate static pages, sitemap, robots.txt, _headers, ads.txt, llms.txt, llms-full.txt, og.png, the IndexNow key file, the What's new page, the RSS feed and per-model pages.
 
 Run from the repo root (or any cwd; paths are relative to this file):
 
@@ -21,9 +21,12 @@ import io
 import json
 import re
 import sys
+from email.utils import format_datetime
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+import site_features
 
 HERE = Path(__file__).resolve().parent
 SITE = "https://freellmapi.link"
@@ -77,25 +80,42 @@ HEADERS_FILE = f"""/*
 
 /schema.json
   X-Content-Usage: {DATA_USE_HEADER}
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+
+/changes.json
+  X-Content-Usage: {DATA_USE_HEADER}
 """
 
 
 NAV = [
     ("/", "Tracker"),
+    ("/new", "What's new"),
+    ("/models", "Models"),
     ("/guides/", "Guides"),
     ("/about", "About"),
     ("/contact", "Contact"),
 ]
 FOOTER = [
     ("/", "Tracker"),
+    ("/new", "What's new"),
+    ("/models", "Models"),
     ("/guides/", "Guides"),
     ("/about", "About"),
     ("/contact", "Contact"),
     ("/privacy", "Privacy"),
     ("/terms", "Terms"),
+    ("/feed.xml", "RSS"),
     ("/data.json", "data.json"),
     ("/schema.json", "schema.json"),
 ]
+
+# Filled at the start of each build() from git history and data.json.
+CHANGES: dict = {}
+MODEL_PAGES: list = []
+MODEL_SKIPPED: list = []
+MODELS_BY_PROVIDER: dict = {}
 
 
 def load_data():
@@ -946,12 +966,14 @@ def render_page(
         pass
     og_title = title if title.startswith(SHORT) or title.startswith("Free LLM") else f"{title} — {SHORT}"
     nav = []
+    path_n = path.rstrip("/") or "/"
     for href, label in NAV:
-        cur = " aria-current=\"page\"" if (path.rstrip("/") or "/") == href.rstrip("/") or (
-            href == "/guides/" and path.startswith("/guides")
-        ) else ""
-        if href == "/" and path != "/":
-            cur = ""
+        href_n = href.rstrip("/") or "/"
+        if href_n == "/":
+            current = path_n == "/"
+        else:
+            current = path_n == href_n or path_n.startswith(href_n + "/")
+        cur = ' aria-current="page"' if current else ""
         nav.append(f'<a href="{attr_esc(href)}"{cur}>{esc(label)}</a>')
     footer_links = " ".join(f'<a href="{attr_esc(h)}">{esc(l)}</a>' for h, l in FOOTER)
     ld = jsonld or []
@@ -994,6 +1016,7 @@ def render_page(
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/styles.css">
+<link rel="alternate" type="application/rss+xml" title="What&#39;s new — {esc(SHORT)}" href="{attr_esc(SITE + '/feed.xml')}">
 <script>{theme_boot}</script>
 {ANALYTICS_HEAD}
 {jsonld_script(ld)}
@@ -1329,6 +1352,7 @@ def provider_card_html(s: dict) -> str:
         if s.get("notes")
         else ""
     )
+    model_links = provider_model_links_html(s)
     tpd = f'{s["tokens_per_day"]:,}' if s.get("tokens_per_day") else "Not published"
     phone = published(phone_of(s))
     code = starter_code(s)
@@ -1357,6 +1381,7 @@ def provider_card_html(s: dict) -> str:
         f'<div class="base"><dt>Base URL</dt><div class="base-row">{base}</div></div>'
         f'<div class="extra"><dt>Limits</dt><dd>{esc(published(s.get("limits")))}</dd></div>'
         f'{notes}'
+        f'{model_links}'
         f'{starter}'
         f'<div class="extra"><dt>Source</dt><dd><a href="{attr_esc(s["url"])}" target="_blank" rel="noopener nofollow">Official page</a></dd>'
         f' · <dt>Last verified</dt><dd>{esc(fmt_date(s.get("last_updated")))}</dd></div>'
@@ -1416,12 +1441,93 @@ def provider_table_html(data) -> str:
     )
 
 
+def provider_model_links_html(s: dict) -> str:
+    links = MODELS_BY_PROVIDER.get(s.get("id") or "") or []
+    if not links:
+        return ""
+    parts = ", ".join(
+        f'<a href="/models/{attr_esc(item["slug"])}">{esc(item["name"])}</a>'
+        for item in links
+    )
+    return (
+        '<div class="extra model-links"><dt>Named in our model pages</dt>'
+        f"<dd>{parts}</dd></div>"
+    )
+
+
+def prepare_features(data: dict) -> None:
+    """Compute changelog and model pages once per build, from data.json + git."""
+    global CHANGES, MODEL_PAGES, MODEL_SKIPPED, MODELS_BY_PROVIDER
+    CHANGES = site_features.collect_changes(HERE, data)
+    pages, skipped, by_provider = site_features.collect_model_families(data, is_dropped)
+    MODEL_PAGES = pages
+    MODEL_SKIPPED = skipped
+    MODELS_BY_PROVIDER = by_provider
+
+
+def _provider_href(pid: str, name: str) -> str:
+    return f'<a href="/#{attr_esc(provider_anchor({"id": pid}))}">{esc(name)}</a>'
+
+
+def changelog_day_items(day: dict, *, link_providers: bool = True) -> list[str]:
+    items = []
+    if day.get("initial"):
+        items.append(esc(day["initial"]["text"]))
+    for row in day.get("added") or []:
+        name = _provider_href(row["id"], row["name"]) if link_providers else esc(row["name"])
+        items.append(f"Added {name}.")
+    for row in day.get("removed") or []:
+        items.append(f"Removed {esc(row['name'])} from the list.")
+    for row in day.get("changed") or []:
+        name = _provider_href(row["id"], row["name"]) if link_providers else esc(row["name"])
+        items.append(f"Updated {name}: {esc(site_features._human_fields(row['fields']))}.")
+    for note in day.get("catalogue_notes") or []:
+        items.append(esc(note))
+    for note in day.get("notes") or []:
+        items.append(esc(note))
+    return items
+
+
 def changelog_html(data) -> str:
+    """Homepage teaser: the most recent days from the git-derived changelog."""
+    days = (CHANGES.get("days") or [])[:5]
     parts = []
-    for c in sorted(data.get("changelog") or [], key=lambda x: x["date"], reverse=True):
-        items = "".join(f"<li>{esc(i)}</li>" for i in c.get("items") or [])
-        parts.append(f"<h3>{esc(fmt_date(c['date']))}</h3><ul>{items}</ul>")
-    return "".join(parts)
+    for day in days:
+        items = "".join(f"<li>{item}</li>" for item in changelog_day_items(day))
+        parts.append(f"<h3>{esc(fmt_date(day['date']))}</h3><ul>{items}</ul>")
+    if not parts:
+        # Fall back to the recorded data.json changelog if git produced nothing.
+        for c in sorted(data.get("changelog") or [], key=lambda x: x["date"], reverse=True)[:5]:
+            items = "".join(f"<li>{esc(i)}</li>" for i in c.get("items") or [])
+            parts.append(f"<h3>{esc(fmt_date(c['date']))}</h3><ul>{items}</ul>")
+    more = (
+        '<p class="news-more">See the full <a href="/new">What’s new</a> page '
+        'or subscribe to the <a href="/feed.xml">RSS feed</a>.</p>'
+    )
+    return "".join(parts) + more
+
+
+def models_teaser_html() -> str:
+    if not MODEL_PAGES:
+        return ""
+    pills = "".join(
+        f'<a class="model-pill" href="/models/{attr_esc(f["slug"])}">'
+        f'{esc(f["name"])} <span>{f["total_count"]}</span></a>'
+        for f in MODEL_PAGES
+    )
+    return (
+        '<section class="wrap home-models" aria-labelledby="models-teaser-title">'
+        '<h2 id="models-teaser-title">Where can I use these models for free?</h2>'
+        '<p class="models-lede">A page for each model family that at least two providers in our data name. '
+        "We only list a provider when that family already appears in its entry — we do not guess the rest of a catalogue.</p>"
+        f'<div class="model-pills">{pills}</div>'
+        '<p><a href="/models/">All model pages →</a></p>'
+        "</section>"
+    )
+
+
+def models_by_provider_json() -> str:
+    return json.dumps(MODELS_BY_PROVIDER, ensure_ascii=False)
 
 
 def apply_home_placeholders(home: str, data: dict) -> str:
@@ -1433,17 +1539,365 @@ def apply_home_placeholders(home: str, data: dict) -> str:
         "<!-- PROVIDER_CARDS -->": provider_cards_html(active),
         "<!-- PROVIDER_TABLE -->": provider_table_html(data),
         "<!-- CHANGELOG -->": changelog_html(data),
+        "<!-- MODELS_TEASER -->": models_teaser_html(),
+        "<!-- MODELS_BY_PROVIDER -->": models_by_provider_json(),
     }
     for token, value in replacements.items():
         home = home.replace(token, value)
     return home
 
 
+def whats_new_content(data: dict) -> str:
+    days = CHANGES.get("days") or []
+    earlier = CHANGES.get("earlier_notes") or []
+    source = CHANGES.get("source")
+    lede = (
+        "<p class=\"page-lede\">This page lists providers added, changed or removed on the tracker, "
+        "grouped by date. Later entries are computed from the git history of <code>data.json</code>. "
+        "We never invent a date or an entry.</p>"
+    )
+    if source == "git" and days:
+        lede += (
+            f'<p class="page-updated">Last updated {esc(fmt_date(days[0]["date"]))}. '
+            f'The tracker snapshot on this page is {esc(fmt_ist(data["last_updated"]))}.</p>'
+        )
+    else:
+        lede += (
+            f'<p class="page-updated">The tracker snapshot on this page is {esc(fmt_ist(data["last_updated"]))}.</p>'
+        )
+    blocks = [
+        crumbs_html([("/", "Home"), ("/new", "What’s new")]),
+        '<h1 class="page-title">What’s new</h1>',
+        lede,
+        '<p class="feed-line">Subscribe: <a href="/feed.xml">RSS feed</a>. Machine-readable copy: <a href="/changes.json">changes.json</a>.</p>',
+    ]
+    for day in days:
+        items = changelog_day_items(day)
+        blocks.append(
+            f'<section class="change-day" id="{attr_esc(day["date"])}">'
+            f'<h2>{esc(fmt_date(day["date"]))}</h2>'
+            f'<ul>{"".join(f"<li>{item}</li>" for item in items)}</ul>'
+            "</section>"
+        )
+    if earlier:
+        blocks.append(
+            "<h2 id=\"earlier-notes\">Earlier notes recorded in the first published data file</h2>"
+            "<p>These lines were already in <code>data.json</code> when the repository was first published "
+            f"on {esc(fmt_date('2026-10-26'))}. The dates below are the dates stored in that file, not later git commits.</p>"
+        )
+        for entry in earlier:
+            items = "".join(f"<li>{esc(i)}</li>" for i in entry["items"])
+            blocks.append(
+                f'<section class="change-day" id="note-{attr_esc(entry["date"])}">'
+                f'<h3>{esc(fmt_date(entry["date"]))}</h3><ul>{items}</ul></section>'
+            )
+    if len(blocks) <= 4 and not days and not earlier:
+        blocks.append("<p>No changelog entries are available yet.</p>")
+    return '<main id="content" class="wrap page"><article class="prose">' + "".join(blocks) + "</article></main>"
+
+
+def feed_xml(data: dict) -> str:
+    days = CHANGES.get("days") or []
+    if days:
+        latest = _parse_iso(days[0]["latest_iso"])
+    else:
+        latest = dt.datetime.fromisoformat(data["last_updated"])
+        if latest.tzinfo is None:
+            latest = latest.replace(tzinfo=IST)
+    items = []
+    for day in days:
+        title_bits = []
+        if day.get("added"):
+            n = len(day["added"])
+            title_bits.append(f"{n} provider{'s' if n != 1 else ''} added")
+        if day.get("changed"):
+            n = len(day["changed"])
+            title_bits.append(f"{n} updated")
+        if day.get("removed"):
+            n = len(day["removed"])
+            title_bits.append(f"{n} removed")
+        if not title_bits and day.get("initial"):
+            title_bits.append(day["initial"]["text"])
+        if not title_bits:
+            title_bits.append("Tracker updates")
+        title = f"{fmt_date(day['date'])}: " + ", ".join(title_bits)
+        lis = "".join(f"<li>{item}</li>" for item in changelog_day_items(day, link_providers=False))
+        desc = f"<p>Changes recorded on {esc(fmt_date(day['date']))}.</p><ul>{lis}</ul>"
+        link = f"{SITE}/new#{day['date']}"
+        pub = _parse_iso(day["latest_iso"])
+        items.append(
+            "    <item>\n"
+            f"      <title>{esc(title)}</title>\n"
+            f"      <link>{esc(link)}</link>\n"
+            f"      <guid isPermaLink=\"true\">{esc(link)}</guid>\n"
+            f"      <pubDate>{esc(format_datetime(pub))}</pubDate>\n"
+            f"      <description>{esc(desc)}</description>\n"
+            "    </item>"
+        )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "  <channel>\n"
+        f"    <title>{esc(SHORT)} — What’s new</title>\n"
+        f"    <link>{esc(SITE + '/new')}</link>\n"
+        f"    <atom:link href=\"{esc(SITE + '/feed.xml')}\" rel=\"self\" type=\"application/rss+xml\"/>\n"
+        "    <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>\n"
+        "    <language>en</language>\n"
+        f"    <lastBuildDate>{esc(format_datetime(latest))}</lastBuildDate>\n"
+        + "\n".join(items)
+        + "\n  </channel>\n</rss>\n"
+    )
+
+
+def _parse_iso(iso: str) -> dt.datetime:
+    d = dt.datetime.fromisoformat(iso)
+    if d.tzinfo is None:
+        d = d.replace(tzinfo=IST)
+    return d.astimezone(IST)
+
+
+def model_family_faqs(fam: dict, data: dict) -> list[tuple[str, str]]:
+    name = fam["name"]
+    providers = fam["providers"]
+    active = [p for p in providers if not p["dropped"]]
+    ended = [p for p in providers if p["dropped"]]
+    names = ", ".join(p["site"]["name"] for p in providers)
+    oai_yes = [p for p in active if p["site"].get("openai_compatible") == "yes"]
+    no_card = [
+        p for p in active
+        if (p["site"].get("card_required") or "").strip().lower().startswith("no")
+        and (p["site"].get("card_required") or "").strip().lower() != "none"
+    ]
+    a1 = (
+        f"{len(providers)} provider{'s' if len(providers) != 1 else ''} in our "
+        f"{fmt_ist(data['last_updated'])} snapshot name a {name} model: {names}. "
+        "We only list a provider here when that name already appears in our data. "
+        "Catalogues change, so confirm on the official page before you rely on an entry."
+    )
+    if ended:
+        a1 += f" {len(ended)} of these {'is' if len(ended) == 1 else 'are'} marked as an ended offer in our list."
+    if oai_yes:
+        a2 = (
+            f"{len(oai_yes)} of the {len(active) or len(providers)} active entries "
+            f"{'is' if len(oai_yes) == 1 else 'are'} marked OpenAI compatible in our data: "
+            + ", ".join(p["site"]["name"] for p in oai_yes)
+            + ". The others are marked no, partial, or Not published — see the table on this page."
+        )
+    else:
+        a2 = (
+            f"None of the active {name} entries in this snapshot are marked “yes” for OpenAI compatibility. "
+            "Check the table for Partial or Not published, and confirm on the official docs."
+        )
+    if no_card:
+        a3 = (
+            f"{len(no_card)} active entr{'y' if len(no_card) == 1 else 'ies'} in this list "
+            f"{'says' if len(no_card) == 1 else 'say'} no card is required: "
+            + ", ".join(p["site"]["name"] for p in no_card)
+            + ". Others may ask for a card, a top-up, or do not publish this. Confirm on the sign-up page."
+        )
+    else:
+        a3 = (
+            "None of the active entries on this page are recorded as “No” for a card. "
+            "Some may say Yes, Top-up, or Not published. Confirm on the provider’s sign-up page."
+        )
+    a4 = (
+        "The provider has not published that figure on their public pages, or we could not find it. "
+        "We never invent quotas, prices or endpoints."
+    )
+    a5 = (
+        f"No. This page only includes providers that already name {name} in our data file. "
+        "A gateway may offer the model without that name appearing in our notes, allowance or limits, "
+        "and we do not guess those catalogues."
+    )
+    return [
+        (f"Where can I use {name} for free via API?", a1),
+        (f"Which of these {name} providers are OpenAI compatible?", a2),
+        ("Do I need a credit card?", a3),
+        ("Why do some fields say Not published?", a4),
+        (f"Is this every site that hosts {name}?", a5),
+    ]
+
+
+def model_snippet(fam: dict) -> str:
+    """Python starter from the first OpenAI-compatible provider with a published base URL."""
+    official = []
+    other = []
+    for item in fam["providers"]:
+        s = item["site"]
+        if item["dropped"]:
+            continue
+        if s.get("openai_compatible") == "yes" and has_base(s) and str(s["base_url"]).startswith("http") and "{" not in str(s["base_url"]):
+            (official if s.get("category") == "official" else other).append(s)
+    s = (official or other or [None])[0]
+    if not s:
+        return (
+            "<p>None of the providers on this page currently have both OpenAI compatibility "
+            "and a published base URL in our data, so we do not invent a snippet. "
+            "Copy the endpoint and model id from the provider’s official docs.</p>"
+        )
+    code = starter_code(s)
+    if not code:
+        return (
+            "<p>We do not have a complete OpenAI-compatible starter for a provider on this page, "
+            "so we do not invent one. Copy the endpoint and model id from the official docs.</p>"
+        )
+    block = (
+        '<div class="snippet"><button type="button" class="copy copy-snip" data-c="'
+        + attr_esc(code)
+        + '">Copy</button><pre>'
+        + esc(code)
+        + "</pre></div>"
+    )
+    return (
+        f"<p>This example uses the published base URL for <a href=\"/#{attr_esc(provider_anchor(s))}\">{esc(s['name'])}</a>. "
+        "Replace <code>MODEL_ID</code> with the model id from that provider’s official docs. "
+        "We do not guess the id.</p>"
+        + block
+    )
+
+
+def model_table(fam: dict) -> str:
+    spec = site_features.family_spec(fam["slug"])
+    rows = []
+    for item in fam["providers"]:
+        s = item["site"]
+        status = "Ended" if item["dropped"] else "Active"
+        tr_cls = ' class="ended"' if item["dropped"] else ""
+        name = (
+            f'<a href="/#{attr_esc(provider_anchor(s))}">{esc(s["name"])}</a>'
+            f' · <a href="{attr_esc(s["url"])}" rel="noopener nofollow">Official page</a>'
+        )
+        base = f'<code>{esc(s["base_url"])}</code>' if has_base(s) else "Not published"
+        excerpt = site_features.excerpt_for(item, spec["pattern"])
+        named = esc(excerpt) if excerpt else "—"
+        rows.append(
+            f"<tr{tr_cls}>"
+            f"<th scope=\"row\">{name}</th>"
+            f"<td>{esc(status)}</td>"
+            f"<td>{esc(oai_label(s))}</td>"
+            f"<td>{esc(allowance_text(s))}</td>"
+            f"<td>{esc(fmt_num(s.get('tokens_per_day')))}</td>"
+            f"<td>{esc(published(s.get('limits')))}</td>"
+            f"<td>{esc(published(s.get('card_required')))}</td>"
+            f"<td>{base}</td>"
+            f"<td>{named}</td>"
+            f"<td>{esc(fmt_date(s.get('last_updated')))}</td>"
+            "</tr>"
+        )
+    cap = (
+        f'Providers in our list that name {esc(fam["name"])}. '
+        "Figures are copied from each provider’s own pages. “Not published” means no official number was found."
+    )
+    return (
+        '<div class="catalog-wrap"><table class="catalog">'
+        f"<caption>{cap}</caption>"
+        "<thead><tr>"
+        '<th scope="col">Provider</th><th scope="col">Status</th>'
+        '<th scope="col">OpenAI compatible</th><th scope="col">Free allowance</th>'
+        '<th scope="col">Tokens/day</th><th scope="col">Limits</th>'
+        '<th scope="col">Card</th><th scope="col">Base URL</th>'
+        '<th scope="col">Named in our data as</th><th scope="col">Last verified</th>'
+        "</tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+    )
+
+
+def model_page_content(fam: dict, data: dict) -> str:
+    name = fam["name"]
+    n = fam["total_count"]
+    header = (
+        crumbs_html([("/", "Home"), ("/models", "Models"), (f"/models/{fam['slug']}", name)])
+        + f'<h1 class="page-title">Where can I use {esc(name)} for free via API?</h1>'
+        + (
+            f'<p class="page-lede">{n} provider{"s" if n != 1 else ""} in our tracker name a {esc(name)} model. '
+            "A provider appears here only when that name is already in our data — we do not guess the rest of a catalogue. "
+            "Figures change often; confirm on the official page before you rely on them.</p>"
+        )
+        + (
+            f'<p class="page-updated">Last updated {esc(fmt_date(data["last_updated"][:10]))}. '
+            f'Tracker snapshot: {esc(fmt_ist(data["last_updated"]))}.</p>'
+        )
+    )
+    faqs = model_family_faqs(fam, data)
+    faq_html = '<section class="faq" aria-labelledby="model-faq"><h2 id="model-faq">Common questions</h2>' + "".join(
+        f"<details{' open' if i == 0 else ''}><summary>{esc(q)}</summary><p>{esc(a)}</p></details>"
+        for i, (q, a) in enumerate(faqs)
+    ) + "</section>"
+    others = "".join(
+        f'<li><a href="/models/{attr_esc(f["slug"])}">{esc(f["name"])}</a> ({f["total_count"]})</li>'
+        for f in MODEL_PAGES
+        if f["slug"] != fam["slug"]
+    )
+    related = (
+        '<aside class="related"><h2>Other model pages</h2><ul>'
+        + others
+        + '<li><a href="/models/">All model pages</a></li></ul></aside>'
+        if others
+        else ""
+    )
+    return (
+        f'<main id="content" class="wrap page">'
+        f'<article class="prose">{header}'
+        f"<h2>Providers that name {esc(name)}</h2>"
+        f"<p>The table lists the published free allowance, OpenAI compatibility, base URL and limits from our data. "
+        "The last column quotes the clause in our data that names this family.</p></article>"
+        f"{model_table(fam)}"
+        f'<article class="prose"><h2>Example request</h2>{model_snippet(fam)}{faq_html}{related}</article>'
+        "</main>"
+    )
+
+
+def models_index_content(data: dict) -> str:
+    cards = []
+    for fam in MODEL_PAGES:
+        cards.append(
+            f'<a class="guide-card" href="/models/{attr_esc(fam["slug"])}">'
+            f'<h2>{esc(fam["name"])}</h2>'
+            f'<p>{fam["total_count"]} providers in our data name a {esc(fam["name"])} model. '
+            f'Where can I use {esc(fam["name"])} for free via API?</p></a>'
+        )
+    grid = '<div class="guide-grid">' + "".join(cards) + "</div>" if cards else "<p>No model family currently has two or more providers in our data.</p>"
+    skipped = ""
+    if MODEL_SKIPPED:
+        bits = ", ".join(
+            f'{esc(f["name"])} ({f["total_count"]} provider{"s" if f["total_count"] != 1 else ""}: '
+            + ", ".join(esc(p["site"]["name"]) for p in f["providers"])
+            + ")"
+            for f in MODEL_SKIPPED
+        )
+        skipped = (
+            "<h2>Families named by fewer than two providers</h2>"
+            "<p>We only publish a model page when at least two providers in our data name that family. "
+            f"Currently that excludes {bits}. A page will appear when a second provider in our data names the family.</p>"
+        )
+    header = (
+        crumbs_html([("/", "Home"), ("/models", "Models")])
+        + '<h1 class="page-title">Free LLM APIs by model family</h1>'
+        + (
+            '<p class="page-lede">These pages answer “Where can I use this model for free via API?” '
+            "for families that at least two providers in our tracker already name. "
+            "We do not invent availability from a gateway’s full catalogue.</p>"
+        )
+        + (
+            f'<p class="page-updated">Last updated {esc(fmt_date(data["last_updated"][:10]))}. '
+            f'Tracker snapshot: {esc(fmt_ist(data["last_updated"]))}.</p>'
+        )
+    )
+    return (
+        f'<main id="content" class="wrap page"><article class="prose">{header}</article>'
+        f"{grid}"
+        f'<article class="prose">{skipped}'
+        '<p>See also the <a href="/">full provider list</a> and <a href="/new">What’s new</a>.</p>'
+        "</article></main>"
+    )
+
+
 def validate_generated_jsonld():
     """Parse every generated HTML page and check required JSON-LD fields."""
     errors = []
     pages = list((HERE).glob("*.html"))
-    for sub in ("about", "contact", "privacy", "terms", "guides"):
+    for sub in ("about", "contact", "privacy", "terms", "guides", "new", "models"):
         pages.extend((HERE / sub).rglob("index.html"))
     seen_desc = {}
     for path in pages:
@@ -1522,6 +1976,7 @@ def validate_generated_jsonld():
 
 def build():
     data = load_data()
+    prepare_features(data)
     changed = 0
     routes = []  # (path, lastmod_date, changefreq, priority)
 
@@ -1691,12 +2146,127 @@ def build():
         changed += 1
     routes.insert(0, ("/", data["last_updated"][:10], "daily", "1.0"))
 
+    # What's new, RSS feed, and machine-readable changelog.
+    new_lastmod = (CHANGES.get("days") or [{}])[0].get("date") or data["last_updated"][:10]
+    new_html = render_page(
+        title="What’s new",
+        description="Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date, with an RSS feed. Dates come from git history of the data file.",
+        path="/new",
+        content=whats_new_content(data),
+        jsonld=[
+            {
+                "@context": "https://schema.org",
+                "@type": "TechArticle",
+                "headline": "What’s new on the Free LLM API Tokens tracker",
+                "description": "Providers added, changed or removed on the tracker, grouped by date.",
+                "datePublished": "2026-10-26",
+                "dateModified": new_lastmod,
+                "author": org_entity(),
+                "publisher": org_entity(),
+                "image": OG_IMAGE_URL,
+                "url": SITE + "/new",
+                "mainEntityOfPage": {"@type": "WebPage", "@id": SITE + "/new"},
+                "inLanguage": "en",
+            }
+        ],
+        crumbs=[("/", "Home"), ("/new", "What’s new")],
+    )
+    if write(HERE / "new" / "index.html", new_html):
+        changed += 1
+    routes.append(("/new", new_lastmod, "daily", "0.8"))
+    if write(HERE / "feed.xml", feed_xml(data)):
+        changed += 1
+    routes.append(("/feed.xml", new_lastmod, "daily", "0.5"))
+    if write(HERE / "changes.json", site_features.changes_to_json(CHANGES)):
+        changed += 1
+    routes.append(("/changes.json", new_lastmod, "daily", "0.4"))
+
+    # Per-model SEO pages.
+    models_index_html = render_page(
+        title="Free LLM APIs by model family",
+        description="Find where to use DeepSeek, Qwen, Gemini, GLM and other model families for free via API. A page is published only when at least two providers in our data name that family.",
+        path="/models",
+        content=models_index_content(data),
+        jsonld=[
+            {
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                "name": "Free LLM APIs by model family",
+                "description": "Index of model-family pages built from names already recorded in the tracker data.",
+                "url": SITE + "/models",
+                "dateModified": data["last_updated"],
+                "publisher": org_entity(),
+                "inLanguage": "en",
+            },
+            {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "Model family pages",
+                "description": "Model families named by at least two providers in the tracker.",
+                "url": SITE + "/models",
+                "dateModified": data["last_updated"],
+                "numberOfItems": len(MODEL_PAGES),
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": i,
+                        "name": fam["name"],
+                        "url": f"{SITE}/models/{fam['slug']}",
+                    }
+                    for i, fam in enumerate(MODEL_PAGES, 1)
+                ],
+            },
+        ],
+        crumbs=[("/", "Home"), ("/models", "Models")],
+    )
+    if write(HERE / "models" / "index.html", models_index_html):
+        changed += 1
+    routes.append(("/models", data["last_updated"][:10], "daily", "0.8"))
+
+    for fam in MODEL_PAGES:
+        path = f"/models/{fam['slug']}"
+        faqs = model_family_faqs(fam, data)
+        page_html = render_page(
+            title=f"Where can I use {fam['name']} for free via API?",
+            description=(
+                f"Where can I use {fam['name']} for free via API? "
+                f"{fam['total_count']} providers in our tracker name a {fam['name']} model, "
+                "with published limits, OpenAI compatibility and base URLs — or Not published when unknown."
+            ),
+            path=path,
+            content=model_page_content(fam, data),
+            jsonld=[
+                {
+                    "@context": "https://schema.org",
+                    "@type": "TechArticle",
+                    "headline": f"Where can I use {fam['name']} for free via API?",
+                    "description": (
+                        f"{fam['total_count']} providers in our tracker name a {fam['name']} model. "
+                        "Availability is taken only from names already in our data."
+                    ),
+                    "datePublished": "2026-11-14",
+                    "dateModified": data["last_updated"],
+                    "author": org_entity(),
+                    "publisher": org_entity(),
+                    "image": OG_IMAGE_URL,
+                    "url": SITE + path,
+                    "mainEntityOfPage": {"@type": "WebPage", "@id": SITE + path},
+                    "inLanguage": "en",
+                },
+                faq_ld(faqs, SITE + path),
+            ],
+            crumbs=[("/", "Home"), ("/models", "Models"), (path, fam["name"])],
+        )
+        if write(HERE / "models" / fam["slug"] / "index.html", page_html):
+            changed += 1
+        routes.append((path, data["last_updated"][:10], "weekly", "0.7"))
+
     # 404
     notfound = render_page(
         title="Page not found",
         description="That page is not on Free LLM API Tokens Tracker.",
         path="/404",
-        content='<main id="content" class="wrap page"><h1 class="page-title">Page not found</h1><p class="page-lede">That address is not on this site. Try the <a href="/">provider list</a> or the <a href="/guides/">guides</a>.</p></main>',
+        content='<main id="content" class="wrap page"><h1 class="page-title">Page not found</h1><p class="page-lede">That address is not on this site. Try the <a href="/">provider list</a>, <a href="/models/">model pages</a>, <a href="/new">What’s new</a> or the <a href="/guides/">guides</a>.</p></main>',
         jsonld=[{"@context": "https://schema.org", "@type": "WebPage", "name": "Page not found", "url": SITE + "/404"}],
     )
     if write(HERE / "404.html", notfound):
@@ -1766,6 +2336,11 @@ Sitemap: https://freellmapi.link/sitemap.xml
         f"- [{g['title']}]({SITE}/guides/{g['slug']}): {g['description']}"
         for g in guides_sorted
     )
+    model_lines = "\n".join(
+        f"- [{fam['name']}]({SITE}/models/{fam['slug']}): Where can I use {fam['name']} for free via API? "
+        f"{fam['total_count']} providers in our data name this family."
+        for fam in MODEL_PAGES
+    ) or "- No model family currently has two or more providers in our data."
     llms = f"""# {NAME}
 
 > A daily-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own public pages on the date shown. If a figure is not published, this site says so. Nothing here is invented.
@@ -1779,6 +2354,9 @@ Methodology: https://freellmapi.link/about
 ## Pages
 
 - [Provider list]({SITE}/): Searchable catalogue of {len(data['sites'])} providers ({tables['active_count']} active offers in the current snapshot).
+- [What’s new]({SITE}/new): Providers added, changed or removed, grouped by date (from git history of data.json).
+- [RSS feed]({SITE}/feed.xml): The same changelog as a feed.
+- [Model pages]({SITE}/models): Free API pages for model families named by at least two providers in our data.
 - [Guides]({SITE}/guides/): Original explainers on using free LLM APIs.
 - [About]({SITE}/about): How the list is compiled.
 - [Privacy]({SITE}/privacy): Privacy policy, cookies, Analytics and ads.
@@ -1786,7 +2364,12 @@ Methodology: https://freellmapi.link/about
 - [Contact]({SITE}/contact): Email contact.
 - [Machine-readable data]({SITE}/data.json): The source list (schema_version {data.get('schema_version', 1)}).
 - [JSON Schema]({SITE}/schema.json): Schema for data.json, so you can validate the file before trusting it.
+- [Changelog data]({SITE}/changes.json): Machine-readable added/changed/removed history.
 - [Full provider summary]({SITE}/llms-full.txt): Compact text list of every provider in data.json.
+
+## Model pages
+
+{model_lines}
 
 ## Guides
 

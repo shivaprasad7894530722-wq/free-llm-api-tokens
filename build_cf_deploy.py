@@ -62,6 +62,8 @@ for p in sorted(here.rglob("*")):
     if should_skip(rel):
         continue
     ct = CT[rel.suffix]
+    if rel.name == "feed.xml":
+        ct = "application/rss+xml; charset=utf-8"
     if rel.suffix in BINARY_SUFFIXES:
         rec = {"body": base64.b64encode(p.read_bytes()).decode("ascii"), "ct": ct, "bin": True}
     else:
@@ -112,7 +114,7 @@ function bodyOf(f) {
 }
 function withSecurity(headers, pathname) {
   const out = Object.assign({}, SECURITY, headers);
-  if (pathname === '/data.json') out['x-content-usage'] = DATA_USE;
+  if (pathname === '/data.json' || pathname === '/schema.json' || pathname === '/changes.json') out['x-content-usage'] = DATA_USE;
   return out;
 }
 export default {

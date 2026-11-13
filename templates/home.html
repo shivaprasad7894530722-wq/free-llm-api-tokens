@@ -85,6 +85,8 @@ const client = new OpenAI({
     </details>
   </section>
 
+  <!-- MODELS_TEASER -->
+
   <section class="wrap home-guides" aria-labelledby="guides-teaser-title">
     <h2 id="guides-teaser-title">Guides</h2>
     <p class="lede" style="margin:0 0 16px;text-align:left">Short explainers on OpenAI-compatible APIs, safety, rate limits and individual providers. Every figure is taken from the list above or from official docs — never invented.</p>
@@ -130,6 +132,7 @@ const client = new OpenAI({
 </main>
 
 <script>
+const MODELS_BY_PROVIDER = <!-- MODELS_BY_PROVIDER -->;
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmtDate = d => {
   if (!d) return "—";
@@ -223,6 +226,12 @@ function render() {
       ? '<code title="' + esc(s.base_url) + '">' + esc(s.base_url) + '</code><button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="' + esc(s.base_url) + '">Copy</button>'
       : '<span class="mut">Not published</span>';
     const notes = s.notes ? '<div class="extra"><dt>Notes</dt><dd>' + esc(s.notes) + '</dd></div>' : "";
+    const modelLinks = (MODELS_BY_PROVIDER[s.id] || []);
+    const models = modelLinks.length
+      ? '<div class="extra model-links"><dt>Named in our model pages</dt><dd>' +
+        modelLinks.map(m => '<a href="/models/' + esc(m.slug) + '">' + esc(m.name) + '</a>').join(", ") +
+        '</dd></div>'
+      : "";
     const code = starterCode(s);
     const starter = code
       ? '<details class="starter"><summary>Copy Python starter</summary>' +
@@ -247,6 +256,7 @@ function render() {
       '<div class="base"><dt>Base URL</dt><div class="base-row">' + base + '</div></div>' +
       '<div class="extra"><dt>Limits</dt><dd>' + esc(published(s.limits)) + '</dd></div>' +
       notes +
+      models +
       starter +
       '<div class="extra"><dt>Source</dt><dd><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">Official page</a></dd> · <dt>Last verified</dt><dd>' + fmtDate(s.last_updated) + '</dd></div>' +
     '</article>';
@@ -274,9 +284,6 @@ fetch("/data.json", {cache:"no-store"}).then(r => {
   DATA = d;
   document.getElementById("statCount").textContent = String(d.sites.length);
   document.getElementById("updated").textContent = istStamp(d.last_updated);
-  document.getElementById("changelog").innerHTML = d.changelog.slice().sort((a, b) => b.date.localeCompare(a.date)).map(c =>
-    "<h3>" + fmtDate(c.date) + "</h3><ul>" + c.items.map(i => "<li>" + esc(i) + "</li>").join("") + "</ul>"
-  ).join("");
   ["q","oai","nocard","nophone","ongoing","trial","norisk","hastpd","showdropped","sort"].forEach(id =>
     document.getElementById(id).addEventListener("input", render)
   );

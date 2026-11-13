@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Free LLM API Tokens — What’s new</title>
+    <link>https://freellmapi.link/new</link>
+    <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 13 Nov 2026 19:08:20 +0530</lastBuildDate>
+    <item>
+      <title>13 Nov 2026: 9 providers added, 3 updated</title>
+      <link>https://freellmapi.link/new#2026-11-13</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-13</guid>
+      <pubDate>Fri, 13 Nov 2026 19:08:20 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 13 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Vectoree.&lt;/li&gt;&lt;li&gt;Added GonkaRouter.&lt;/li&gt;&lt;li&gt;Added Speka.&lt;/li&gt;&lt;li&gt;Added Braintrust.&lt;/li&gt;&lt;li&gt;Added Liquid AI.&lt;/li&gt;&lt;li&gt;Added Together AI.&lt;/li&gt;&lt;li&gt;Added Novita AI.&lt;/li&gt;&lt;li&gt;Added NLP Cloud.&lt;/li&gt;&lt;li&gt;Added IBM watsonx.ai.&lt;/li&gt;&lt;li&gt;Updated Gemini API (Google AI Studio): training-data policy.&lt;/li&gt;&lt;li&gt;Updated SenseNova Token Plan: phone requirement.&lt;/li&gt;&lt;li&gt;Updated Hyperbolic: offer type and phone requirement.&lt;/li&gt;&lt;li&gt;Updated offer type across 22 existing providers.&lt;/li&gt;&lt;li&gt;Added optional free_type, phone_required and data_training fields, plus filters, a public JSON schema, and copy-paste starter snippets.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>12 Nov 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-12</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-12</guid>
+      <pubDate>Thu, 12 Nov 2026 08:59:49 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 12 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added NovAI.&lt;/li&gt;&lt;li&gt;Added Zro (MoonMath).&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>11 Nov 2026: 3 providers added, 1 updated</title>
+      <link>https://freellmapi.link/new#2026-11-11</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-11</guid>
+      <pubDate>Wed, 11 Nov 2026 08:58:28 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 11 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Hyperbolic.&lt;/li&gt;&lt;li&gt;Added ArcaneAPI.&lt;/li&gt;&lt;li&gt;Added 1vy.&lt;/li&gt;&lt;li&gt;Updated AI21 Labs (Jamba): free allowance.&lt;/li&gt;&lt;li&gt;AI21 Labs Jamba API retired on 9 Aug 2026; free trial gone.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>10 Nov 2026: 2 providers added, 1 updated</title>
+      <link>https://freellmapi.link/new#2026-11-10</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-10</guid>
+      <pubDate>Tue, 10 Nov 2026 08:58:10 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 10 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added FreeInference (Harvard MadSys Lab).&lt;/li&gt;&lt;li&gt;Added Inferbase.&lt;/li&gt;&lt;li&gt;Updated Ollama Cloud: free allowance and notes.&lt;/li&gt;&lt;li&gt;Ollama Cloud no longer has a free cloud tier (pay-as-you-go per token).&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>9 Nov 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-09</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-09</guid>
+      <pubDate>Mon, 09 Nov 2026 09:02:45 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 9 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added EXAONE API Platform (LG K-EXAONE 2.5).&lt;/li&gt;&lt;li&gt;Added Regolo.ai.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>6 Nov 2026: 7 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-06</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-06</guid>
+      <pubDate>Fri, 06 Nov 2026 09:04:22 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 6 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added OpenPaths.&lt;/li&gt;&lt;li&gt;Added LLM EU.&lt;/li&gt;&lt;li&gt;Added Boundless API.&lt;/li&gt;&lt;li&gt;Added Mango Inference.&lt;/li&gt;&lt;li&gt;Added LLMCloud.&lt;/li&gt;&lt;li&gt;Added Nscale.&lt;/li&gt;&lt;li&gt;Added Maritaca AI (S5-free).&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>5 Nov 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-05</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-05</guid>
+      <pubDate>Thu, 05 Nov 2026 08:57:10 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 5 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Hetzner Inference API (Experiments).&lt;/li&gt;&lt;li&gt;Added Lightning AI Model APIs.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>4 Nov 2026: 4 providers added, 1 updated</title>
+      <link>https://freellmapi.link/new#2026-11-04</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-04</guid>
+      <pubDate>Wed, 04 Nov 2026 09:03:09 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 4 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added nabh.cloud.&lt;/li&gt;&lt;li&gt;Added Mervex.&lt;/li&gt;&lt;li&gt;Added Orq AI Gateway.&lt;/li&gt;&lt;li&gt;Added OpenAny.&lt;/li&gt;&lt;li&gt;Updated Orq AI Gateway: base URL.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>3 Nov 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-03</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-03</guid>
+      <pubDate>Tue, 03 Nov 2026 09:00:13 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 3 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added JoinGonka Gateway.&lt;/li&gt;&lt;li&gt;Added ngrok.ai AI Gateway.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>2 Nov 2026: 4 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-02</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-02</guid>
+      <pubDate>Mon, 02 Nov 2026 09:04:27 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 2 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Infercom (SambaNova EU).&lt;/li&gt;&lt;li&gt;Added AI21 Labs (Jamba).&lt;/li&gt;&lt;li&gt;Added Tencent Cloud TokenHub.&lt;/li&gt;&lt;li&gt;Added Helyx AI.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>30 Oct 2026: 4 providers added</title>
+      <link>https://freellmapi.link/new#2026-10-30</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-10-30</guid>
+      <pubDate>Fri, 30 Oct 2026 08:57:16 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 30 Oct 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added SenseNova Token Plan.&lt;/li&gt;&lt;li&gt;Added PEKPIK LLM.&lt;/li&gt;&lt;li&gt;Added Aevon.&lt;/li&gt;&lt;li&gt;Added Api.Airforce.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>29 Oct 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-10-29</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-10-29</guid>
+      <pubDate>Thu, 29 Oct 2026 08:59:19 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 29 Oct 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Tencent EdgeOne Makers Models.&lt;/li&gt;&lt;li&gt;Added Typhoon API (OpenTyphoon).&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>28 Oct 2026: 1 provider added, 2 updated</title>
+      <link>https://freellmapi.link/new#2026-10-28</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-10-28</guid>
+      <pubDate>Wed, 28 Oct 2026 09:01:48 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 28 Oct 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added River AI (River Inference).&lt;/li&gt;&lt;li&gt;Updated NaraRouter: free allowance and notes.&lt;/li&gt;&lt;li&gt;Updated BazaarLink: free allowance and notes.&lt;/li&gt;&lt;li&gt;NaraRouter Free plan cut from 3 models to 1 (laguna-s-2.1); still 7M tokens/day, 15 RPM.&lt;/li&gt;&lt;li&gt;BazaarLink free models down from 7 to 6.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>27 Oct 2026: 4 providers added</title>
+      <link>https://freellmapi.link/new#2026-10-27</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-10-27</guid>
+      <pubDate>Tue, 27 Oct 2026 09:04:20 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 27 Oct 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Experiential Labs.&lt;/li&gt;&lt;li&gt;Added Runcrate.&lt;/li&gt;&lt;li&gt;Added InferAll.&lt;/li&gt;&lt;li&gt;Added Flux Router.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>26 Oct 2026: First published copy of this list in the repository (73 providers).</title>
+      <link>https://freellmapi.link/new#2026-10-26</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-10-26</guid>
+      <pubDate>Mon, 26 Oct 2026 09:35:51 +0530</pubDate>
+      <description>&lt;p&gt;Changes recorded on 26 Oct 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;First published copy of this list in the repository (73 providers).&lt;/li&gt;&lt;li&gt;Added Flexlora, IteraCompute, Inception.&lt;/li&gt;&lt;li&gt;NaraRouter free models cut from 5 to 3 (still 7M tokens/day, 15 RPM).&lt;/li&gt;&lt;li&gt;Rechecked Infron, Token Harbor and AMD Token Factory docs.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -248,3 +248,18 @@ details.directory summary::after{content:" ▾";color:var(--faint)}
 .catalog tr.ended{opacity:.7}
 .catalog a{font-weight:600}
 .catalog code{font:0.75rem/1.4 var(--mono);word-break:break-all}
+
+.home-models{margin:0 0 48px}
+.home-models h2{margin:0 0 10px;font-size:1.35rem;letter-spacing:-.03em}
+.models-lede{margin:0 0 16px;color:var(--mut);max-width:720px}
+.model-pills{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.model-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--fg);font-weight:600;font-size:.9rem}
+.model-pill:hover{text-decoration:none;border-color:var(--acc);background:var(--card-hover)}
+.model-pill span{font-size:.75rem;font-weight:700;color:var(--acc2);background:var(--acc-bg);border-radius:999px;padding:1px 7px}
+.news-more{margin:12px 0 0;font-size:.88rem}
+.news-more a{font-weight:600}
+.feed-line{margin:-12px 0 28px;font-size:.92rem;color:var(--mut)}
+.change-day{margin:0 0 1.6em}
+.change-day h2,.change-day h3{margin:0 0 .4em}
+.page .catalog-wrap{margin:0 0 2em}
+.model-links a{font-weight:600}

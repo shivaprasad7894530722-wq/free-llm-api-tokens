@@ -11,3 +11,9 @@
 
 /schema.json
   X-Content-Usage: Personal and research use only; no bulk commercial reuse without permission. See https://freellmapi.link/terms
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+
+/changes.json
+  X-Content-Usage: Personal and research use only; no bulk commercial reuse without permission. See https://freellmapi.link/terms
