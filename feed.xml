@@ -6,12 +6,12 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 13 Nov 2026 13:38:20 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2026 22:05:19 +0000</lastBuildDate>
     <item>
       <title>13 Nov 2026: 9 providers added, 3 updated</title>
       <link>https://freellmapi.link/new#2026-11-13</link>
       <guid isPermaLink="true">https://freellmapi.link/new#2026-11-13</guid>
-      <pubDate>Fri, 13 Nov 2026 13:38:20 +0000</pubDate>
+      <pubDate>Fri, 13 Nov 2026 22:05:19 +0000</pubDate>
       <description>&lt;p&gt;Changes recorded on 13 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Vectoree.&lt;/li&gt;&lt;li&gt;Added GonkaRouter.&lt;/li&gt;&lt;li&gt;Added Speka.&lt;/li&gt;&lt;li&gt;Added Braintrust.&lt;/li&gt;&lt;li&gt;Added Liquid AI.&lt;/li&gt;&lt;li&gt;Added Together AI.&lt;/li&gt;&lt;li&gt;Added Novita AI.&lt;/li&gt;&lt;li&gt;Added NLP Cloud.&lt;/li&gt;&lt;li&gt;Added IBM watsonx.ai.&lt;/li&gt;&lt;li&gt;Updated Gemini API (Google AI Studio): training-data policy.&lt;/li&gt;&lt;li&gt;Updated SenseNova Token Plan: phone requirement.&lt;/li&gt;&lt;li&gt;Updated Hyperbolic: offer type and phone requirement.&lt;/li&gt;&lt;li&gt;Updated offer type across 22 existing providers.&lt;/li&gt;&lt;li&gt;Added optional free_type, phone_required and data_training fields, plus filters, a public JSON schema, and copy-paste starter snippets.&lt;/li&gt;&lt;/ul&gt;</description>
     </item>
     <item>
