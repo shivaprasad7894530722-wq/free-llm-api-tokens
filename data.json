@@ -1,7 +1,14 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-11-12T08:59:49+05:30",
+  "last_updated": "2026-11-13T08:57:22+05:30",
   "changelog": [
+    {
+      "date": "2026-11-13",
+      "items": [
+        "Added Vectoree.",
+        "Added GonkaRouter."
+      ]
+    },
     {
       "date": "2026-11-12",
       "items": [
@@ -2012,6 +2019,38 @@
       "category": "gateway",
       "first_reported": "2026-11-12",
       "last_updated": "2026-11-12"
+    },
+    {
+      "id": "vectoree",
+      "name": "Vectoree",
+      "url": "https://vectoree.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://vectoree.ai/api/v1",
+      "free_allowance": "$5 one-time welcome credit after CLI login and project link; then pay-as-you-go wallet",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Agent backend with OpenAI-compatible Model Gateway (36+ models, vectoree/auto). Credit is one-time, not daily; empty wallet stops the gateway.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "gonkarouter",
+      "name": "GonkaRouter",
+      "url": "https://gonkarouter.io/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://api.gonkarouter.io/v1",
+      "free_allowance": "1M free tokens one-time for new accounts (email or Google sign-in)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Router on the Gonka network; GLM-5.3-Flash, DeepSeek-V4-Flash, MiniMax-M2.7. Also Anthropic-compatible. One-time grant, not daily. Blog mentions a $20 credit campaign that the pricing page does not confirm.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13"
     }
   ]
 }

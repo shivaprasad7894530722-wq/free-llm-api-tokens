@@ -1,9 +1,9 @@
 # Free LLM API Tokens Tracker — full provider list
 
-Snapshot: 12 Nov 2026, 08:59 IST
+Snapshot: 13 Nov 2026, 08:57 IST
 Canonical: https://freellmapi.link/
 Source: https://freellmapi.link/data.json
-Counts: 112 listed, 108 active, 33 official (active), 102 OpenAI compatible (active).
+Counts: 114 listed, 110 active, 33 official (active), 104 OpenAI compatible (active).
 “Not published” means the provider did not publish that figure. Do not invent a number.
 
 - 1vy | active | category=gateway | openai_compatible=Yes | allowance=$1 free credit on signup, 100+ models on one key (15% markup after) | tokens_per_day=Not published | limits=Not published | card=Not published | base_url=https://api.1vy.ai/v1 | relay_risk=yes | url=https://1vy.ai/ | entry_updated=2026-11-11
@@ -46,6 +46,7 @@ Counts: 112 listed, 108 active, 33 official (active), 102 OpenAI compatible (act
 - Frenix | active | category=gateway | openai_compatible=Yes | allowance=500 requests/day | tokens_per_day=Not published | limits=500 requests/day | card=Not published | base_url=https://api.frenix.sh/v1 | relay_risk=yes | url=https://frenix.sh/ | entry_updated=2026-10-22
 - Gemini API (Google AI Studio) | active | category=official | openai_compatible=Yes | allowance=Free tier on selected Gemini models | tokens_per_day=Not published | limits=Per-model RPM/RPD on Google's rate-limit page | card=No | base_url=https://generativelanguage.googleapis.com/v1beta/openai/ | relay_risk=no | url=https://ai.google.dev/gemini-api/docs/pricing | entry_updated=2026-10-03
 - Gonka Broker | active | category=gateway | openai_compatible=Yes | allowance=≥1M tokens/month on any catalogue model | tokens_per_day=Not published | limits=Not published | card=Not published | base_url=https://proxy.gonkabroker.com/v1 | relay_risk=yes | url=https://gonkabroker.com/ | entry_updated=2026-10-09
+- GonkaRouter | active | category=gateway | openai_compatible=Yes | allowance=1M free tokens one-time for new accounts (email or Google sign-in) | tokens_per_day=Not published | limits=Not published | card=No | base_url=https://api.gonkarouter.io/v1 | relay_risk=yes | url=https://gonkarouter.io/pricing | entry_updated=2026-11-13
 - Google Cloud Vertex AI express mode | active | category=official | openai_compatible=No | allowance=90-day free use of Gemini models | tokens_per_day=Not published | limits=Not published | card=No | base_url=Not published | relay_risk=no | url=https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview | entry_updated=2026-10-03
 - Groq | active | category=official | openai_compatible=Yes | allowance=200,000 tokens/day on listed models | tokens_per_day=200,000 | limits=1,000 requests/day on listed models | card=No | base_url=https://api.groq.com/openai/v1 | relay_risk=no | url=https://console.groq.com/docs/rate-limits | entry_updated=2026-10-03
 - GW BUS | active | category=gateway | openai_compatible=Yes | allowance=$5 signup credit + 1M tokens/day on Free plan | tokens_per_day=1,000,000 | limits=Not published | card=Not published | base_url=https://api.gwbus.com/v1 | relay_risk=yes | url=https://gwbus.com/ | entry_updated=2026-10-23
@@ -109,6 +110,7 @@ Counts: 112 listed, 108 active, 33 official (active), 102 OpenAI compatible (act
 - TrustedRouter | active | category=gateway | openai_compatible=Yes | allowance=1M free tokens to start (one-time) | tokens_per_day=Not published | limits=Not published | card=No | base_url=https://api.trustedrouter.com/v1 | relay_risk=no | url=https://trustedrouter.com/ | entry_updated=2026-10-13
 - Typhoon API (OpenTyphoon) | active | category=official | openai_compatible=Yes | allowance=Free tier on Typhoon models (light usage) | tokens_per_day=Not published | limits=5 req/s, 200 req/min per model | card=No | base_url=https://api.opentyphoon.ai/v1 | relay_risk=no | url=https://docs.opentyphoon.ai/en/ | entry_updated=2026-10-29
 - UnoRouter | active | category=gateway | openai_compatible=Yes | allowance=105 :free models | tokens_per_day=Not published | limits=1 request/min per free model | card=No | base_url=https://api.unorouter.com/v1 | relay_risk=yes | url=https://unorouter.com/ | entry_updated=2026-10-06
+- Vectoree | active | category=gateway | openai_compatible=Yes | allowance=$5 one-time welcome credit after CLI login and project link; then pay-as-you-go wallet | tokens_per_day=Not published | limits=Not published | card=No | base_url=https://vectoree.ai/api/v1 | relay_risk=yes | url=https://vectoree.ai/pricing | entry_updated=2026-11-13
 - Vercel AI Gateway | active | category=gateway | openai_compatible=Yes | allowance=Free credit (amount not confirmed) | tokens_per_day=Not published | limits=Not published | card=Not published | base_url=https://ai-gateway.vercel.sh/v1 | relay_risk=no | url=https://vercel.com/ai-gateway | entry_updated=2026-10-15
 - Vikasit AI | active | category=gateway | openai_compatible=Yes | allowance=2M tokens/day on vikasit-nova | tokens_per_day=2,000,000 | limits=Not published | card=Not published | base_url=https://api.vikasit.ai/v1 | relay_risk=no | url=https://vikasit.ai/ | entry_updated=2026-10-16
 - Vireonix | active | category=gateway | openai_compatible=Yes | allowance=No key needed; hourly fair use | tokens_per_day=Not published | limits=Hourly fair-use cap | card=No | base_url=https://vireonix.ai/v1 | relay_risk=yes | url=https://vireonix.ai/ | entry_updated=2026-10-09

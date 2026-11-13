@@ -4,11 +4,11 @@
 
 Canonical site: https://freellmapi.link/
 Contact: hello@lumiono.com
-Last tracker snapshot: 12 Nov 2026, 08:59 IST
+Last tracker snapshot: 13 Nov 2026, 08:57 IST
 
 ## Pages
 
-- [Provider list](https://freellmapi.link/): Searchable catalogue of 112 providers (108 active offers in the current snapshot).
+- [Provider list](https://freellmapi.link/): Searchable catalogue of 114 providers (110 active offers in the current snapshot).
 - [Guides](https://freellmapi.link/guides/): Original explainers on using free LLM APIs.
 - [About](https://freellmapi.link/about): How the list is compiled.
 - [Privacy](https://freellmapi.link/privacy): Privacy policy, cookies, Analytics and ads.
