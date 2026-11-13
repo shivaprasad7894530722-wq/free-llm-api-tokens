@@ -4,7 +4,7 @@ title: Terms and disclaimer
 lede: This list is a public reference, not a promise that any free tier will stay the same or suit your work.
 description: Terms of use and disclaimer for Free LLM API Tokens Tracker, including accuracy limits, acceptable use and third-party APIs.
 date_published: 2026-11-12
-date_modified: 2026-11-12
+date_modified: 2026-11-13
 ---
 
 ## Acceptance
@@ -35,14 +35,18 @@ Unofficial relays and gateways may forward your prompts to other services. Do no
 
 ## Acceptable use of this site
 
-You may browse the pages, use the public [data.json](/data.json) file, and link to the site. You may not:
+You may browse the pages, consult the public [data.json](/data.json) file as described below, and link to the site. You may not:
 
 - Attempt to break, overload or probe the site in a way that harms other users or the host
 - Misrepresent the site as an official status page for any provider
 - Invent quotas or endpoints and attribute them to this site
 - Use the site to distribute malware or to collect keys or personal data from other people
 
-Automated access that stays within reasonable request rates and respects [robots.txt](/robots.txt) is allowed. The data file is the preferred machine-readable source.
+Automated access that stays within reasonable request rates and respects [robots.txt](/robots.txt) is allowed for search engines and AI search crawlers. High-volume scraping that overloads the site is not allowed.
+
+## Data use
+
+The catalogue and the public [data.json](/data.json) file may be viewed for personal or research use. You may not copy the list in bulk, republish the dataset, or reuse it commercially — including to build a competing product — without prior written permission. Search engines and AI search crawlers that respect [robots.txt](/robots.txt) may index the public pages. For permission, email [{{email}}](mailto:{{email}}).
 
 ## Advertising and affiliate links
 

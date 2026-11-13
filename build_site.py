@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate static pages, sitemap, robots.txt, ads.txt, llms.txt, og.png and the IndexNow key file.
+"""Generate static pages, sitemap, robots.txt, _headers, ads.txt, llms.txt, og.png and the IndexNow key file.
 
 Run from the repo root (or any cwd; paths are relative to this file):
 
@@ -44,6 +44,38 @@ OG_IMAGE_PATH = "/og.png"
 OG_IMAGE_URL = SITE + OG_IMAGE_PATH
 OG_IMAGE_WIDTH = 1200
 OG_IMAGE_HEIGHT = 630
+
+# Applied via Cloudflare Pages `_headers` and also by the `_worker.js` deploy
+# path in build_cf_deploy.py (that worker is what currently serves the site).
+CSP = (
+    "default-src 'self'; "
+    "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; "
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    "font-src 'self' https://fonts.gstatic.com; "
+    "img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com https://*.google-analytics.com; "
+    "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com; "
+    "frame-ancestors 'none'; "
+    "base-uri 'self'; "
+    "form-action 'self'; "
+    "object-src 'none'; "
+    "upgrade-insecure-requests"
+)
+DATA_USE_HEADER = (
+    "Personal and research use only; no bulk commercial reuse without permission. "
+    "See https://freellmapi.link/terms"
+)
+HEADERS_FILE = f"""/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Content-Security-Policy: {CSP}
+
+/data.json
+  X-Content-Usage: {DATA_USE_HEADER}
+"""
+
 
 NAV = [
     ("/", "Tracker"),
@@ -1165,11 +1197,23 @@ def build():
     if write(HERE / "404.html", notfound):
         changed += 1
 
-    # robots.txt
+    # robots.txt — keep search and AI-search crawlers fully allowed.
     robots = """User-agent: *
 Allow: /
 
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
 User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: ClaudeBot
@@ -1181,11 +1225,19 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
+User-agent: Applebot
+Allow: /
+
 Sitemap: https://freellmapi.link/sitemap.xml
 """
     if write(HERE / "robots.txt", robots):
         changed += 1
     routes.append(("/robots.txt", data["last_updated"][:10], "yearly", "0.1"))
+
+    # Cloudflare Pages _headers (used by wrangler pages deploy). The MCP
+    # `_worker.js` path applies the same headers in build_cf_deploy.py.
+    if write(HERE / "_headers", HEADERS_FILE):
+        changed += 1
 
     # Open Graph share image (1200x630) and IndexNow key file.
     if write_bytes(HERE / "og.png", make_og_png()):
