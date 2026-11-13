@@ -23,7 +23,7 @@ Figures are copied from each provider’s public pages on the date shown. Free t
 
 If a field is marked **Not published**, we do not have a public figure. You agree not to treat a missing number as zero, unlimited, or as a figure taken from somewhere else on the internet.
 
-The site may contain mistakes or delays. We may correct, update or remove entries at any time. The list is usually reviewed on weekdays, but we do not warrant that it is complete or current at the moment you read it. The last tracker snapshot was {{list_updated}}.
+The site may contain mistakes or delays. We may correct, update or remove entries at any time. The list is usually reviewed daily, but we do not warrant that it is complete or current at the moment you read it. The last tracker snapshot was {{list_updated}}.
 
 ## Third-party APIs and keys
 

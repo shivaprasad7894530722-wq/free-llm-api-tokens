@@ -26,6 +26,6 @@ This page does not include a contact form. A form would be a tempting place to p
 
 ## How fast will I get a reply?
 
-There is no published service-level agreement. Weekday messages about an incorrect public figure are the priority, because the list is also reviewed on weekdays.
+There is no published service-level agreement. Messages about an incorrect public figure are the priority, because the list is also reviewed daily.
 
 For provider outages, billing or account access, write to the provider. This site does not operate any of the APIs in the list and cannot reset a key or restore a quota.

@@ -51,7 +51,7 @@ If you compare Groq with other official rows that also publish a daily token fig
 
 ## How do I check that our row is still right?
 
-Open the official rate-limit or docs link stored on the card, and compare the allowance, the request cap, the card requirement and the base URL. If they differ, trust the official page and [send us the public link](/contact). We update the list on weekdays; this entry was first listed on {{first_reported}} and last changed on {{entry_updated}}.
+Open the official rate-limit or docs link stored on the card, and compare the allowance, the request cap, the card requirement and the base URL. If they differ, trust the official page and [send us the public link](/contact). We update the list daily; this entry was first listed on {{first_reported}} and last changed on {{entry_updated}}.
 
 Related official snapshots on this site include [Gemini](/guides/gemini-api) and [Cerebras](/guides/cerebras-api). Those pages follow the same rule: only data.json fields and official URLs, with placeholders that stay in sync when the list changes.
 

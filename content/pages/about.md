@@ -1,7 +1,7 @@
 ---
 slug: about
 title: About this tracker
-lede: A weekday-updated list of sites that give free LLM API tokens, with the figures each provider actually publishes.
+lede: A daily-updated list of sites that give free LLM API tokens, with the figures each provider actually publishes.
 description: How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published.
 date_published: 2026-11-12
 date_modified: 2026-11-12
@@ -23,9 +23,9 @@ Some sites are official model makers or clouds. Others are gateways or resellers
 
 ## How often is the list updated?
 
-The list is reviewed on weekdays. The “last checked” time on the home page is stored with an India Standard Time offset (Asia/Calcutta) and was {{list_updated}} at the last snapshot. An entry also has its own “updated” date, which changes only when that row changes.
+The list is reviewed daily. The “last checked” time on the home page is stored with an India Standard Time offset (Asia/Calcutta) and was {{list_updated}} at the last snapshot. An entry also has its own “updated” date, which changes only when that row changes.
 
-A [weekday changelog](/) on the home page records additions and corrections. Guides that include live tables, such as [Best free LLM APIs (current)](/guides/best-free-llm-apis), are regenerated from the same data file whenever the list is updated.
+A [daily changelog](/) on the home page records additions and corrections. Guides that include live tables, such as [Best free LLM APIs (current)](/guides/best-free-llm-apis), are regenerated from the same data file whenever the list is updated.
 
 ## What does “OpenAI compatible” mean here?
 

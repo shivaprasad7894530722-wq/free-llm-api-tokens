@@ -53,7 +53,7 @@ If you are choosing among official compatible APIs, compare this Neuron-based al
 
 ## How do I report a change?
 
-If Cloudflare’s official pricing page no longer matches the fact box, [send the public URL](/contact). We review the list on weekdays and will not update a Neuron figure from a forum post or from a conversion formula.
+If Cloudflare’s official pricing page no longer matches the fact box, [send the public URL](/contact). We review the list daily and will not update a Neuron figure from a forum post or from a conversion formula.
 
 
 ## How is this different from other Cloudflare products on a free plan?

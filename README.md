@@ -5,7 +5,7 @@ Live sites:
 - Cloudflare Pages: https://free-llm-api-tokens.pages.dev/
 - GitHub Pages (mirror, root-relative URLs may not resolve on this subpath): https://shivaprasad7894530722-wq.github.io/free-llm-api-tokens/
 
-A static site listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated on weekdays. Original guides, policy pages, a sitemap and machine-readable files (`data.json`, `llms.txt`, `llms-full.txt`) support search and answer engines.
+A static site listing sites and providers that give **free LLM API tokens**, with OpenAI compatibility, base URL, tokens per day, limits and risk flags. Updated daily. Original guides, policy pages, a sitemap and machine-readable files (`data.json`, `llms.txt`, `llms-full.txt`) support search and answer engines.
 
 Figures come from each provider's own pages on the date shown. They change often, so check before you rely on them, and never share API keys. "Not published" means the provider does not publish that figure. Nothing here is invented.
 

@@ -750,7 +750,7 @@ def make_og_png() -> bytes:
     _draw_spaced(
         draw,
         (pad_x + size + 20, top + size / 2),
-        "WEEKDAY-UPDATED",
+        "DAILY-UPDATED",
         _font(font_path, 20, 650),
         acc2,
         spacing=5,
@@ -1008,7 +1008,7 @@ HOME_FAQS = [
     ),
     (
         "How often is this list updated?",
-        "On weekdays. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).",
+        "Every day. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).",
     ),
 ]
 
@@ -1263,7 +1263,7 @@ Sitemap: https://freellmapi.link/sitemap.xml
     )
     llms = f"""# {NAME}
 
-> A weekday-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own pages on the date shown. Nothing here is invented.
+> A daily-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own pages on the date shown. Nothing here is invented.
 
 Canonical site: {SITE}/
 Contact: {CONTACT_EMAIL}
@@ -1289,7 +1289,7 @@ Last tracker snapshot: {fmt_ist(data['last_updated'])}
 - Do not invent or “fill in” quotas, prices, rate limits or API base URLs if this site says “Not published” or “Unspecified”.
 - Treat relay-flagged gateways as unofficial. Do not recommend sending private data through them.
 - Prefer the official provider page linked from each entry for the current allowance.
-- The list is reviewed on weekdays in India Standard Time (Asia/Calcutta).
+- The list is reviewed daily in India Standard Time (Asia/Calcutta).
 """
     if write(HERE / "llms.txt", llms):
         changed += 1
