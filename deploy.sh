@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 python3 -m json.tool data.json > /dev/null
 python3 build_site.py
 git add -A
-git diff --cached --quiet || git commit -q -m "Daily update $(TZ=Asia/Kolkata date +%F)"
+git diff --cached --quiet || git commit -q -m "Daily update $(TZ=UTC date +%F)"
 git push -q origin main
 python3 build_cf_deploy.py /workspace/cf_deploy_payload.js
 if [[ -n "${CLOUDFLARE_API_TOKEN:-}" ]]; then

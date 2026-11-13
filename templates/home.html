@@ -6,7 +6,7 @@
     <p class="page-updated" id="home-updated">Last updated <!-- HOME_LAST_UPDATED -->.</p>
     <div class="stats">
       <div class="stat"><b id="statCount"><!-- HOME_COUNT --></b><span>providers listed</span></div>
-      <div class="stat"><b id="updated"><!-- HOME_LAST_CHECKED --></b><span>last checked (IST)</span></div>
+      <div class="stat"><b id="updated"><!-- HOME_LAST_CHECKED --></b><span>last checked (UTC)</span></div>
     </div>
     <p class="note">Figures come from each provider’s own pages on the date shown, and they change often. Check before you rely on them. Never share your API keys.</p>
   </section>
@@ -137,7 +137,7 @@ const client = new OpenAI({
     </details>
     <details>
       <summary>How often is this list updated?</summary>
-      <p>Every day. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).</p>
+      <p>Every day. The “last checked” time at the top is when the list was last reviewed, shown in UTC.</p>
     </details>
   </section>
 </main>
@@ -152,9 +152,9 @@ const fmtDate = d => {
 };
 const fmtNum = n => n >= 1e6 ? (n / 1e6).toFixed(n % 1e6 ? 1 : 0) + "M" : n >= 1e3 ? (n / 1e3).toFixed(n % 1e3 ? 1 : 0) + "K" : String(n);
 const published = v => (v == null || v === "" || String(v).toLowerCase() === "unspecified") ? "Not published" : String(v);
-const istStamp = iso => {
+const utcStamp = iso => {
   const d = new Date(iso);
-  return d.toLocaleString("en-GB", {timeZone:"Asia/Kolkata", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit"}) + " IST";
+  return d.toLocaleString("en-GB", {timeZone:"UTC", day:"numeric", month:"short", year:"numeric", hour:"2-digit", minute:"2-digit", hour12:false}) + " UTC";
 };
 const isDropped = s => {
   const a = (s.free_allowance || "").trim();
@@ -294,7 +294,7 @@ fetch("/data.json", {cache:"no-store"}).then(r => {
 }).then(d => {
   DATA = d;
   document.getElementById("statCount").textContent = String(d.sites.length);
-  document.getElementById("updated").textContent = istStamp(d.last_updated);
+  document.getElementById("updated").textContent = utcStamp(d.last_updated);
   ["q","oai","nocard","nophone","ongoing","trial","norisk","hastpd","showdropped","sort"].forEach(id =>
     document.getElementById(id).addEventListener("input", render)
   );

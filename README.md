@@ -44,7 +44,7 @@ The contact address on the site is `hello@lumiono.com`. There is no form that co
 ```jsonc
 {
   "schema_version": 1,
-  "last_updated": "2026-10-26T09:45:00+05:30",   // ISO 8601 with the +05:30 offset; shown on the site as IST
+  "last_updated": "2026-10-26T04:15:00Z",   // ISO 8601 timestamp in UTC; shown on the site as UTC
   "changelog": [                                  // newest first
     { "date": "2026-10-26", "items": ["Added Flexlora.", "NaraRouter free models cut from 5 to 3."] }
   ],
@@ -62,8 +62,8 @@ The contact address on the site is `hello@lumiono.com`. There is no form that co
       "notes": "Looks like a NaraRouter rebrand.",
       "relay_risk": true,               // true = unofficial reseller/relay or unknown operator
       "category": "gateway",            // "official" (model maker/cloud) | "gateway"
-      "first_reported": "2026-10-26",   // YYYY-MM-DD (IST)
-      "last_updated": "2026-10-26"      // YYYY-MM-DD (IST) of the last change to this entry
+      "first_reported": "2026-10-26",   // YYYY-MM-DD (UTC date)
+      "last_updated": "2026-10-26"      // YYYY-MM-DD (UTC date) of the last change to this entry
     }
   ]
 }

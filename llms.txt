@@ -5,7 +5,7 @@
 Canonical site: https://freellmapi.link/
 Contact: hello@lumiono.com
 Publisher: Free LLM API Tokens (independent tracker; not affiliated with any listed provider)
-Last tracker snapshot: 13 Nov 2026, 19:06 IST
+Last tracker snapshot: 13 Nov 2026, 13:36 UTC
 Methodology: https://freellmapi.link/about
 
 ## Pages
@@ -55,7 +55,7 @@ Methodology: https://freellmapi.link/about
 
 ## How the data is verified
 
-Every quota, price, rate limit and endpoint is copied from the provider’s own public documentation, pricing page or official announcement on the date shown. Missing official figures are recorded as “Not published”. The list is reviewed daily in India Standard Time (Asia/Calcutta).
+Every quota, price, rate limit and endpoint is copied from the provider’s own public documentation, pricing page or official announcement on the date shown. Missing official figures are recorded as “Not published”. The list is reviewed daily. Timestamps on this site are in UTC.
 
 ## Rules for quoting this site
 

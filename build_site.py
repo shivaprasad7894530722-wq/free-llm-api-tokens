@@ -33,7 +33,7 @@ SITE = "https://freellmapi.link"
 NAME = "Free LLM API Tokens Tracker"
 SHORT = "Free LLM API Tokens"
 CONTACT_EMAIL = "hello@lumiono.com"
-IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
+UTC = dt.timezone.utc
 
 # Google Analytics 4 is live on every generated page.
 GA4_ID = "G-60M3MTCPVQ"
@@ -140,14 +140,14 @@ def fmt_date(d: str) -> str:
     return dt.date(int(y), int(m), int(dd)).strftime("%-d %b %Y")
 
 
-def fmt_ist(iso: str) -> str:
+def fmt_utc(iso: str) -> str:
     try:
         d = dt.datetime.fromisoformat(iso)
     except Exception:
         return iso
     if d.tzinfo is None:
-        d = d.replace(tzinfo=IST)
-    return d.astimezone(IST).strftime("%-d %b %Y, %H:%M") + " IST"
+        d = d.replace(tzinfo=UTC)
+    return d.astimezone(UTC).strftime("%-d %b %Y, %H:%M") + " UTC"
 
 
 def fmt_num(n) -> str:
@@ -446,7 +446,7 @@ def write_schema_json() -> str:
         "properties": {
             "schema_version": {"type": "integer", "minimum": 1},
             "data_use": {"type": "string"},
-            "last_updated": {"type": "string", "description": "ISO-8601 timestamp in Asia/Calcutta (IST)."},
+            "last_updated": {"type": "string", "description": "ISO-8601 timestamp in UTC."},
             "changelog": {
                 "type": "array",
                 "items": {
@@ -610,7 +610,7 @@ def provider_placeholders(s: dict, data: dict) -> dict:
         "relay": "yes" if s.get("relay_risk") else "no",
         "first_reported": fmt_date(s.get("first_reported")),
         "entry_updated": fmt_date(s.get("last_updated")),
-        "list_updated": fmt_ist(data["last_updated"]),
+        "list_updated": fmt_utc(data["last_updated"]),
         "FACTBOX": factbox(s),
         "SNIPPETS": snippets_for(s),
     }
@@ -687,7 +687,7 @@ def generated_tables(data: dict) -> dict:
     ]
 
     stats = (
-        f"<p>As of {esc(fmt_ist(data['last_updated']))} this tracker lists "
+        f"<p>As of {esc(fmt_utc(data['last_updated']))} this tracker lists "
         f"<strong>{len(data['sites'])}</strong> providers: <strong>{len(active)}</strong> with an "
         f"active free offer in our data, and <strong>{len(dropped)}</strong> ended offers. "
         f"Of the active list, <strong>{len(official)}</strong> are marked official, "
@@ -702,7 +702,7 @@ def generated_tables(data: dict) -> dict:
         "TABLE_OFFICIAL": table_rows(sorted(official, key=lambda s: s["name"].lower()), cols_official),
         "TABLE_NO_CARD_OAI": table_rows(sorted(nocard_oai, key=lambda s: s["name"].lower()), cols_full),
         "TABLE_ENDED": table_rows(dropped, cols_full) if dropped else "<p>No ended offers are currently recorded.</p>",
-        "list_updated": fmt_ist(data["last_updated"]),
+        "list_updated": fmt_utc(data["last_updated"]),
         "site_count": str(len(data["sites"])),
         "active_count": str(len(active)),
         "official_count": str(len(official)),
@@ -1071,7 +1071,7 @@ def article_page(meta, body_html, data, crumbs, path, extra_ld=None):
     header = crumbs_html(crumbs) + f"<h1 class=\"page-title\">{esc(meta['title'])}</h1>"
     if meta.get("lede"):
         header += f"<p class=\"page-lede\">{esc(meta['lede'])}</p>"
-    header += f'<p class="page-updated">Last updated {esc(fmt_date(updated[:10]) if len(updated)>=10 else updated)}. The provider figures on this page follow the tracker snapshot of {esc(fmt_ist(data["last_updated"]))}.</p>'
+    header += f'<p class="page-updated">Last updated {esc(fmt_date(updated[:10]) if len(updated)>=10 else updated)}. The provider figures on this page follow the tracker snapshot of {esc(fmt_utc(data["last_updated"]))}.</p>'
     related = meta.get("related") or ""
     related_html = ""
     if related:
@@ -1206,7 +1206,7 @@ HOME_FAQS = [
     ),
     (
         "How often is this list updated?",
-        "Every day. The “last checked” time at the top is when the list was last reviewed, shown in India Standard Time (Asia/Calcutta).",
+        "Every day. The “last checked” time at the top is when the list was last reviewed, shown in UTC.",
     ),
 ]
 
@@ -1428,7 +1428,7 @@ def provider_table_html(data) -> str:
         )
     cap = (
         f"Free and free-tier LLM API providers, snapshot "
-        f"{esc(fmt_ist(data['last_updated']))}."
+        f"{esc(fmt_utc(data['last_updated']))}."
     )
     return (
         '<div class="catalog-wrap"><table class="catalog">'
@@ -1540,7 +1540,7 @@ def apply_home_placeholders(home: str, data: dict) -> str:
     replacements = {
         "<!-- HOME_COUNT -->": str(len(data["sites"])),
         "<!-- HOME_LAST_UPDATED -->": fmt_date(data["last_updated"][:10]),
-        "<!-- HOME_LAST_CHECKED -->": fmt_ist(data["last_updated"]),
+        "<!-- HOME_LAST_CHECKED -->": fmt_utc(data["last_updated"]),
         "<!-- PROVIDER_CARDS -->": provider_cards_html(active),
         "<!-- PROVIDER_TABLE -->": provider_table_html(data),
         "<!-- CHANGELOG -->": changelog_html(data),
@@ -1564,11 +1564,11 @@ def whats_new_content(data: dict) -> str:
     if source == "git" and days:
         lede += (
             f'<p class="page-updated">Last updated {esc(fmt_date(days[0]["date"]))}. '
-            f'The tracker snapshot on this page is {esc(fmt_ist(data["last_updated"]))}.</p>'
+            f'The tracker snapshot on this page is {esc(fmt_utc(data["last_updated"]))}.</p>'
         )
     else:
         lede += (
-            f'<p class="page-updated">The tracker snapshot on this page is {esc(fmt_ist(data["last_updated"]))}.</p>'
+            f'<p class="page-updated">The tracker snapshot on this page is {esc(fmt_utc(data["last_updated"]))}.</p>'
         )
     blocks = [
         crumbs_html([("/", "Home"), ("/new", "What’s new")]),
@@ -1624,7 +1624,7 @@ def feed_xml(data: dict) -> str:
     else:
         latest = dt.datetime.fromisoformat(data["last_updated"])
         if latest.tzinfo is None:
-            latest = latest.replace(tzinfo=IST)
+            latest = latest.replace(tzinfo=UTC)
     items = []
     for day in days:
         title_bits = []
@@ -1673,8 +1673,8 @@ def feed_xml(data: dict) -> str:
 def _parse_iso(iso: str) -> dt.datetime:
     d = dt.datetime.fromisoformat(iso)
     if d.tzinfo is None:
-        d = d.replace(tzinfo=IST)
-    return d.astimezone(IST)
+        d = d.replace(tzinfo=UTC)
+    return d.astimezone(UTC)
 
 
 def model_family_faqs(fam: dict, data: dict) -> list[tuple[str, str]]:
@@ -1691,7 +1691,7 @@ def model_family_faqs(fam: dict, data: dict) -> list[tuple[str, str]]:
     ]
     a1 = (
         f"{len(providers)} provider{'s' if len(providers) != 1 else ''} in our "
-        f"{fmt_ist(data['last_updated'])} snapshot name a {name} model: {names}. "
+        f"{fmt_utc(data['last_updated'])} snapshot name a {name} model: {names}. "
         "We only list a provider here when that name already appears in our data. "
         "Catalogues change, so confirm on the official page before you rely on an entry."
     )
@@ -1846,7 +1846,7 @@ def model_page_content(fam: dict, data: dict) -> str:
         )
         + (
             f'<p class="page-updated">Last updated {esc(fmt_date(data["last_updated"][:10]))}. '
-            f'Tracker snapshot: {esc(fmt_ist(data["last_updated"]))}.</p>'
+            f'Tracker snapshot: {esc(fmt_utc(data["last_updated"]))}.</p>'
         )
     )
     faqs = model_family_faqs(fam, data)
@@ -1911,7 +1911,7 @@ def models_index_content(data: dict) -> str:
         )
         + (
             f'<p class="page-updated">Last updated {esc(fmt_date(data["last_updated"][:10]))}. '
-            f'Tracker snapshot: {esc(fmt_ist(data["last_updated"]))}.</p>'
+            f'Tracker snapshot: {esc(fmt_utc(data["last_updated"]))}.</p>'
         )
     )
     return (
@@ -2078,7 +2078,7 @@ def build():
         crumbs_html([("/", "Home"), ("/guides/", "Guides")])
         + '<h1 class="page-title">Guides</h1>'
         + '<p class="page-lede">Practical, original explainers on free LLM APIs. Quotas, prices and endpoints are taken from our provider list or official docs — we do not invent them.</p>'
-        + f'<p class="page-updated">Provider figures follow the tracker snapshot of {esc(fmt_ist(data["last_updated"]))}.</p>'
+        + f'<p class="page-updated">Provider figures follow the tracker snapshot of {esc(fmt_utc(data["last_updated"]))}.</p>'
         + guide_index_cards(guides_sorted)
     )
     gidx = render_page(
@@ -2104,7 +2104,7 @@ def build():
     # Policy / info pages
     for p in sorted((HERE / "content" / "pages").glob("*.md")):
         meta, body = parse_frontmatter(p.read_text(encoding="utf-8"))
-        body = fill(body, {"list_updated": fmt_ist(data["last_updated"]), "email": CONTACT_EMAIL, "site": SITE})
+        body = fill(body, {"list_updated": fmt_utc(data["last_updated"]), "email": CONTACT_EMAIL, "site": SITE})
         body_html = md_to_html(body.strip())
         path = "/" + meta["slug"]
         crumbs = [("/", "Home"), (path, meta["title"])]
@@ -2378,7 +2378,7 @@ Sitemap: https://freellmapi.link/sitemap.xml
 Canonical site: {SITE}/
 Contact: {CONTACT_EMAIL}
 Publisher: {SHORT} (independent tracker; not affiliated with any listed provider)
-Last tracker snapshot: {fmt_ist(data['last_updated'])}
+Last tracker snapshot: {fmt_utc(data['last_updated'])}
 Methodology: https://freellmapi.link/about
 
 ## Pages
@@ -2407,7 +2407,7 @@ Methodology: https://freellmapi.link/about
 
 ## How the data is verified
 
-Every quota, price, rate limit and endpoint is copied from the provider’s own public documentation, pricing page or official announcement on the date shown. Missing official figures are recorded as “Not published”. The list is reviewed daily in India Standard Time (Asia/Calcutta).
+Every quota, price, rate limit and endpoint is copied from the provider’s own public documentation, pricing page or official announcement on the date shown. Missing official figures are recorded as “Not published”. The list is reviewed daily. Timestamps on this site are in UTC.
 
 ## Rules for quoting this site
 
@@ -2434,7 +2434,7 @@ Every quota, price, rate limit and endpoint is copied from the provider’s own 
         )
     llms_full = (
         f"# {NAME} — full provider list\n\n"
-        f"Snapshot: {fmt_ist(data['last_updated'])}\n"
+        f"Snapshot: {fmt_utc(data['last_updated'])}\n"
         f"Canonical: {SITE}/\n"
         f"Source: {SITE}/data.json\n"
         f"Counts: {len(data['sites'])} listed, {tables['active_count']} active, {tables['official_count']} official (active), {tables['oai_count']} OpenAI compatible (active).\n"

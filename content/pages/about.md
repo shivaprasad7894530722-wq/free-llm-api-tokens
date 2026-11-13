@@ -25,7 +25,7 @@ Some sites are official model makers or clouds. Others are gateways or resellers
 
 ## How often is the list updated?
 
-The list is reviewed daily. The “last checked” time on the home page is stored with an India Standard Time offset (Asia/Calcutta) and was {{list_updated}} at the last snapshot. An entry also has its own “updated” date, which changes only when that row changes.
+The list is reviewed daily. The “last checked” time on the home page is stored in UTC and was {{list_updated}} at the last snapshot. An entry also has its own “updated” date, which changes only when that row changes.
 
 A [daily changelog](/) on the home page records additions and corrections. Guides that include live tables, such as [Best free LLM APIs (current)](/guides/best-free-llm-apis), are regenerated from the same data file whenever the list is updated.
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """What's-new changelog and per-model SEO pages, used by build_site.py.
 
-The changelog is computed from git history of data.json (IST commit dates).
+The changelog is computed from git history of data.json (UTC dates).
 A copy is written to changes.json so later builds stay fresh even if git is
 missing. Dates and entries are never invented.
 
@@ -19,7 +19,7 @@ from collections import defaultdict
 from email.utils import format_datetime
 from pathlib import Path
 
-IST = dt.timezone(dt.timedelta(hours=5, minutes=30))
+UTC = dt.timezone.utc
 
 COMPARE_FIELDS = (
     "name",
@@ -149,18 +149,18 @@ def _load_data_at(repo: Path, sha: str) -> dict | None:
         return None
 
 
-def _ist_date(iso: str) -> str:
+def _utc_date(iso: str) -> str:
     d = dt.datetime.fromisoformat(iso)
     if d.tzinfo is None:
-        d = d.replace(tzinfo=IST)
-    return d.astimezone(IST).date().isoformat()
+        d = d.replace(tzinfo=UTC)
+    return d.astimezone(UTC).date().isoformat()
 
 
-def _ist_dt(iso: str) -> dt.datetime:
+def _utc_dt(iso: str) -> dt.datetime:
     d = dt.datetime.fromisoformat(iso)
     if d.tzinfo is None:
-        d = d.replace(tzinfo=IST)
-    return d.astimezone(IST)
+        d = d.replace(tzinfo=UTC)
+    return d.astimezone(UTC)
 
 
 def _sites_map(data: dict | None) -> dict:
@@ -273,8 +273,8 @@ def collect_changes(repo: Path, data: dict) -> dict:
         for sha, iso in commits:
             current = _load_data_at(repo, sha)
             cur_sites = _sites_map(current)
-            day = _ist_date(iso)
-            stamp = _ist_dt(iso)
+            day = _utc_date(iso)
+            stamp = _utc_dt(iso)
             bucket = days.setdefault(
                 day,
                 {
@@ -371,7 +371,7 @@ def collect_changes(repo: Path, data: dict) -> dict:
                 date,
                 {
                     "date": date,
-                    "latest_iso": f"{date}T00:00:00+05:30",
+                    "latest_iso": f"{date}T00:00:00Z",
                     "commits": [],
                     "added": [],
                     "removed": [],

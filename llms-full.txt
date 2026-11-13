@@ -1,6 +1,6 @@
 # Free LLM API Tokens Tracker — full provider list
 
-Snapshot: 13 Nov 2026, 19:06 IST
+Snapshot: 13 Nov 2026, 13:36 UTC
 Canonical: https://freellmapi.link/
 Source: https://freellmapi.link/data.json
 Counts: 121 listed, 117 active, 39 official (active), 109 OpenAI compatible (active).
