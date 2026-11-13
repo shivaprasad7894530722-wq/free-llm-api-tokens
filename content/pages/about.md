@@ -2,20 +2,22 @@
 slug: about
 title: About this tracker
 lede: A daily-updated list of sites that give free LLM API tokens, with the figures each provider actually publishes.
-description: How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published.
+description: How Free LLM API Tokens Tracker is compiled, how data is verified from official docs only, why some figures are marked Not published, and who publishes the list.
 date_published: 2026-11-12
-date_modified: 2026-11-12
+date_modified: 2026-11-13
 ---
 
 ## What is this site?
 
-Free LLM API Tokens Tracker is a public catalogue of websites and providers that advertise a free allowance for large language model APIs. For each entry we record whether the API is OpenAI compatible, the published base URL, the free allowance, a tokens-per-day figure when one is published, rate limits, whether a card is required, and a relay-risk flag. The machine-readable source is [data.json](/data.json).
+Free LLM API Tokens Tracker is a public catalogue of websites and providers that advertise a free allowance for large language model APIs. For each entry we record whether the API is OpenAI compatible, the published base URL, the free allowance, a tokens-per-day figure when one is published, rate limits, whether a card is required, and a relay-risk flag. The machine-readable sources are [data.json](/data.json) and [llms-full.txt](/llms-full.txt).
 
 The aim is practical: if you want to try a model through an API without paying first, you should be able to see what is on offer, what is not published, and where the official documentation lives. The site is independent and is not affiliated with any provider in the list.
 
-## How are the figures collected?
+## How is the data verified?
 
-Every quota, price, rate limit and endpoint on this site is copied from a provider’s own public pages on the date shown in that entry. If a provider does not publish a figure, we show **Not published** (or “Unspecified” in the raw data). We do not estimate, scrape private dashboards, or fill gaps from memory.
+Every quota, price, rate limit and endpoint on this site is copied from a provider’s own public documentation, pricing page or official announcement on the date shown in that entry. We do not estimate missing figures, scrape private dashboards, or fill gaps from memory, social posts or unofficial mirrors.
+
+If a provider does not publish a figure, we show **Not published** (or “Unspecified” in the raw data). That is a deliberate gap, not a hidden value. We never invent quotas, prices or endpoints.
 
 When an offer ends, we keep the row and mark the allowance so the history stays visible. Ended offers are hidden on the home page unless you choose to show them.
 
@@ -31,11 +33,11 @@ A [daily changelog](/) on the home page records additions and corrections. Guide
 
 “Yes” means you can point an OpenAI SDK, or another client that speaks the OpenAI HTTP API, at the provider’s base URL and use that provider’s key. “Partial” means only some models or features work that way. “Not published” means we have not seen a clear public statement, and we will not guess. See [What is an OpenAI-compatible API?](/guides/what-is-an-openai-compatible-api) and [How to use free OpenAI-compatible APIs](/guides/how-to-use-free-openai-compatible-apis).
 
-## Who is behind the site?
+## Who publishes this tracker?
 
-The site is maintained as a public tracker. For questions, corrections or a takedown request, email [{{email}}](mailto:{{email}}). Please do not send API keys or other secrets to that address.
+The site is published by Free LLM API Tokens, an independent public tracker. It is not affiliated with OpenAI or with any provider in the list. The publisher’s purpose is to record what each provider publishes, not to resell access or to operate an API gateway.
 
-If you found a published allowance that does not match our list, include the provider name and a link to the official page you used. We will check the public source before changing a figure.
+For questions, corrections or a takedown request, email [{{email}}](mailto:{{email}}). Please do not send API keys or other secrets to that address. If you found a published allowance that does not match our list, include the provider name and a link to the official page you used. We will check the public source before changing a figure.
 
 ## Advertising and analytics
 

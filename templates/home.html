@@ -2,10 +2,11 @@
   <section class="wrap hero" aria-labelledby="hero-title">
     <div class="eyebrow">Updated daily</div>
     <h1 id="hero-title"><span>Free API credits for AI models, in one place.</span></h1>
-    <p class="lede">A daily-updated list of sites that give free LLM API tokens — with what you get, whether they work like OpenAI, and the base URL you need.</p>
+    <p class="lede">This site is a daily-updated tracker of <!-- HOME_COUNT --> free and free-tier LLM APIs. For each provider it records the published free allowance, whether the API is OpenAI-compatible, the base URL, and tokens per day — or “Not published” when official pages do not give a number.</p>
+    <p class="page-updated" id="home-updated">Last updated <!-- HOME_LAST_UPDATED -->.</p>
     <div class="stats">
-      <div class="stat"><b id="statCount">…</b><span>providers listed</span></div>
-      <div class="stat"><b id="updated">…</b><span>last checked (IST)</span></div>
+      <div class="stat"><b id="statCount"><!-- HOME_COUNT --></b><span>providers listed</span></div>
+      <div class="stat"><b id="updated"><!-- HOME_LAST_CHECKED --></b><span>last checked (IST)</span></div>
     </div>
     <p class="note">Figures come from each provider’s own pages on the date shown, and they change often. Check before you rely on them. Never share your API keys.</p>
   </section>
@@ -14,17 +15,17 @@
     <div class="how">
       <article class="step">
         <span class="num">1</span>
-        <h2 id="how-title">Sign up</h2>
+        <h2 id="how-title">How do I sign up?</h2>
         <p>Open a provider from the list and create a free account. Prefer official providers if you are sending anything private.</p>
       </article>
       <article class="step">
         <span class="num">2</span>
-        <h2>Get your API key</h2>
+        <h2>Where do I get an API key?</h2>
         <p>Copy the key from their dashboard and keep it secret — on your computer or in an environment variable, never in a public chat or repo.</p>
       </article>
       <article class="step">
         <span class="num">3</span>
-        <h2>Set the base URL</h2>
+        <h2>How do I set the base URL?</h2>
         <p>Point the OpenAI SDK (or any OpenAI-compatible client) at the provider’s base URL:</p>
         <div class="snippet">
           <button type="button" class="copy copy-snip" data-c="import OpenAI from &quot;openai&quot;;
@@ -45,7 +46,7 @@ const client = new OpenAI({
   </section>
 
   <section class="wrap" id="browse" aria-labelledby="browse-title">
-    <h2 id="browse-title" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Browse providers</h2>
+    <h2 id="browse-title" class="browse-title">Which sites currently offer free LLM API tokens?</h2>
     <div class="panel">
       <div class="controls">
         <div class="search">
@@ -69,10 +70,15 @@ const client = new OpenAI({
       </div>
       <details class="news">
         <summary>Latest updates</summary>
-        <div class="news-body" id="changelog"></div>
+        <div class="news-body" id="changelog"><!-- CHANGELOG --></div>
       </details>
     </div>
-    <div class="grid" id="grid"></div>
+    <div class="grid" id="grid"><!-- PROVIDER_CARDS --></div>
+    <details class="directory" id="provider-directory" open>
+      <summary>Full snapshot table (all <!-- HOME_COUNT --> providers)</summary>
+      <p class="catalog-lede">This table is the complete <!-- HOME_LAST_UPDATED --> snapshot, including ended offers. Figures are copied from each provider’s own pages. “Not published” means no official number was found.</p>
+      <!-- PROVIDER_TABLE -->
+    </details>
   </section>
 
   <section class="wrap home-guides" aria-labelledby="guides-teaser-title">
@@ -235,8 +241,23 @@ fetch("/data.json", {cache:"no-store"}).then(r => {
     document.getElementById(id).addEventListener("input", render)
   );
   render();
+  syncDirectory();
+  window.addEventListener("hashchange", syncDirectory);
 }).catch(e => {
   document.getElementById("grid").innerHTML = '<p class="empty">Could not load the provider list. Please refresh the page.</p>';
   console.error(e);
 });
+
+function syncDirectory() {
+  const dir = document.getElementById("provider-directory");
+  if (!dir) return;
+  const hash = (location.hash || "").replace(/^#/, "");
+  if (hash.startsWith("provider-")) {
+    dir.open = true;
+    const row = document.getElementById(hash);
+    if (row) row.scrollIntoView({block: "center"});
+  } else {
+    dir.open = false;
+  }
+}
 </script>

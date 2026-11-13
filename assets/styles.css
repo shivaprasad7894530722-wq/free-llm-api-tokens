@@ -217,3 +217,20 @@ footer.site-footer{border-top:1px solid var(--line);padding:28px 0 40px;color:va
   .guide-card{transition:none}
   .guide-card:hover{transform:none}
 }
+
+.hero .page-updated{margin:0 auto 16px;max-width:720px}
+.browse-title{margin:0 0 14px;font-size:1.35rem;letter-spacing:-.03em}
+details.directory{margin:-24px 0 48px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+details.directory summary{cursor:pointer;font-weight:700;font-size:.95rem;list-style:none}
+details.directory summary::-webkit-details-marker{display:none}
+details.directory summary::after{content:" ▾";color:var(--faint)}
+.catalog-lede{margin:10px 0 14px;color:var(--mut);font-size:.92rem;max-width:800px}
+.catalog-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.catalog{width:100%;border-collapse:collapse;font-size:.82rem}
+.catalog caption{caption-side:top;text-align:left;padding:10px 12px;color:var(--mut);font-size:.85rem}
+.catalog th,.catalog td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.catalog th{font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);font-weight:700;background:color-mix(in srgb, var(--bg) 55%, transparent);white-space:nowrap}
+.catalog tr:target{background:var(--acc-bg)}
+.catalog tr.ended{opacity:.7}
+.catalog a{font-weight:600}
+.catalog code{font:0.75rem/1.4 var(--mono);word-break:break-all}

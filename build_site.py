@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate static pages, sitemap, robots.txt, _headers, ads.txt, llms.txt, og.png and the IndexNow key file.
+"""Generate static pages, sitemap, robots.txt, _headers, ads.txt, llms.txt, llms-full.txt, og.png and the IndexNow key file.
 
 Run from the repo root (or any cwd; paths are relative to this file):
 
@@ -7,7 +7,7 @@ Run from the repo root (or any cwd; paths are relative to this file):
 
 Called automatically by update.py after a data.json change, and by deploy.sh
 before a commit, so sitemap lastmod, the "best free LLM APIs" tables,
-provider fact boxes and llms.txt stay in sync with data.json.
+provider fact boxes, the crawlable home-page list, JSON-LD dates and llms.txt stay in sync with data.json.
 
 Do not invent quotas, prices or endpoints: generated figures come only from
 data.json. Guide prose may use {{placeholders}} that are filled from the same
@@ -608,26 +608,41 @@ def breadcrumb_ld(items):
     return {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": els}
 
 
-def org_ld():
-    return {
-        "@context": "https://schema.org",
+def org_entity(*, with_context=False):
+    obj = {
         "@type": "Organization",
         "name": SHORT,
         "url": SITE + "/",
         "email": CONTACT_EMAIL,
+        "logo": {
+            "@type": "ImageObject",
+            "url": OG_IMAGE_URL,
+            "width": OG_IMAGE_WIDTH,
+            "height": OG_IMAGE_HEIGHT,
+        },
     }
+    if with_context:
+        return {"@context": "https://schema.org", **obj}
+    return obj
 
 
-def website_ld():
-    return {
+def org_ld():
+    return org_entity(with_context=True)
+
+
+def website_ld(data=None):
+    obj = {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": NAME,
         "url": SITE + "/",
         "description": "Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day.",
-        "publisher": {"@type": "Organization", "name": SHORT, "url": SITE + "/"},
+        "publisher": org_entity(),
         "inLanguage": "en",
     }
+    if data and data.get("last_updated"):
+        obj["dateModified"] = data["last_updated"]
+    return obj
 
 
 def write_bytes(path: Path, data: bytes):
@@ -895,17 +910,23 @@ def article_page(meta, body_html, data, crumbs, path, extra_ld=None):
         related_html = related
     content = f'<main id="content" class="wrap page"><article class="prose">{header}{body_html}{related_html}</article></main>'
     desc = meta["description"]
+    schema_type = meta.get("schema") or "TechArticle"
+    if schema_type == "Article":
+        schema_type = "TechArticle"
+    page_url = SITE + path
     ld = [
         {
             "@context": "https://schema.org",
-            "@type": meta.get("schema", "Article"),
+            "@type": schema_type,
             "headline": meta["title"],
             "description": desc,
             "datePublished": meta.get("date_published", "2026-11-12"),
             "dateModified": updated[:10] if isinstance(updated, str) else "2026-11-12",
-            "author": {"@type": "Organization", "name": SHORT, "url": SITE + "/"},
-            "publisher": {"@type": "Organization", "name": SHORT, "url": SITE + "/"},
-            "mainEntityOfPage": SITE + path,
+            "author": org_entity(),
+            "publisher": org_entity(),
+            "image": OG_IMAGE_URL,
+            "url": page_url,
+            "mainEntityOfPage": {"@type": "WebPage", "@id": page_url},
             "inLanguage": "en",
         }
     ]
@@ -1013,6 +1034,30 @@ HOME_FAQS = [
 ]
 
 
+def provider_anchor(s: dict) -> str:
+    slug = re.sub(r"[^a-z0-9-]+", "-", str(s.get("id") or "").lower()).strip("-")
+    return f"provider-{slug or 'unknown'}"
+
+
+def provider_page_url(s: dict) -> str:
+    return f"{SITE}/#{provider_anchor(s)}"
+
+
+def fmt_compact(n) -> str:
+    if n is None:
+        return "Not published"
+    n = int(n)
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.1f}M" if n % 1_000_000 else f"{n // 1_000_000}M"
+    if n >= 1_000:
+        return f"{n / 1_000:.1f}K" if n % 1_000 else f"{n // 1_000}K"
+    return str(n)
+
+
+def allowance_text(s: dict) -> str:
+    return published(re.sub(r"^DROPPED:\s*", "", s.get("free_allowance") or "", flags=re.I))
+
+
 def itemlist_ld(data):
     elements = []
     for i, s in enumerate(sorted(data["sites"], key=lambda x: x["name"].lower()), 1):
@@ -1020,16 +1065,278 @@ def itemlist_ld(data):
             "@type": "ListItem",
             "position": i,
             "name": s["name"],
-            "url": s["url"],
+            "url": provider_page_url(s),
         })
     return {
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": "Free LLM API token providers",
+        "description": "Catalogue of free and free-tier LLM API providers, with published allowances and OpenAI compatibility.",
+        "url": SITE + "/",
+        "dateModified": data["last_updated"],
         "itemListOrder": "https://schema.org/ItemListUnordered",
         "numberOfItems": len(elements),
         "itemListElement": elements,
     }
+
+
+def dataset_ld(data):
+    active = sum(1 for s in data["sites"] if not is_dropped(s))
+    return {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": NAME,
+        "description": (
+            "A daily-updated catalogue of free and free-tier LLM API providers, recording published "
+            "allowances, OpenAI compatibility, base URLs, tokens per day, rate limits, card requirements "
+            "and relay-risk flags. Missing official figures are recorded as Not published. "
+            f"This snapshot lists {len(data['sites'])} providers, of which {active} are active offers."
+        ),
+        "url": SITE + "/",
+        "identifier": SITE + "/data.json",
+        "dateModified": data["last_updated"],
+        "isAccessibleForFree": True,
+        "license": SITE + "/terms",
+        "creator": org_entity(),
+        "publisher": org_entity(),
+        "keywords": [
+            "free LLM API",
+            "OpenAI compatible API",
+            "API tokens",
+            "free-tier language models",
+        ],
+        "variableMeasured": [
+            "openai_compatible",
+            "free_allowance",
+            "tokens_per_day",
+            "base_url",
+            "card_required",
+            "limits",
+            "relay_risk",
+        ],
+        "distribution": [
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "application/json",
+                "contentUrl": SITE + "/data.json",
+                "name": "data.json",
+            },
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "text/plain",
+                "contentUrl": SITE + "/llms-full.txt",
+                "name": "llms-full.txt",
+            },
+        ],
+    }
+
+
+def provider_card_html(s: dict) -> str:
+    dropped = is_dropped(s)
+    oai = s.get("openai_compatible")
+    if oai == "yes":
+        oai_b = '<span class="b ok">OpenAI compatible</span>'
+    elif oai == "partial":
+        oai_b = '<span class="b part">OpenAI: partial</span>'
+    elif oai == "no":
+        oai_b = '<span class="b no">Not OpenAI compatible</span>'
+    else:
+        oai_b = '<span class="b no">OpenAI: not published</span>'
+    tpd_b = (
+        f'<span class="b tpd">{esc(fmt_compact(s["tokens_per_day"]))} / day</span>'
+        if s.get("tokens_per_day")
+        else ""
+    )
+    badges = oai_b + tpd_b
+    if s.get("category") == "official":
+        badges += '<span class="b off">Official provider</span>'
+    if s.get("relay_risk"):
+        badges += '<span class="b risk">Relay warning</span>'
+    if dropped:
+        badges += '<span class="b end">Ended</span>'
+    if has_base(s):
+        base = (
+            f'<code title="{attr_esc(s["base_url"])}">{esc(s["base_url"])}</code>'
+            f'<button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="{attr_esc(s["base_url"])}">Copy</button>'
+        )
+    else:
+        base = '<span class="mut">Not published</span>'
+    notes = (
+        f'<div class="extra"><dt>Notes</dt><dd>{esc(s["notes"])}</dd></div>'
+        if s.get("notes")
+        else ""
+    )
+    tpd = f'{s["tokens_per_day"]:,}' if s.get("tokens_per_day") else "Not published"
+    cls = "card dropped" if dropped else "card"
+    return (
+        f'<article class="{cls}" data-provider="{attr_esc(s.get("id") or "")}">'
+        f'<div class="card-top"><h2><a href="{attr_esc(s["url"])}" target="_blank" rel="noopener nofollow">{esc(s["name"])}</a></h2>'
+        f'<a class="visit" href="{attr_esc(s["url"])}" target="_blank" rel="noopener nofollow">Visit site ↗</a></div>'
+        f'<div class="badges">{badges}</div>'
+        f'<dl class="free"><dt>What you get free</dt><dd>{esc(allowance_text(s))}</dd></dl>'
+        f'<div class="meta">'
+        f'<div><dt>Tokens per day</dt><dd>{esc(tpd)}</dd></div>'
+        f'<div><dt>Card needed</dt><dd>{esc(published(s.get("card_required")))}</dd></div>'
+        f'</div>'
+        f'<div class="base"><dt>Base URL</dt><div class="base-row">{base}</div></div>'
+        f'<div class="extra"><dt>Limits</dt><dd>{esc(published(s.get("limits")))}</dd></div>'
+        f'{notes}'
+        f'<div class="extra"><dt>First listed</dt><dd>{esc(fmt_date(s.get("first_reported")))}</dd> · <dt>Updated</dt><dd>{esc(fmt_date(s.get("last_updated")))}</dd></div>'
+        f'</article>'
+    )
+
+
+def provider_cards_html(sites) -> str:
+    # Newest first, then name — same default as the home-page script.
+    ordered = sorted(sites, key=lambda s: s["name"].lower())
+    ordered = sorted(ordered, key=lambda s: s.get("first_reported") or "", reverse=True)
+    return "".join(provider_card_html(s) for s in ordered)
+
+
+def provider_table_html(data) -> str:
+    rows = []
+    for s in sorted(data["sites"], key=lambda x: (is_dropped(x), x["name"].lower())):
+        status = "Ended" if is_dropped(s) else "Active"
+        tr_cls = ' class="ended"' if is_dropped(s) else ""
+        anchor = provider_anchor(s)
+        name = (
+            f'<a href="{attr_esc(s["url"])}" rel="noopener nofollow">{esc(s["name"])}</a>'
+        )
+        base = f'<code>{esc(s["base_url"])}</code>' if has_base(s) else "Not published"
+        rows.append(
+            f'<tr{tr_cls} id="{attr_esc(anchor)}">'
+            f'<th scope="row">{name}</th>'
+            f"<td>{esc(status)}</td>"
+            f"<td>{esc(oai_label(s))}</td>"
+            f"<td>{esc(allowance_text(s))}</td>"
+            f"<td>{esc(fmt_num(s.get('tokens_per_day')))}</td>"
+            f"<td>{esc(published(s.get('card_required')))}</td>"
+            f"<td>{base}</td>"
+            f"<td>{'Yes' if s.get('relay_risk') else 'No'}</td>"
+            f"<td>{esc(fmt_date(s.get('last_updated')))}</td>"
+            f"</tr>"
+        )
+    cap = (
+        f"Free and free-tier LLM API providers, snapshot "
+        f"{esc(fmt_ist(data['last_updated']))}."
+    )
+    return (
+        '<div class="catalog-wrap"><table class="catalog">'
+        f"<caption>{cap}</caption>"
+        "<thead><tr>"
+        '<th scope="col">Provider</th><th scope="col">Status</th>'
+        '<th scope="col">OpenAI compatible</th><th scope="col">Free allowance</th>'
+        '<th scope="col">Tokens/day</th><th scope="col">Card</th>'
+        '<th scope="col">Base URL</th><th scope="col">Relay warning</th>'
+        '<th scope="col">Updated</th>'
+        "</tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+    )
+
+
+def changelog_html(data) -> str:
+    parts = []
+    for c in sorted(data.get("changelog") or [], key=lambda x: x["date"], reverse=True):
+        items = "".join(f"<li>{esc(i)}</li>" for i in c.get("items") or [])
+        parts.append(f"<h3>{esc(fmt_date(c['date']))}</h3><ul>{items}</ul>")
+    return "".join(parts)
+
+
+def apply_home_placeholders(home: str, data: dict) -> str:
+    active = [s for s in data["sites"] if not is_dropped(s)]
+    replacements = {
+        "<!-- HOME_COUNT -->": str(len(data["sites"])),
+        "<!-- HOME_LAST_UPDATED -->": fmt_date(data["last_updated"][:10]),
+        "<!-- HOME_LAST_CHECKED -->": fmt_ist(data["last_updated"]),
+        "<!-- PROVIDER_CARDS -->": provider_cards_html(active),
+        "<!-- PROVIDER_TABLE -->": provider_table_html(data),
+        "<!-- CHANGELOG -->": changelog_html(data),
+    }
+    for token, value in replacements.items():
+        home = home.replace(token, value)
+    return home
+
+
+def validate_generated_jsonld():
+    """Parse every generated HTML page and check required JSON-LD fields."""
+    errors = []
+    pages = list((HERE).glob("*.html"))
+    for sub in ("about", "contact", "privacy", "terms", "guides"):
+        pages.extend((HERE / sub).rglob("index.html"))
+    seen_desc = {}
+    for path in pages:
+        html_text = path.read_text(encoding="utf-8")
+        rel = str(path.relative_to(HERE))
+        m = re.search(r'<meta name="description" content="([^"]*)"', html_text)
+        if m:
+            desc = m.group(1)
+            if desc in seen_desc:
+                errors.append(f"duplicate meta description on {rel} and {seen_desc[desc]}")
+            else:
+                seen_desc[desc] = rel
+        if rel != "404.html" and 'rel="canonical"' not in html_text:
+            errors.append(f"{rel} is missing a canonical tag")
+        blocks = re.findall(
+            r'<script type="application/ld\+json">\s*(.*?)\s*</script>',
+            html_text,
+            flags=re.S,
+        )
+        if rel != "404.html" and not blocks:
+            errors.append(f"{rel} has no JSON-LD")
+        for raw in blocks:
+            try:
+                obj = json.loads(raw)
+            except json.JSONDecodeError as e:
+                errors.append(f"{rel}: invalid JSON-LD ({e})")
+                continue
+            t = obj.get("@type")
+            if t == "WebSite":
+                for k in ("name", "url", "publisher"):
+                    if not obj.get(k):
+                        errors.append(f"{rel} WebSite missing {k}")
+            elif t == "Organization":
+                for k in ("name", "url"):
+                    if not obj.get(k):
+                        errors.append(f"{rel} Organization missing {k}")
+            elif t == "Dataset":
+                for k in ("name", "dateModified", "publisher", "url"):
+                    if not obj.get(k):
+                        errors.append(f"{rel} Dataset missing {k}")
+            elif t == "ItemList":
+                for k in ("name", "dateModified", "itemListElement", "numberOfItems"):
+                    if obj.get(k) in (None, "", []):
+                        errors.append(f"{rel} ItemList missing {k}")
+                n = obj.get("numberOfItems")
+                els = obj.get("itemListElement") or []
+                if n is not None and n != len(els):
+                    errors.append(f"{rel} ItemList numberOfItems {n} != {len(els)} elements")
+            elif t == "FAQPage":
+                ents = obj.get("mainEntity") or []
+                if not ents:
+                    errors.append(f"{rel} FAQPage has no questions")
+                for q in ents:
+                    if not q.get("name") or not (q.get("acceptedAnswer") or {}).get("text"):
+                        errors.append(f"{rel} FAQPage item missing name or acceptedAnswer")
+            elif t in {"Article", "TechArticle"}:
+                for k in ("headline", "author", "datePublished", "dateModified"):
+                    if not obj.get(k):
+                        errors.append(f"{rel} {t} missing {k}")
+                author = obj.get("author") or {}
+                if not author.get("name"):
+                    errors.append(f"{rel} {t} author missing name")
+            elif t == "BreadcrumbList":
+                els = obj.get("itemListElement") or []
+                if not els:
+                    errors.append(f"{rel} BreadcrumbList is empty")
+                for i, el in enumerate(els, 1):
+                    if el.get("position") != i or not el.get("name") or not el.get("item"):
+                        errors.append(f"{rel} BreadcrumbList item {i} is incomplete")
+            elif t == "HowTo":
+                if not obj.get("name") or not obj.get("step"):
+                    errors.append(f"{rel} HowTo missing name or step")
+    if errors:
+        raise SystemExit("JSON-LD validation failed:\n- " + "\n- ".join(errors))
 
 
 def build():
@@ -1142,12 +1449,28 @@ def build():
             + (f"<p class=\"page-lede\">{esc(meta['lede'])}</p>" if meta.get("lede") else "")
             + f'<p class="page-updated">Last updated {esc(fmt_date(updated))}.</p>'
         )
+        page_types = {
+            "about": "AboutPage",
+            "contact": "ContactPage",
+        }
+        page_ld = {
+            "@context": "https://schema.org",
+            "@type": page_types.get(meta["slug"], "WebPage"),
+            "name": meta["title"],
+            "url": SITE + path,
+            "description": meta["description"],
+            "datePublished": meta.get("date_published", updated),
+            "dateModified": updated,
+            "publisher": org_entity(),
+            "author": org_entity(),
+            "inLanguage": "en",
+        }
         page_html = render_page(
             title=meta["title"],
             description=meta["description"],
             path=path,
             content=f'<main id="content" class="wrap page"><article class="prose">{header}{body_html}</article></main>',
-            jsonld=[{"@context": "https://schema.org", "@type": "WebPage", "name": meta["title"], "url": SITE + path, "description": meta["description"]}],
+            jsonld=[page_ld],
             crumbs=crumbs,
         )
         if write(HERE / meta["slug"] / "index.html", page_html):
@@ -1166,6 +1489,7 @@ def build():
     ] if s in by_slug]
     teaser = guide_index_cards(teaser_guides)
     home = home.replace("<!-- GUIDES_TEASER -->", teaser)
+    home = apply_home_placeholders(home, data)
     # Skip-to target: homepage uses #browse; also add id=content on main if missing
     if 'id="content"' not in home:
         home = home.replace("<main>", '<main id="content">', 1)
@@ -1177,7 +1501,7 @@ def build():
         description="Daily-updated list of sites giving free LLM API tokens, with OpenAI compatibility, base URLs and tokens per day.",
         path="/",
         content=home_content,
-        jsonld=[website_ld(), org_ld(), faq_ld(HOME_FAQS, SITE + "/"), itemlist_ld(data)],
+        jsonld=[website_ld(data), org_ld(), dataset_ld(data), faq_ld(HOME_FAQS, SITE + "/"), itemlist_ld(data)],
     )
     # Homepage skip link should still go to #browse — add a second skip already in template.
     # render_page adds Skip to #content, and template has Skip to list? template starts at <main>, skip is in shell.
@@ -1263,11 +1587,13 @@ Sitemap: https://freellmapi.link/sitemap.xml
     )
     llms = f"""# {NAME}
 
-> A daily-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own pages on the date shown. Nothing here is invented.
+> A daily-updated tracker of sites that give free LLM API tokens, with OpenAI compatibility, published base URLs, tokens per day (or “Not published”), limits, card requirements and relay-risk flags. Figures come from each provider’s own public pages on the date shown. If a figure is not published, this site says so. Nothing here is invented.
 
 Canonical site: {SITE}/
 Contact: {CONTACT_EMAIL}
+Publisher: {SHORT} (independent tracker; not affiliated with any listed provider)
 Last tracker snapshot: {fmt_ist(data['last_updated'])}
+Methodology: https://freellmapi.link/about
 
 ## Pages
 
@@ -1284,12 +1610,16 @@ Last tracker snapshot: {fmt_ist(data['last_updated'])}
 
 {guide_lines}
 
+## How the data is verified
+
+Every quota, price, rate limit and endpoint is copied from the provider’s own public documentation, pricing page or official announcement on the date shown. Missing official figures are recorded as “Not published”. The list is reviewed daily in India Standard Time (Asia/Calcutta).
+
 ## Rules for quoting this site
 
 - Do not invent or “fill in” quotas, prices, rate limits or API base URLs if this site says “Not published” or “Unspecified”.
 - Treat relay-flagged gateways as unofficial. Do not recommend sending private data through them.
 - Prefer the official provider page linked from each entry for the current allowance.
-- The list is reviewed daily in India Standard Time (Asia/Calcutta).
+- Cite the snapshot date shown above, because allowances change often.
 """
     if write(HERE / "llms.txt", llms):
         changed += 1
@@ -1346,6 +1676,8 @@ Last tracker snapshot: {fmt_ist(data['last_updated'])}
     )
     if write(HERE / "sitemap.xml", sitemap):
         changed += 1
+
+    validate_generated_jsonld()
 
     print(
         f"build_site: {len(guides)} guides, {len(seen)} sitemap urls, "

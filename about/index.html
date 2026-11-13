@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>About this tracker — Free LLM API Tokens</title>
-<meta name="description" content="How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published.">
+<meta name="description" content="How Free LLM API Tokens Tracker is compiled, how data is verified from official docs only, why some figures are marked Not published, and who publishes the list.">
 <link rel="canonical" href="https://freellmapi.link/about">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://freellmapi.link/about">
 <meta property="og:title" content="About this tracker — Free LLM API Tokens">
-<meta property="og:description" content="How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published.">
+<meta property="og:description" content="How Free LLM API Tokens Tracker is compiled, how data is verified from official docs only, why some figures are marked Not published, and who publishes the list.">
 <meta property="og:site_name" content="Free LLM API Tokens Tracker">
 <meta property="og:image" content="https://freellmapi.link/og.png">
 <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
 <meta property="og:image:alt" content="Free LLM API Tokens Tracker">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="About this tracker — Free LLM API Tokens">
-<meta name="twitter:description" content="How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published.">
+<meta name="twitter:description" content="How Free LLM API Tokens Tracker is compiled, how data is verified from official docs only, why some figures are marked Not published, and who publishes the list.">
 <meta name="twitter:image" content="https://freellmapi.link/og.png">
 <meta name="theme-color" content="#070910">
 <meta name="color-scheme" content="dark light">
@@ -45,10 +45,37 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
+  "@type": "AboutPage",
   "name": "About this tracker",
   "url": "https://freellmapi.link/about",
-  "description": "How Free LLM API Tokens Tracker is compiled, how often it is updated, and why some figures are marked Not published."
+  "description": "How Free LLM API Tokens Tracker is compiled, how data is verified from official docs only, why some figures are marked Not published, and who publishes the list.",
+  "datePublished": "2026-11-12",
+  "dateModified": "2026-11-13",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/",
+    "email": "hello@lumiono.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freellmapi.link/og.png",
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "Free LLM API Tokens",
+    "url": "https://freellmapi.link/",
+    "email": "hello@lumiono.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://freellmapi.link/og.png",
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "inLanguage": "en"
 }
 </script>
 <script type="application/ld+json">
@@ -95,11 +122,12 @@
     </div>
   </div>
 </header>
-<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>About this tracker</span></nav><h1 class="page-title">About this tracker</h1><p class="page-lede">A daily-updated list of sites that give free LLM API tokens, with the figures each provider actually publishes.</p><p class="page-updated">Last updated 12 Nov 2026.</p><h2 id="what-is-this-site">What is this site?</h2>
-<p>Free LLM API Tokens Tracker is a public catalogue of websites and providers that advertise a free allowance for large language model APIs. For each entry we record whether the API is OpenAI compatible, the published base URL, the free allowance, a tokens-per-day figure when one is published, rate limits, whether a card is required, and a relay-risk flag. The machine-readable source is <a href="/data.json">data.json</a>.</p>
+<main id="content" class="wrap page"><article class="prose"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <span>About this tracker</span></nav><h1 class="page-title">About this tracker</h1><p class="page-lede">A daily-updated list of sites that give free LLM API tokens, with the figures each provider actually publishes.</p><p class="page-updated">Last updated 13 Nov 2026.</p><h2 id="what-is-this-site">What is this site?</h2>
+<p>Free LLM API Tokens Tracker is a public catalogue of websites and providers that advertise a free allowance for large language model APIs. For each entry we record whether the API is OpenAI compatible, the published base URL, the free allowance, a tokens-per-day figure when one is published, rate limits, whether a card is required, and a relay-risk flag. The machine-readable sources are <a href="/data.json">data.json</a> and <a href="/llms-full.txt">llms-full.txt</a>.</p>
 <p>The aim is practical: if you want to try a model through an API without paying first, you should be able to see what is on offer, what is not published, and where the official documentation lives. The site is independent and is not affiliated with any provider in the list.</p>
-<h2 id="how-are-the-figures-collected">How are the figures collected?</h2>
-<p>Every quota, price, rate limit and endpoint on this site is copied from a provider’s own public pages on the date shown in that entry. If a provider does not publish a figure, we show <strong>Not published</strong> (or “Unspecified” in the raw data). We do not estimate, scrape private dashboards, or fill gaps from memory.</p>
+<h2 id="how-is-the-data-verified">How is the data verified?</h2>
+<p>Every quota, price, rate limit and endpoint on this site is copied from a provider’s own public documentation, pricing page or official announcement on the date shown in that entry. We do not estimate missing figures, scrape private dashboards, or fill gaps from memory, social posts or unofficial mirrors.</p>
+<p>If a provider does not publish a figure, we show <strong>Not published</strong> (or “Unspecified” in the raw data). That is a deliberate gap, not a hidden value. We never invent quotas, prices or endpoints.</p>
 <p>When an offer ends, we keep the row and mark the allowance so the history stays visible. Ended offers are hidden on the home page unless you choose to show them.</p>
 <p>Some sites are official model makers or clouds. Others are gateways or resellers. We flag unofficial relays so you can avoid sending private prompts through them. Read <a href="/guides/relay-gateway-risks">relay and gateway risks</a> before you use a flagged site.</p>
 <h2 id="how-often-is-the-list-updated">How often is the list updated?</h2>
@@ -107,9 +135,9 @@
 <p>A <a href="/">daily changelog</a> on the home page records additions and corrections. Guides that include live tables, such as <a href="/guides/best-free-llm-apis">Best free LLM APIs (current)</a>, are regenerated from the same data file whenever the list is updated.</p>
 <h2 id="what-does-openai-compatible-mean-here">What does “OpenAI compatible” mean here?</h2>
 <p>“Yes” means you can point an OpenAI SDK, or another client that speaks the OpenAI HTTP API, at the provider’s base URL and use that provider’s key. “Partial” means only some models or features work that way. “Not published” means we have not seen a clear public statement, and we will not guess. See <a href="/guides/what-is-an-openai-compatible-api">What is an OpenAI-compatible API?</a> and <a href="/guides/how-to-use-free-openai-compatible-apis">How to use free OpenAI-compatible APIs</a>.</p>
-<h2 id="who-is-behind-the-site">Who is behind the site?</h2>
-<p>The site is maintained as a public tracker. For questions, corrections or a takedown request, email <a href="mailto:hello@lumiono.com">hello@lumiono.com</a>. Please do not send API keys or other secrets to that address.</p>
-<p>If you found a published allowance that does not match our list, include the provider name and a link to the official page you used. We will check the public source before changing a figure.</p>
+<h2 id="who-publishes-this-tracker">Who publishes this tracker?</h2>
+<p>The site is published by Free LLM API Tokens, an independent public tracker. It is not affiliated with OpenAI or with any provider in the list. The publisher’s purpose is to record what each provider publishes, not to resell access or to operate an API gateway.</p>
+<p>For questions, corrections or a takedown request, email <a href="mailto:hello@lumiono.com">hello@lumiono.com</a>. Please do not send API keys or other secrets to that address. If you found a published allowance that does not match our list, include the provider name and a link to the official page you used. We will check the public source before changing a figure.</p>
 <h2 id="advertising-and-analytics">Advertising and analytics</h2>
 <p>The site uses Google Analytics 4. Ads may be added later once a programme such as Google AdSense is approved. Details, cookie use and opt-out links are in the <a href="/privacy">privacy policy</a>. The <a href="/terms">terms</a> explain that the list is provided as-is and that you must check each provider’s current terms before you rely on a free tier.</p></article></main>
 <footer class="site-footer">

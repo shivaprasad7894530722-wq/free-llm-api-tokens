@@ -13,7 +13,7 @@ Figures come from each provider's own pages on the date shown. They change often
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home page (generated). Loads `data.json` at runtime. |
+| `index.html` | Home page (generated). The provider list is pre-rendered in HTML for crawlers, then enhanced at runtime from `data.json`. |
 | `data.json` | The single source of truth for provider figures. Edit only this file (or use `update.py`). |
 | `content/guides/*.md` | Guide source (front matter + Markdown). `{{placeholders}}` are filled from `data.json`. |
 | `content/pages/*.md` | About, Contact, Privacy and Terms source. |
