@@ -8,3 +8,6 @@
 
 /data.json
   X-Content-Usage: Personal and research use only; no bulk commercial reuse without permission. See https://freellmapi.link/terms
+
+/schema.json
+  X-Content-Usage: Personal and research use only; no bulk commercial reuse without permission. See https://freellmapi.link/terms

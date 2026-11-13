@@ -62,11 +62,15 @@ const client = new OpenAI({
         <div class="filters">
           <label class="chip"><input type="checkbox" id="oai"> OpenAI compatible</label>
           <label class="chip"><input type="checkbox" id="nocard"> No card needed</label>
+          <label class="chip"><input type="checkbox" id="nophone"> No phone needed</label>
+          <label class="chip"><input type="checkbox" id="ongoing"> Ongoing free</label>
+          <label class="chip"><input type="checkbox" id="trial"> Trial / one-time</label>
           <label class="chip"><input type="checkbox" id="hastpd"> Has daily tokens</label>
           <label class="chip"><input type="checkbox" id="norisk"> Hide relays</label>
           <label class="chip"><input type="checkbox" id="showdropped"> Show ended offers</label>
           <span id="count"></span>
         </div>
+        <p class="data-links">Machine-readable copy: <a href="/data.json">data.json</a> · <a href="/schema.json">schema.json</a>. Personal and research use; see the <a href="/terms">terms</a>.</p>
       </div>
       <details class="news">
         <summary>Latest updates</summary>
@@ -107,6 +111,14 @@ const client = new OpenAI({
       <p>It depends on the provider. Use the “No card needed” filter to narrow the list, then confirm on their site — some ask for a card later, or after a trial credit runs out.</p>
     </details>
     <details>
+      <summary>Do I need a phone number?</summary>
+      <p>Only some providers say so on their official pages. Use the “No phone needed” filter to see entries we could confirm do not require a phone. If the field says “Not published”, check their sign-up page — we do not guess.</p>
+    </details>
+    <details>
+      <summary>What is the difference between ongoing free and a trial?</summary>
+      <p>“Ongoing free” is a renewing free tier. “Trial / one-time” is a signup credit or a time-limited allowance. We only set this when official pages make the type clear; otherwise it stays “Not published”.</p>
+    </details>
+    <details>
       <summary>Why does it say “Not published”?</summary>
       <p>The provider has not published that figure on their public pages. We never invent quotas, prices or endpoints.</p>
     </details>
@@ -139,8 +151,18 @@ const cardNotNeeded = s => {
   if (!c || c === "unspecified" || c === "yes" || c === "top-up" || c.startsWith("yes ")) return false;
   return /^(no\b|no card)/i.test(s.card_required.trim());
 };
+const flagOf = v => (v == null || String(v).trim() === "") ? "unspecified" : String(v).trim().toLowerCase();
+const phoneNotNeeded = s => flagOf(s.phone_required) === "no";
+const isOngoing = s => flagOf(s.free_type) === "ongoing";
+const isTrial = s => flagOf(s.free_type) === "trial";
 const allowanceText = s => published((s.free_allowance || "").replace(/^DROPPED:\s*/i, ""));
 const hasBase = s => s.base_url && String(s.base_url).toLowerCase() !== "unspecified";
+const starterCode = s => {
+  if (s.openai_compatible !== "yes" || !hasBase(s)) return "";
+  const base = String(s.base_url);
+  if (!base.startsWith("http") || base.includes("{")) return "";
+  return "import os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    api_key=os.environ[\"API_KEY\"],\n    base_url=\"" + base + "\",\n)\n\nresp = client.chat.completions.create(\n    model=\"MODEL_ID\",  # copy the model id from the provider's docs\n    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n)\nprint(resp.choices[0].message.content)\n";
+};
 
 let DATA = null;
 
@@ -148,6 +170,9 @@ function render() {
   const q = document.getElementById("q").value.trim().toLowerCase();
   const oai = document.getElementById("oai").checked;
   const nocard = document.getElementById("nocard").checked;
+  const nophone = document.getElementById("nophone").checked;
+  const ongoing = document.getElementById("ongoing").checked;
+  const trial = document.getElementById("trial").checked;
   const nr = document.getElementById("norisk").checked;
   const ht = document.getElementById("hastpd").checked;
   const showDropped = document.getElementById("showdropped").checked;
@@ -158,10 +183,13 @@ function render() {
     if (!showDropped && isDropped(s)) return false;
     if (oai && s.openai_compatible !== "yes") return false;
     if (nocard && !cardNotNeeded(s)) return false;
+    if (nophone && !phoneNotNeeded(s)) return false;
+    if (ongoing && !isOngoing(s)) return false;
+    if (trial && !isTrial(s)) return false;
     if (nr && s.relay_risk) return false;
     if (ht && !s.tokens_per_day) return false;
     if (q) {
-      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required].join(" ").toLowerCase();
+      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required, s.phone_required, s.free_type].join(" ").toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -188,14 +216,23 @@ function render() {
           ? '<span class="b no">Not OpenAI compatible</span>'
           : '<span class="b no">OpenAI: not published</span>';
     const tpdB = s.tokens_per_day ? '<span class="b tpd">' + esc(fmtNum(s.tokens_per_day)) + ' / day</span>' : "";
+    const ft = flagOf(s.free_type);
+    const typeB = ft === "trial" ? '<span class="b trial">Trial / one-time</span>'
+      : ft === "ongoing" ? '<span class="b ongoing">Ongoing free</span>' : "";
     const base = hasBase(s)
       ? '<code title="' + esc(s.base_url) + '">' + esc(s.base_url) + '</code><button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="' + esc(s.base_url) + '">Copy</button>'
       : '<span class="mut">Not published</span>';
     const notes = s.notes ? '<div class="extra"><dt>Notes</dt><dd>' + esc(s.notes) + '</dd></div>' : "";
+    const code = starterCode(s);
+    const starter = code
+      ? '<details class="starter"><summary>Copy Python starter</summary>' +
+        '<div class="snippet"><button type="button" class="copy copy-snip" data-c="' + esc(code) + '">Copy</button><pre>' + esc(code) + '</pre></div>' +
+        '<p class="extra">Copy the model id from the provider’s official docs. Do not guess it.</p></details>'
+      : "";
     return '<article class="card' + (dropped ? ' dropped' : '') + '">' +
       '<div class="card-top"><h2><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">' + esc(s.name) + '</a></h2>' +
       '<a class="visit" href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">Visit site ↗</a></div>' +
-      '<div class="badges">' + oaiB + tpdB +
+      '<div class="badges">' + oaiB + tpdB + typeB +
         (s.category === "official" ? '<span class="b off">Official provider</span>' : '') +
         (s.relay_risk ? '<span class="b risk">Relay warning</span>' : '') +
         (dropped ? '<span class="b end">Ended</span>' : '') +
@@ -204,11 +241,14 @@ function render() {
       '<div class="meta">' +
         '<div><dt>Tokens per day</dt><dd>' + (s.tokens_per_day ? s.tokens_per_day.toLocaleString("en-GB") : "Not published") + '</dd></div>' +
         '<div><dt>Card needed</dt><dd>' + esc(published(s.card_required)) + '</dd></div>' +
+        '<div><dt>Phone needed</dt><dd>' + esc(published(s.phone_required)) + '</dd></div>' +
+        '<div><dt>Offer type</dt><dd>' + esc(published(s.free_type)) + '</dd></div>' +
       '</div>' +
       '<div class="base"><dt>Base URL</dt><div class="base-row">' + base + '</div></div>' +
       '<div class="extra"><dt>Limits</dt><dd>' + esc(published(s.limits)) + '</dd></div>' +
       notes +
-      '<div class="extra"><dt>First listed</dt><dd>' + fmtDate(s.first_reported) + '</dd> · <dt>Updated</dt><dd>' + fmtDate(s.last_updated) + '</dd></div>' +
+      starter +
+      '<div class="extra"><dt>Source</dt><dd><a href="' + esc(s.url) + '" target="_blank" rel="noopener nofollow">Official page</a></dd> · <dt>Last verified</dt><dd>' + fmtDate(s.last_updated) + '</dd></div>' +
     '</article>';
   }).join("") || '<p class="empty">No providers match those filters. Try clearing search or showing ended offers.</p>';
 }
@@ -237,7 +277,7 @@ fetch("/data.json", {cache:"no-store"}).then(r => {
   document.getElementById("changelog").innerHTML = d.changelog.slice().sort((a, b) => b.date.localeCompare(a.date)).map(c =>
     "<h3>" + fmtDate(c.date) + "</h3><ul>" + c.items.map(i => "<li>" + esc(i) + "</li>").join("") + "</ul>"
   ).join("");
-  ["q","oai","nocard","norisk","hastpd","showdropped","sort"].forEach(id =>
+  ["q","oai","nocard","nophone","ongoing","trial","norisk","hastpd","showdropped","sort"].forEach(id =>
     document.getElementById(id).addEventListener("input", render)
   );
   render();

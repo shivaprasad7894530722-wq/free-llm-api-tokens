@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://freellmapi.link/schema.json",
+  "title": "Free LLM API Tokens tracker dataset",
+  "description": "Catalogue of free and free-tier LLM API providers. Quotas, prices and endpoints come only from each provider's own public pages. Use \"Not published\" or Unspecified when official pages do not give a figure; never invent one.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "last_updated",
+    "sites"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "data_use": {
+      "type": "string"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "ISO-8601 timestamp in Asia/Calcutta (IST)."
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "items"
+        ],
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/provider"
+      }
+    }
+  },
+  "$defs": {
+    "publishedString": {
+      "description": "Official text, or Unspecified / null when not published.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "yesNoPartial": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no",
+            "partial",
+            "Unspecified"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "yesNo": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No",
+        "Unspecified"
+      ]
+    },
+    "provider": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "url",
+        "openai_compatible",
+        "base_url",
+        "free_allowance",
+        "tokens_per_day",
+        "limits",
+        "card_required",
+        "notes",
+        "relay_risk",
+        "category",
+        "first_reported",
+        "last_updated"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "description": "Official docs or pricing page used as the source."
+        },
+        "openai_compatible": {
+          "$ref": "#/$defs/yesNoPartial"
+        },
+        "base_url": {
+          "$ref": "#/$defs/publishedString"
+        },
+        "free_allowance": {
+          "$ref": "#/$defs/publishedString"
+        },
+        "tokens_per_day": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "limits": {
+          "$ref": "#/$defs/publishedString"
+        },
+        "card_required": {
+          "$ref": "#/$defs/publishedString"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "relay_risk": {
+          "type": "boolean"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "official",
+            "gateway"
+          ]
+        },
+        "first_reported": {
+          "type": "string"
+        },
+        "last_updated": {
+          "type": "string",
+          "description": "Date this entry was last checked against official pages."
+        },
+        "free_type": {
+          "type": "string",
+          "enum": [
+            "ongoing",
+            "trial",
+            "Unspecified"
+          ],
+          "description": "ongoing = renewing free tier; trial = one-time or time-limited credit. Unspecified if official pages are unclear."
+        },
+        "phone_required": {
+          "$ref": "#/$defs/yesNo"
+        },
+        "data_training": {
+          "$ref": "#/$defs/yesNo",
+          "description": "Whether official pages say free-tier prompts may be used for training. Unspecified if they do not say."
+        }
+      }
+    }
+  }
+}

@@ -1,13 +1,21 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-13T08:57:22+05:30",
+  "last_updated": "2026-11-13T19:06:23+05:30",
   "changelog": [
     {
       "date": "2026-11-13",
       "items": [
         "Added Vectoree.",
-        "Added GonkaRouter."
+        "Added GonkaRouter.",
+        "Added Speka.",
+        "Added Braintrust.",
+        "Added Liquid AI.",
+        "Added Together AI.",
+        "Added Novita AI.",
+        "Added NLP Cloud.",
+        "Added IBM watsonx.ai.",
+        "Added optional free_type, phone_required and data_training fields, plus filters, a public JSON schema, and copy-paste starter snippets."
       ]
     },
     {
@@ -243,7 +251,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Yes"
     },
     {
       "id": "groq",
@@ -259,7 +270,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "openrouter",
@@ -275,7 +289,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "cloudflare",
@@ -291,7 +308,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "sambanova",
@@ -307,7 +327,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "mistral",
@@ -323,7 +346,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "zai",
@@ -339,7 +365,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "cohere",
@@ -355,7 +384,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "huggingface",
@@ -371,7 +403,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "nvidia",
@@ -387,7 +422,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-05",
-      "last_updated": "2026-10-05"
+      "last_updated": "2026-10-05",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "siliconflow",
@@ -403,7 +441,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "ollama",
@@ -419,7 +460,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-11-10"
+      "last_updated": "2026-11-10",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "cerebras",
@@ -435,7 +479,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "fireworks",
@@ -451,7 +498,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "alibaba",
@@ -467,7 +517,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "gcp-express",
@@ -483,7 +536,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "anthropic",
@@ -499,7 +555,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03"
+      "last_updated": "2026-10-03",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "apinex",
@@ -515,7 +574,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-23"
+      "last_updated": "2026-10-23",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "nararouter",
@@ -531,7 +593,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-05",
-      "last_updated": "2026-10-28"
+      "last_updated": "2026-10-28",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "freeai",
@@ -547,7 +612,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-06",
-      "last_updated": "2026-10-06"
+      "last_updated": "2026-10-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "unorouter",
@@ -563,7 +631,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-06",
-      "last_updated": "2026-10-06"
+      "last_updated": "2026-10-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "bazaarlink",
@@ -579,7 +650,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-07",
-      "last_updated": "2026-10-28"
+      "last_updated": "2026-10-28",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "yepapi",
@@ -595,7 +669,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-07",
-      "last_updated": "2026-10-07"
+      "last_updated": "2026-10-07",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "wanapis",
@@ -611,7 +688,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-07",
-      "last_updated": "2026-10-07"
+      "last_updated": "2026-10-07",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "tokenfaucet",
@@ -627,7 +707,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-07",
-      "last_updated": "2026-10-07"
+      "last_updated": "2026-10-07",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "dreamprompting",
@@ -643,7 +726,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-08",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "llm7",
@@ -659,7 +745,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-08",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "anyapi",
@@ -675,7 +764,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-08",
-      "last_updated": "2026-10-08"
+      "last_updated": "2026-10-08",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "yapi",
@@ -691,7 +783,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-08",
-      "last_updated": "2026-10-08"
+      "last_updated": "2026-10-08",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "gonka",
@@ -707,7 +802,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-09",
-      "last_updated": "2026-10-09"
+      "last_updated": "2026-10-09",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "freeaiapikey",
@@ -723,7 +821,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-09",
-      "last_updated": "2026-10-09"
+      "last_updated": "2026-10-09",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "vireonix",
@@ -739,7 +840,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-09",
-      "last_updated": "2026-10-09"
+      "last_updated": "2026-10-09",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "infron",
@@ -755,7 +859,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-09",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "tokenharbor",
@@ -771,7 +878,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-09",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "freetheai",
@@ -787,7 +897,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-12",
-      "last_updated": "2026-10-12"
+      "last_updated": "2026-10-12",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "requesty",
@@ -803,7 +916,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-12",
-      "last_updated": "2026-10-12"
+      "last_updated": "2026-10-12",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "kilo",
@@ -819,7 +935,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-12",
-      "last_updated": "2026-10-12"
+      "last_updated": "2026-10-12",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "ovh",
@@ -835,7 +954,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-12",
-      "last_updated": "2026-10-12"
+      "last_updated": "2026-10-12",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "trustedrouter",
@@ -851,7 +973,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-13",
-      "last_updated": "2026-10-13"
+      "last_updated": "2026-10-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "batchrate",
@@ -867,7 +992,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-13",
-      "last_updated": "2026-10-13"
+      "last_updated": "2026-10-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "paraloncloud",
@@ -883,7 +1011,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-13",
-      "last_updated": "2026-10-13"
+      "last_updated": "2026-10-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "orcarouter",
@@ -899,7 +1030,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-14",
-      "last_updated": "2026-10-14"
+      "last_updated": "2026-10-14",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "nous",
@@ -915,7 +1049,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-14",
-      "last_updated": "2026-10-14"
+      "last_updated": "2026-10-14",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "aihubmix",
@@ -931,7 +1068,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "routeway",
@@ -947,7 +1087,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "cleanapis",
@@ -963,7 +1106,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "agnes",
@@ -979,7 +1125,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "amd",
@@ -995,7 +1144,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "vercel",
@@ -1011,7 +1163,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-15",
-      "last_updated": "2026-10-15"
+      "last_updated": "2026-10-15",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "vikasit",
@@ -1027,7 +1182,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-16",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "xkiro",
@@ -1043,7 +1201,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-16",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "blazeapi",
@@ -1059,7 +1220,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-16",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "crowllm",
@@ -1075,7 +1239,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-16",
-      "last_updated": "2026-10-16"
+      "last_updated": "2026-10-16",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "onomeo",
@@ -1091,7 +1258,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-19",
-      "last_updated": "2026-10-19"
+      "last_updated": "2026-10-19",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "llmgateway",
@@ -1107,7 +1277,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-19",
-      "last_updated": "2026-10-19"
+      "last_updated": "2026-10-19",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "opencode",
@@ -1123,7 +1296,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-20",
-      "last_updated": "2026-10-20"
+      "last_updated": "2026-10-20",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "electronhub",
@@ -1139,7 +1315,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-20",
-      "last_updated": "2026-10-20"
+      "last_updated": "2026-10-20",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "pollinations",
@@ -1155,7 +1334,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-20",
-      "last_updated": "2026-10-20"
+      "last_updated": "2026-10-20",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "router9",
@@ -1171,7 +1353,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-21",
-      "last_updated": "2026-10-21"
+      "last_updated": "2026-10-21",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "ramp",
@@ -1187,7 +1372,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-21",
-      "last_updated": "2026-10-21"
+      "last_updated": "2026-10-21",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "bytez",
@@ -1203,7 +1391,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-21",
-      "last_updated": "2026-10-21"
+      "last_updated": "2026-10-21",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "modelscope",
@@ -1219,7 +1410,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-21",
-      "last_updated": "2026-10-21"
+      "last_updated": "2026-10-21",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "aionlabs",
@@ -1235,7 +1429,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-22",
-      "last_updated": "2026-10-22"
+      "last_updated": "2026-10-22",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "frenix",
@@ -1251,7 +1448,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-22",
-      "last_updated": "2026-10-22"
+      "last_updated": "2026-10-22",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "mixroute",
@@ -1267,7 +1467,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-22",
-      "last_updated": "2026-10-22"
+      "last_updated": "2026-10-22",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "bayofassets",
@@ -1283,7 +1486,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-22",
-      "last_updated": "2026-10-22"
+      "last_updated": "2026-10-22",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "gwbus",
@@ -1299,7 +1505,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-23",
-      "last_updated": "2026-10-23"
+      "last_updated": "2026-10-23",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "euri",
@@ -1315,7 +1524,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-23",
-      "last_updated": "2026-10-23"
+      "last_updated": "2026-10-23",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "apibridge",
@@ -1331,7 +1543,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-23",
-      "last_updated": "2026-10-23"
+      "last_updated": "2026-10-23",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "routmy",
@@ -1347,7 +1562,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-23",
-      "last_updated": "2026-10-23"
+      "last_updated": "2026-10-23",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "flexlora",
@@ -1363,7 +1581,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-26",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "iteracompute",
@@ -1379,7 +1600,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-26",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "inception",
@@ -1395,7 +1619,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-26",
-      "last_updated": "2026-10-26"
+      "last_updated": "2026-10-26",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "experiential-labs",
@@ -1411,7 +1638,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-27",
-      "last_updated": "2026-10-27"
+      "last_updated": "2026-10-27",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "runcrate",
@@ -1427,7 +1657,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-27",
-      "last_updated": "2026-10-27"
+      "last_updated": "2026-10-27",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "inferall",
@@ -1443,7 +1676,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-27",
-      "last_updated": "2026-10-27"
+      "last_updated": "2026-10-27",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "flux-router",
@@ -1459,7 +1695,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-27",
-      "last_updated": "2026-10-27"
+      "last_updated": "2026-10-27",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "river",
@@ -1475,7 +1714,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-28",
-      "last_updated": "2026-10-28"
+      "last_updated": "2026-10-28",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "edgeone-makers",
@@ -1491,7 +1733,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-29",
-      "last_updated": "2026-10-29"
+      "last_updated": "2026-10-29",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "typhoon",
@@ -1507,7 +1752,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-29",
-      "last_updated": "2026-10-29"
+      "last_updated": "2026-10-29",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "sensenova",
@@ -1523,7 +1771,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-30",
-      "last_updated": "2026-10-30"
+      "last_updated": "2026-10-30",
+      "free_type": "Unspecified",
+      "phone_required": "Yes",
+      "data_training": "Unspecified"
     },
     {
       "id": "pekpik",
@@ -1539,7 +1790,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-30",
-      "last_updated": "2026-10-30"
+      "last_updated": "2026-10-30",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "aevon",
@@ -1555,7 +1809,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-30",
-      "last_updated": "2026-10-30"
+      "last_updated": "2026-10-30",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "airforce",
@@ -1571,7 +1828,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-30",
-      "last_updated": "2026-10-30"
+      "last_updated": "2026-10-30",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "infercom",
@@ -1587,7 +1847,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-02",
-      "last_updated": "2026-11-02"
+      "last_updated": "2026-11-02",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "ai21",
@@ -1603,7 +1866,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-02",
-      "last_updated": "2026-11-11"
+      "last_updated": "2026-11-11",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "tencent-tokenhub",
@@ -1619,7 +1885,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-02",
-      "last_updated": "2026-11-02"
+      "last_updated": "2026-11-02",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "helyx-ai",
@@ -1635,7 +1904,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-02",
-      "last_updated": "2026-11-02"
+      "last_updated": "2026-11-02",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "joingonka",
@@ -1651,7 +1923,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-03",
-      "last_updated": "2026-11-03"
+      "last_updated": "2026-11-03",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "ngrok-ai",
@@ -1667,7 +1942,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-03",
-      "last_updated": "2026-11-03"
+      "last_updated": "2026-11-03",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "nabh-cloud",
@@ -1683,7 +1961,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-04",
-      "last_updated": "2026-11-04"
+      "last_updated": "2026-11-04",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "mervex",
@@ -1699,7 +1980,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-04",
-      "last_updated": "2026-11-04"
+      "last_updated": "2026-11-04",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "orq-gateway",
@@ -1715,7 +1999,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-04",
-      "last_updated": "2026-11-04"
+      "last_updated": "2026-11-04",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "openany",
@@ -1731,7 +2018,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-04",
-      "last_updated": "2026-11-04"
+      "last_updated": "2026-11-04",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "hetzner-inference",
@@ -1747,7 +2037,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-05",
-      "last_updated": "2026-11-05"
+      "last_updated": "2026-11-05",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "lightning-ai",
@@ -1763,7 +2056,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-11-05",
-      "last_updated": "2026-11-05"
+      "last_updated": "2026-11-05",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "openpaths",
@@ -1779,7 +2075,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "llmeu",
@@ -1795,7 +2094,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "boundless-api",
@@ -1811,7 +2113,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "mango-inference",
@@ -1827,7 +2132,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "llmcloud",
@@ -1843,7 +2151,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "nscale",
@@ -1859,7 +2170,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "maritaca",
@@ -1875,7 +2189,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-06",
-      "last_updated": "2026-11-06"
+      "last_updated": "2026-11-06",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "k-exaone",
@@ -1891,7 +2208,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-09",
-      "last_updated": "2026-11-09"
+      "last_updated": "2026-11-09",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "regolo",
@@ -1907,7 +2227,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-11-09",
-      "last_updated": "2026-11-09"
+      "last_updated": "2026-11-09",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "freeinference",
@@ -1923,7 +2246,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-11-10",
-      "last_updated": "2026-11-10"
+      "last_updated": "2026-11-10",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "inferbase",
@@ -1939,7 +2265,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-10",
-      "last_updated": "2026-11-10"
+      "last_updated": "2026-11-10",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "hyperbolic",
@@ -1955,7 +2284,10 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-11-11",
-      "last_updated": "2026-11-11"
+      "last_updated": "2026-11-11",
+      "free_type": "trial",
+      "phone_required": "Yes",
+      "data_training": "Unspecified"
     },
     {
       "id": "arcaneapi",
@@ -1971,7 +2303,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-11",
-      "last_updated": "2026-11-11"
+      "last_updated": "2026-11-11",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "1vy",
@@ -1987,7 +2322,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-11",
-      "last_updated": "2026-11-11"
+      "last_updated": "2026-11-11",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "novai",
@@ -2003,7 +2341,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-12",
-      "last_updated": "2026-11-12"
+      "last_updated": "2026-11-12",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "zro",
@@ -2019,7 +2360,10 @@
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-11-12",
-      "last_updated": "2026-11-12"
+      "last_updated": "2026-11-12",
+      "free_type": "Unspecified",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "vectoree",
@@ -2035,7 +2379,10 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-13",
-      "last_updated": "2026-11-13"
+      "last_updated": "2026-11-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     },
     {
       "id": "gonkarouter",
@@ -2051,7 +2398,143 @@
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-13",
-      "last_updated": "2026-11-13"
+      "last_updated": "2026-11-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "speka",
+      "name": "Speka",
+      "url": "https://speka.me",
+      "openai_compatible": "yes",
+      "base_url": "https://speka.me/v1",
+      "free_allowance": "Free plan includes $1 of model usage each month and access to all open catalog models",
+      "tokens_per_day": null,
+      "limits": "10 requests/minute and 1 API key on the Free plan",
+      "card_required": "No",
+      "notes": "Official site says prompts are not used to train models. A gateway: do not send private data if that is a concern.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "No"
+    },
+    {
+      "id": "braintrust",
+      "name": "Braintrust",
+      "url": "https://docs.braintrust.dev/plans-and-limits",
+      "openai_compatible": "yes",
+      "base_url": "https://api.braintrust.dev/v1/proxy",
+      "free_allowance": "Starter plan is $0/month and includes $10 of model credits each month for built-in models",
+      "tokens_per_day": null,
+      "limits": "Monthly credits do not roll over. On Starter, built-in model use pauses after credits unless a card is added for on-demand usage",
+      "card_required": "No",
+      "notes": "Official examples still use this OpenAI-compatible proxy URL; docs also note the proxy page is deprecated and that requests now route to Braintrust's gateway.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "liquid",
+      "name": "Liquid AI",
+      "url": "https://docs.liquid.ai/api/quickstart",
+      "openai_compatible": "yes",
+      "base_url": "https://api.liquid.ai/openai/v1",
+      "free_allowance": "Limited-time $2 in free API credits for new accounts (stated on console.liquid.ai)",
+      "tokens_per_day": null,
+      "limits": "Per-model request and token limits are listed in Liquid Console, not as a single public number",
+      "card_required": "Unspecified",
+      "notes": "Official docs say chat models speak the OpenAI API. The $2 new-account credit is described as limited-time on the console.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "together",
+      "name": "Together AI",
+      "url": "https://docs.together.ai/docs/serverless/models",
+      "openai_compatible": "yes",
+      "base_url": "https://api.together.ai/v1",
+      "free_allowance": "Ternary Bonsai 27B (Prism-ML/Ternary-Bonsai-27B) is listed as Free for input and output on the serverless models page",
+      "tokens_per_day": null,
+      "limits": "No fixed public RPM for this model; official rate-limit docs say limits may apply under high demand",
+      "card_required": "Unspecified",
+      "notes": "Other Together serverless models on the same page are priced per token. Confirm the current Free listing before you rely on it.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "novita",
+      "name": "Novita AI",
+      "url": "https://novita.ai/pricing",
+      "openai_compatible": "yes",
+      "base_url": "https://api.novita.ai/openai/v1",
+      "free_allowance": "Apodex 1.1 Mini is listed with Free input and Free output on the official pricing page",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Official quickstart uses the OpenAI-compatible chat completions endpoint. Other catalog models on the pricing page are paid.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "nlpcloud",
+      "name": "NLP Cloud",
+      "url": "https://nlpcloud.com/",
+      "openai_compatible": "no",
+      "base_url": "https://api.nlpcloud.io/v1",
+      "free_allowance": "Free plan can test the I models without a credit card. The pay-as-you-go plan adds an initial $15 credit and requires a card",
+      "tokens_per_day": null,
+      "limits": "Official FAQ says throughput on the Free plan is very limited; no public numeric cap was found",
+      "card_required": "No",
+      "notes": "Uses NLP Cloud's own API, not an OpenAI-compatible chat endpoint. The $15 credit applies only to pay-as-you-go.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "watsonx",
+      "name": "IBM watsonx.ai",
+      "url": "https://www.ibm.com/products/watsonx-ai/pricing",
+      "openai_compatible": null,
+      "base_url": "https://us-south.ml.cloud.ibm.com",
+      "free_allowance": "Free plan: up to 300,000 foundation-model tokens per month, up to 20 CUH of machine learning tools, and up to 100 documents for text extraction",
+      "tokens_per_day": null,
+      "limits": "Monthly Free-plan caps above; a tokens-per-day figure is not published",
+      "card_required": "Unspecified",
+      "notes": "Dallas service URL is from IBM Cloud API Docs; other regions have their own hosts. A simple OpenAI-compatible base URL was not clearly published on the pages checked.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-13",
+      "last_updated": "2026-11-13",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     }
   ]
 }

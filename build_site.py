@@ -74,6 +74,9 @@ HEADERS_FILE = f"""/*
 
 /data.json
   X-Content-Usage: {DATA_USE_HEADER}
+
+/schema.json
+  X-Content-Usage: {DATA_USE_HEADER}
 """
 
 
@@ -91,6 +94,7 @@ FOOTER = [
     ("/privacy", "Privacy"),
     ("/terms", "Terms"),
     ("/data.json", "data.json"),
+    ("/schema.json", "schema.json"),
 ]
 
 
@@ -336,10 +340,14 @@ def factbox(s: dict) -> str:
         ("Tokens per day", esc(fmt_num(s.get("tokens_per_day")))),
         ("Rate limits", esc(published(s.get("limits")))),
         ("Card required", esc(published(s.get("card_required")))),
+        ("Phone required", esc(published(phone_of(s)))),
+        ("Offer type", esc(published(s.get("free_type")))),
+        ("Free-tier data used for training", esc(published(data_training_of(s)))),
         ("Base URL", esc(published(s.get("base_url"))) if not has_base(s) else f"<code>{esc(s['base_url'])}</code>"),
         ("Relay warning", "Yes — treat as a relay or reseller" if s.get("relay_risk") else "No"),
+        ("Source", f'<a href="{attr_esc(s["url"])}" rel="noopener">Official page</a>'),
         ("First listed", esc(fmt_date(s.get("first_reported")))),
-        ("Entry updated", esc(fmt_date(s.get("last_updated")))),
+        ("Last verified", esc(fmt_date(s.get("last_updated")))),
     ]
     if s.get("notes"):
         rows.append(("Notes", esc(s["notes"])))
@@ -355,6 +363,139 @@ def factbox(s: dict) -> str:
 
 def has_base(s) -> bool:
     return bool(s.get("base_url")) and str(s.get("base_url")).strip().lower() != "unspecified"
+
+
+def flag_value(v) -> str:
+    if v is None or str(v).strip() == "":
+        return "Unspecified"
+    return str(v).strip()
+
+
+def is_unspecified(v) -> bool:
+    return flag_value(v).lower() in {"unspecified", "none"}
+
+
+def free_type_of(s: dict) -> str:
+    return flag_value(s.get("free_type")).lower()
+
+
+def phone_of(s: dict) -> str:
+    return flag_value(s.get("phone_required"))
+
+
+def data_training_of(s: dict) -> str:
+    return flag_value(s.get("data_training"))
+
+
+def starter_code(s: dict) -> str:
+    """Short Python starter. Only for OpenAI-compatible entries with a published base URL."""
+    if s.get("openai_compatible") != "yes" or not has_base(s):
+        return ""
+    base = s["base_url"]
+    if not str(base).startswith("http") or "{" in str(base):
+        return ""
+    return (
+        "import os\n"
+        "from openai import OpenAI\n\n"
+        "client = OpenAI(\n"
+        "    api_key=os.environ[\"API_KEY\"],\n"
+        f"    base_url=\"{base}\",\n"
+        ")\n\n"
+        "resp = client.chat.completions.create(\n"
+        "    model=\"MODEL_ID\",  # copy the model id from the provider's docs\n"
+        "    messages=[{\"role\": \"user\", \"content\": \"Hello\"}],\n"
+        ")\n"
+        "print(resp.choices[0].message.content)\n"
+    )
+
+
+def write_schema_json() -> str:
+    """JSON Schema for data.json. Optional fields may be omitted or set to Unspecified."""
+    schema = {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "$id": f"{SITE}/schema.json",
+        "title": "Free LLM API Tokens tracker dataset",
+        "description": (
+            "Catalogue of free and free-tier LLM API providers. Quotas, prices and "
+            "endpoints come only from each provider's own public pages. Use "
+            '"Not published" or Unspecified when official pages do not give a figure; never invent one.'
+        ),
+        "type": "object",
+        "required": ["schema_version", "last_updated", "sites"],
+        "additionalProperties": True,
+        "properties": {
+            "schema_version": {"type": "integer", "minimum": 1},
+            "data_use": {"type": "string"},
+            "last_updated": {"type": "string", "description": "ISO-8601 timestamp in Asia/Calcutta (IST)."},
+            "changelog": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "required": ["date", "items"],
+                    "properties": {
+                        "date": {"type": "string"},
+                        "items": {"type": "array", "items": {"type": "string"}},
+                    },
+                },
+            },
+            "sites": {
+                "type": "array",
+                "items": {"$ref": "#/$defs/provider"},
+            },
+        },
+        "$defs": {
+            "publishedString": {
+                "description": "Official text, or Unspecified / null when not published.",
+                "type": ["string", "null"],
+            },
+            "yesNoPartial": {
+                "anyOf": [
+                    {"type": "string", "enum": ["yes", "no", "partial", "Unspecified"]},
+                    {"type": "null"},
+                ]
+            },
+            "yesNo": {
+                "type": "string",
+                "enum": ["Yes", "No", "Unspecified"],
+            },
+            "provider": {
+                "type": "object",
+                "required": [
+                    "id", "name", "url", "openai_compatible", "base_url",
+                    "free_allowance", "tokens_per_day", "limits", "card_required",
+                    "notes", "relay_risk", "category", "first_reported", "last_updated",
+                ],
+                "additionalProperties": True,
+                "properties": {
+                    "id": {"type": "string"},
+                    "name": {"type": "string"},
+                    "url": {"type": "string", "description": "Official docs or pricing page used as the source."},
+                    "openai_compatible": {"$ref": "#/$defs/yesNoPartial"},
+                    "base_url": {"$ref": "#/$defs/publishedString"},
+                    "free_allowance": {"$ref": "#/$defs/publishedString"},
+                    "tokens_per_day": {"type": ["integer", "null"], "minimum": 0},
+                    "limits": {"$ref": "#/$defs/publishedString"},
+                    "card_required": {"$ref": "#/$defs/publishedString"},
+                    "notes": {"type": "string"},
+                    "relay_risk": {"type": "boolean"},
+                    "category": {"type": "string", "enum": ["official", "gateway"]},
+                    "first_reported": {"type": "string"},
+                    "last_updated": {"type": "string", "description": "Date this entry was last checked against official pages."},
+                    "free_type": {
+                        "type": "string",
+                        "enum": ["ongoing", "trial", "Unspecified"],
+                        "description": "ongoing = renewing free tier; trial = one-time or time-limited credit. Unspecified if official pages are unclear.",
+                    },
+                    "phone_required": {"$ref": "#/$defs/yesNo"},
+                    "data_training": {
+                        "$ref": "#/$defs/yesNo",
+                        "description": "Whether official pages say free-tier prompts may be used for training. Unspecified if they do not say.",
+                    },
+                },
+            },
+        },
+    }
+    return json.dumps(schema, indent=2, ensure_ascii=False) + "\n"
 
 
 def snippets_for(s: dict) -> str:
@@ -1024,6 +1165,14 @@ HOME_FAQS = [
         "It depends on the provider. Use the “No card needed” filter to narrow the list, then confirm on their site — some ask for a card later, or after a trial credit runs out.",
     ),
     (
+        "Do I need a phone number?",
+        "Only some providers say so on their official pages. Use the “No phone needed” filter to see entries we could confirm do not require a phone. If the field says “Not published”, check their sign-up page — we do not guess.",
+    ),
+    (
+        "What is the difference between ongoing free and a trial?",
+        "“Ongoing free” is a renewing free tier. “Trial / one-time” is a signup credit or a time-limited allowance. We only set this when official pages make the type clear; otherwise it stays “Not published”.",
+    ),
+    (
         "Why does it say “Not published”?",
         "The provider has not published that figure on their public pages. We never invent quotas, prices or endpoints.",
     ),
@@ -1111,6 +1260,9 @@ def dataset_ld(data):
             "tokens_per_day",
             "base_url",
             "card_required",
+            "free_type",
+            "phone_required",
+            "data_training",
             "limits",
             "relay_risk",
         ],
@@ -1120,6 +1272,12 @@ def dataset_ld(data):
                 "encodingFormat": "application/json",
                 "contentUrl": SITE + "/data.json",
                 "name": "data.json",
+            },
+            {
+                "@type": "DataDownload",
+                "encodingFormat": "application/schema+json",
+                "contentUrl": SITE + "/schema.json",
+                "name": "schema.json",
             },
             {
                 "@type": "DataDownload",
@@ -1152,6 +1310,11 @@ def provider_card_html(s: dict) -> str:
         badges += '<span class="b off">Official provider</span>'
     if s.get("relay_risk"):
         badges += '<span class="b risk">Relay warning</span>'
+    ft = free_type_of(s)
+    if ft == "trial":
+        badges += '<span class="b trial">Trial / one-time</span>'
+    elif ft == "ongoing":
+        badges += '<span class="b ongoing">Ongoing free</span>'
     if dropped:
         badges += '<span class="b end">Ended</span>'
     if has_base(s):
@@ -1167,6 +1330,17 @@ def provider_card_html(s: dict) -> str:
         else ""
     )
     tpd = f'{s["tokens_per_day"]:,}' if s.get("tokens_per_day") else "Not published"
+    phone = published(phone_of(s))
+    code = starter_code(s)
+    starter = ""
+    if code:
+        starter = (
+            '<details class="starter"><summary>Copy Python starter</summary>'
+            f'<div class="snippet"><button type="button" class="copy copy-snip" data-c="{attr_esc(code)}">Copy</button>'
+            f'<pre>{esc(code)}</pre></div>'
+            "<p class=\"extra\">Copy the model id from the provider’s official docs. Do not guess it.</p>"
+            "</details>"
+        )
     cls = "card dropped" if dropped else "card"
     return (
         f'<article class="{cls}" data-provider="{attr_esc(s.get("id") or "")}">'
@@ -1177,11 +1351,15 @@ def provider_card_html(s: dict) -> str:
         f'<div class="meta">'
         f'<div><dt>Tokens per day</dt><dd>{esc(tpd)}</dd></div>'
         f'<div><dt>Card needed</dt><dd>{esc(published(s.get("card_required")))}</dd></div>'
+        f'<div><dt>Phone needed</dt><dd>{esc(phone)}</dd></div>'
+        f'<div><dt>Offer type</dt><dd>{esc(published(s.get("free_type")))}</dd></div>'
         f'</div>'
         f'<div class="base"><dt>Base URL</dt><div class="base-row">{base}</div></div>'
         f'<div class="extra"><dt>Limits</dt><dd>{esc(published(s.get("limits")))}</dd></div>'
         f'{notes}'
-        f'<div class="extra"><dt>First listed</dt><dd>{esc(fmt_date(s.get("first_reported")))}</dd> · <dt>Updated</dt><dd>{esc(fmt_date(s.get("last_updated")))}</dd></div>'
+        f'{starter}'
+        f'<div class="extra"><dt>Source</dt><dd><a href="{attr_esc(s["url"])}" target="_blank" rel="noopener nofollow">Official page</a></dd>'
+        f' · <dt>Last verified</dt><dd>{esc(fmt_date(s.get("last_updated")))}</dd></div>'
         f'</article>'
     )
 
@@ -1211,6 +1389,8 @@ def provider_table_html(data) -> str:
             f"<td>{esc(allowance_text(s))}</td>"
             f"<td>{esc(fmt_num(s.get('tokens_per_day')))}</td>"
             f"<td>{esc(published(s.get('card_required')))}</td>"
+            f"<td>{esc(published(phone_of(s)))}</td>"
+            f"<td>{esc(published(s.get('free_type')))}</td>"
             f"<td>{base}</td>"
             f"<td>{'Yes' if s.get('relay_risk') else 'No'}</td>"
             f"<td>{esc(fmt_date(s.get('last_updated')))}</td>"
@@ -1227,8 +1407,9 @@ def provider_table_html(data) -> str:
         '<th scope="col">Provider</th><th scope="col">Status</th>'
         '<th scope="col">OpenAI compatible</th><th scope="col">Free allowance</th>'
         '<th scope="col">Tokens/day</th><th scope="col">Card</th>'
+        '<th scope="col">Phone</th><th scope="col">Offer type</th>'
         '<th scope="col">Base URL</th><th scope="col">Relay warning</th>'
-        '<th scope="col">Updated</th>'
+        '<th scope="col">Last verified</th>'
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></div>"
@@ -1603,7 +1784,8 @@ Methodology: https://freellmapi.link/about
 - [Privacy]({SITE}/privacy): Privacy policy, cookies, Analytics and ads.
 - [Terms]({SITE}/terms): Terms and disclaimer.
 - [Contact]({SITE}/contact): Email contact.
-- [Machine-readable data]({SITE}/data.json): The source list (schema_version 1).
+- [Machine-readable data]({SITE}/data.json): The source list (schema_version {data.get('schema_version', 1)}).
+- [JSON Schema]({SITE}/schema.json): Schema for data.json, so you can validate the file before trusting it.
 - [Full provider summary]({SITE}/llms-full.txt): Compact text list of every provider in data.json.
 
 ## Guides
@@ -1631,9 +1813,11 @@ Every quota, price, rate limit and endpoint is copied from the provider’s own 
             f"- {s['name']} | {status} | category={s.get('category')} | "
             f"openai_compatible={oai_label(s)} | allowance={published(s.get('free_allowance'))} | "
             f"tokens_per_day={fmt_num(s.get('tokens_per_day'))} | limits={published(s.get('limits'))} | "
-            f"card={published(s.get('card_required'))} | base_url={published(s.get('base_url'))} | "
+            f"card={published(s.get('card_required'))} | phone={published(phone_of(s))} | "
+            f"free_type={published(s.get('free_type'))} | "
+            f"base_url={published(s.get('base_url'))} | "
             f"relay_risk={'yes' if s.get('relay_risk') else 'no'} | url={s['url']} | "
-            f"entry_updated={s.get('last_updated')}"
+            f"last_verified={s.get('last_updated')}"
         )
     llms_full = (
         f"# {NAME} — full provider list\n\n"
@@ -1647,9 +1831,12 @@ Every quota, price, rate limit and endpoint is copied from the provider’s own 
     )
     if write(HERE / "llms-full.txt", llms_full):
         changed += 1
+    if write(HERE / "schema.json", write_schema_json()):
+        changed += 1
     routes.append(("/llms.txt", data["last_updated"][:10], "daily", "0.4"))
     routes.append(("/llms-full.txt", data["last_updated"][:10], "daily", "0.3"))
     routes.append(("/data.json", data["last_updated"][:10], "daily", "0.6"))
+    routes.append(("/schema.json", data["last_updated"][:10], "daily", "0.5"))
 
     # sitemap
     # unique paths, home first
