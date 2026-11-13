@@ -1035,7 +1035,12 @@ def render_page(
       </svg>
       Free LLM API Tokens
     </a>
-    <nav class="nav" aria-label="Primary">{''.join(nav)}</nav>
+    <details class="nav-menu">
+      <summary class="icon-btn nav-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </summary>
+      <nav class="nav" aria-label="Primary">{''.join(nav)}</nav>
+    </details>
     <div class="top-actions">
       <button type="button" class="icon-btn" id="themeBtn" aria-label="Toggle light and dark theme" title="Toggle theme">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
@@ -1571,26 +1576,42 @@ def whats_new_content(data: dict) -> str:
         lede,
         '<p class="feed-line">Subscribe: <a href="/feed.xml">RSS feed</a>. Machine-readable copy: <a href="/changes.json">changes.json</a>.</p>',
     ]
-    for day in days:
+
+    def day_section(day: dict) -> str:
         items = changelog_day_items(day)
-        blocks.append(
+        return (
             f'<section class="change-day" id="{attr_esc(day["date"])}">'
             f'<h2>{esc(fmt_date(day["date"]))}</h2>'
             f'<ul>{"".join(f"<li>{item}</li>" for item in items)}</ul>'
             "</section>"
         )
-    if earlier:
+
+    recent, older = days[:7], days[7:]
+    blocks.extend(day_section(day) for day in recent)
+    if older:
+        n = len(older)
         blocks.append(
+            f'<details class="older-changes"><summary>Earlier updates ({n} day{"s" if n != 1 else ""})</summary>'
+            + "".join(day_section(day) for day in older)
+            + "</details>"
+        )
+    if earlier:
+        earlier_html = [
             "<h2 id=\"earlier-notes\">Earlier notes recorded in the first published data file</h2>"
             "<p>These lines were already in <code>data.json</code> when the repository was first published "
             f"on {esc(fmt_date('2026-10-26'))}. The dates below are the dates stored in that file, not later git commits.</p>"
-        )
+        ]
         for entry in earlier:
             items = "".join(f"<li>{esc(i)}</li>" for i in entry["items"])
-            blocks.append(
+            earlier_html.append(
                 f'<section class="change-day" id="note-{attr_esc(entry["date"])}">'
                 f'<h3>{esc(fmt_date(entry["date"]))}</h3><ul>{items}</ul></section>'
             )
+        blocks.append(
+            '<details class="older-changes"><summary>Earlier notes recorded in the first published data file</summary>'
+            + "".join(earlier_html)
+            + "</details>"
+        )
     if len(blocks) <= 4 and not days and not earlier:
         blocks.append("<p>No changelog entries are available yet.</p>")
     return '<main id="content" class="wrap page"><article class="prose">' + "".join(blocks) + "</article></main>"
@@ -1763,25 +1784,36 @@ def model_table(fam: dict) -> str:
         s = item["site"]
         status = "Ended" if item["dropped"] else "Active"
         tr_cls = ' class="ended"' if item["dropped"] else ""
+        status_badge = (
+            ' <span class="b end">Ended</span>' if item["dropped"] else ""
+        )
         name = (
             f'<a href="/#{attr_esc(provider_anchor(s))}">{esc(s["name"])}</a>'
+            f"{status_badge}"
             f' · <a href="{attr_esc(s["url"])}" rel="noopener nofollow">Official page</a>'
         )
         base = f'<code>{esc(s["base_url"])}</code>' if has_base(s) else "Not published"
         excerpt = site_features.excerpt_for(item, spec["pattern"])
         named = esc(excerpt) if excerpt else "—"
+        extra = (
+            '<details class="more-meta">'
+            "<summary>Base URL and extra details</summary>"
+            "<dl>"
+            f"<div><dt>Base URL</dt> <dd>{base}</dd></div>"
+            f"<div><dt>Named in our data as</dt> <dd>{named}</dd></div>"
+            f"<div><dt>Tokens/day</dt> <dd>{esc(fmt_num(s.get('tokens_per_day')))}</dd></div>"
+            f"<div><dt>Limits</dt> <dd>{esc(published(s.get('limits')))}</dd></div>"
+            f"<div><dt>Card needed</dt> <dd>{esc(published(s.get('card_required')))}</dd></div>"
+            f"<div><dt>Status</dt> <dd>{esc(status)}</dd></div>"
+            f"<div><dt>Last verified</dt> <dd>{esc(fmt_date(s.get('last_updated')))}</dd></div>"
+            "</dl>"
+            "</details>"
+        )
         rows.append(
             f"<tr{tr_cls}>"
-            f"<th scope=\"row\">{name}</th>"
-            f"<td>{esc(status)}</td>"
-            f"<td>{esc(oai_label(s))}</td>"
-            f"<td>{esc(allowance_text(s))}</td>"
-            f"<td>{esc(fmt_num(s.get('tokens_per_day')))}</td>"
-            f"<td>{esc(published(s.get('limits')))}</td>"
-            f"<td>{esc(published(s.get('card_required')))}</td>"
-            f"<td>{base}</td>"
-            f"<td>{named}</td>"
-            f"<td>{esc(fmt_date(s.get('last_updated')))}</td>"
+            f"<th scope=\"row\">{name}{extra}</th>"
+            f'<td data-label="Free limit">{esc(allowance_text(s))}</td>'
+            f'<td data-label="OpenAI compatible">{esc(oai_label(s))}</td>'
             "</tr>"
         )
     cap = (
@@ -1789,14 +1821,12 @@ def model_table(fam: dict) -> str:
         "Figures are copied from each provider’s own pages. “Not published” means no official number was found."
     )
     return (
-        '<div class="catalog-wrap"><table class="catalog">'
+        '<div class="catalog-wrap"><table class="catalog model-catalog">'
         f"<caption>{cap}</caption>"
         "<thead><tr>"
-        '<th scope="col">Provider</th><th scope="col">Status</th>'
-        '<th scope="col">OpenAI compatible</th><th scope="col">Free allowance</th>'
-        '<th scope="col">Tokens/day</th><th scope="col">Limits</th>'
-        '<th scope="col">Card</th><th scope="col">Base URL</th>'
-        '<th scope="col">Named in our data as</th><th scope="col">Last verified</th>'
+        '<th scope="col">Provider</th>'
+        '<th scope="col">Free limit</th>'
+        '<th scope="col">OpenAI compatible</th>'
         "</tr></thead><tbody>"
         + "".join(rows)
         + "</tbody></table></div>"
@@ -1840,8 +1870,8 @@ def model_page_content(fam: dict, data: dict) -> str:
         f'<main id="content" class="wrap page">'
         f'<article class="prose">{header}'
         f"<h2>Providers that name {esc(name)}</h2>"
-        f"<p>The table lists the published free allowance, OpenAI compatibility, base URL and limits from our data. "
-        "The last column quotes the clause in our data that names this family.</p></article>"
+        f"<p>The table lists the published free limit and OpenAI compatibility from our data. "
+        "The base URL, rate limits and the clause that names this family are under each provider.</p></article>"
         f"{model_table(fam)}"
         f'<article class="prose"><h2>Example request</h2>{model_snippet(fam)}{faq_html}{related}</article>'
         "</main>"
