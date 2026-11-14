@@ -5,12 +5,12 @@
 Canonical site: https://freellmapi.link/
 Contact: hello@lumiono.com
 Publisher: Free LLM API Tokens (independent tracker; not affiliated with any listed provider)
-Last tracker snapshot: 13 Nov 2026, 13:36 UTC
+Last tracker snapshot: 14 Nov 2026, 03:44 UTC
 Methodology: https://freellmapi.link/about
 
 ## Pages
 
-- [Provider list](https://freellmapi.link/): Searchable catalogue of 121 providers (117 active offers in the current snapshot).
+- [Provider list](https://freellmapi.link/): Searchable catalogue of 124 providers (120 active offers in the current snapshot).
 - [What’s new](https://freellmapi.link/new): Providers added, changed or removed, grouped by date (from git history of data.json).
 - [RSS feed](https://freellmapi.link/feed.xml): The same changelog as a feed.
 - [Model pages](https://freellmapi.link/models): Free API pages for model families named by at least two providers in our data.
@@ -26,12 +26,13 @@ Methodology: https://freellmapi.link/about
 
 ## Model pages
 
-- [DeepSeek](https://freellmapi.link/models/deepseek): Where can I use DeepSeek for free via API? 14 providers in our data name this family.
-- [Qwen](https://freellmapi.link/models/qwen): Where can I use Qwen for free via API? 5 providers in our data name this family.
+- [DeepSeek](https://freellmapi.link/models/deepseek): Where can I use DeepSeek for free via API? 15 providers in our data name this family.
+- [Qwen](https://freellmapi.link/models/qwen): Where can I use Qwen for free via API? 6 providers in our data name this family.
+- [Gemma](https://freellmapi.link/models/gemma): Where can I use Gemma for free via API? 2 providers in our data name this family.
 - [Gemini](https://freellmapi.link/models/gemini): Where can I use Gemini for free via API? 5 providers in our data name this family.
 - [GPT-OSS](https://freellmapi.link/models/gpt-oss): Where can I use GPT-OSS for free via API? 3 providers in our data name this family.
 - [Mistral](https://freellmapi.link/models/mistral): Where can I use Mistral for free via API? 2 providers in our data name this family.
-- [GLM](https://freellmapi.link/models/glm): Where can I use GLM for free via API? 10 providers in our data name this family.
+- [GLM](https://freellmapi.link/models/glm): Where can I use GLM for free via API? 11 providers in our data name this family.
 - [Kimi](https://freellmapi.link/models/kimi): Where can I use Kimi for free via API? 5 providers in our data name this family.
 - [MiniMax](https://freellmapi.link/models/minimax): Where can I use MiniMax for free via API? 4 providers in our data name this family.
 

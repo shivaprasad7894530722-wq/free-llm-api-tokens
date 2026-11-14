@@ -1,8 +1,16 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-13T13:36:23Z",
+  "last_updated": "2026-11-14T03:44:57Z",
   "changelog": [
+    {
+      "date": "2026-11-14",
+      "items": [
+        "Added AMD Token Lab.",
+        "Added NFlashX.",
+        "Added Qora API."
+      ]
+    },
     {
       "date": "2026-11-13",
       "items": [
@@ -2535,6 +2543,54 @@
       "free_type": "ongoing",
       "phone_required": "Unspecified",
       "data_training": "Unspecified"
+    },
+    {
+      "id": "amd-token-lab",
+      "name": "AMD Token Lab",
+      "url": "https://www.amd.com/en/developer/ai-dev-program.html",
+      "openai_compatible": "yes",
+      "base_url": "https://api.tokenlab.amd.com/v1",
+      "free_allowance": "Complimentary Token Lab points for free AMD AI Developer Program members (10 points, 30-day access per AMD dev community)",
+      "tokens_per_day": null,
+      "limits": "About 20 RPM per key; points drawn per model rate; access extendable once by 15 days",
+      "card_required": "No",
+      "notes": "Open models on AMD GPUs: DeepSeek V4, Qwen3.8, Gemma 4, GLM-5.3. AMD publishes no point amount on the program page.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-14",
+      "last_updated": "2026-11-14"
+    },
+    {
+      "id": "nflashx",
+      "name": "NFlashX",
+      "url": "https://github.com/nflashx/nflashx",
+      "openai_compatible": "yes",
+      "base_url": "https://nflashx.cc.cd/v1",
+      "free_allowance": "$1 welcome credit on signup (first 100 accounts) plus free-tier Flash model",
+      "tokens_per_day": null,
+      "limits": "Flash model 2 req/min on free, 4K output",
+      "card_required": "No",
+      "notes": "Small new multimodal API (chat, image, video) by NowayDev; credit capped per network.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-14",
+      "last_updated": "2026-11-14"
+    },
+    {
+      "id": "qora-api",
+      "name": "Qora API",
+      "url": "https://qoraapi.com/",
+      "openai_compatible": "yes",
+      "base_url": "https://qoraapi.com/v1",
+      "free_allowance": "$5 trial credit on request (email support or DM @QoraAPI); not automatic",
+      "tokens_per_day": null,
+      "limits": "Pay as you go after; $50 minimum top-up",
+      "card_required": "Unspecified",
+      "notes": "API relay gateway, 350+ models, also Anthropic-format at https://qoraapi.com.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-14",
+      "last_updated": "2026-11-14"
     }
   ]
 }
