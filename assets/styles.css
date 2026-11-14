@@ -262,7 +262,7 @@ details.directory summary::after{content:" ▾";color:var(--faint)}
 .model-links a{font-weight:600}
 
 /* Compact first-screen chrome */
-.how-section{margin:0 0 22px}
+.how-section{margin:0 auto 22px}
 .how-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:4px 14px;box-shadow:var(--shadow)}
 .how-box > summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;padding:10px 0}
 .how-box > summary::-webkit-details-marker{display:none}
