@@ -1,8 +1,15 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-14T03:44:57Z",
+  "last_updated": "2026-11-16T16:00:41Z",
   "changelog": [
+    {
+      "date": "2026-11-16",
+      "items": [
+        "Added Baichuan AI.",
+        "Added Baidu Qianfan."
+      ]
+    },
     {
       "date": "2026-11-14",
       "items": [
@@ -2591,6 +2598,44 @@
       "category": "gateway",
       "first_reported": "2026-11-14",
       "last_updated": "2026-11-14"
+    },
+    {
+      "id": "baichuan",
+      "name": "Baichuan AI",
+      "url": "https://platform.baichuan-ai.com/prices",
+      "openai_compatible": "yes",
+      "base_url": "https://api.baichuan-ai.com/v1",
+      "free_allowance": "¥80 one-time signup credit (about 10M Baichuan2-Turbo tokens), valid 3 months",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "China-based platform; Chinese-language console.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-16",
+      "last_updated": "2026-11-16",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
+    },
+    {
+      "id": "baidu-qianfan",
+      "name": "Baidu Qianfan",
+      "url": "https://cloud.baidu.cn/doc/qianfan/s/Imi2rpirg",
+      "openai_compatible": "yes",
+      "base_url": "https://qianfan.baidubce.com/v2",
+      "free_allowance": "1M free tokens each on 17 models (ERNIE 4.5, DeepSeek, Qwen3, Kimi K2), one-time, valid 3 months",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "Unspecified",
+      "notes": "Online inference only, not batch. China-based platform; Chinese-language console.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-16",
+      "last_updated": "2026-11-16",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     }
   ]
 }

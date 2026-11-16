@@ -1,9 +1,9 @@
 # Free LLM API Tokens Tracker — full provider list
 
-Snapshot: 14 Nov 2026, 03:44 UTC
+Snapshot: 16 Nov 2026, 16:00 UTC
 Canonical: https://freellmapi.link/
 Source: https://freellmapi.link/data.json
-Counts: 124 listed, 120 active, 40 official (active), 112 OpenAI compatible (active).
+Counts: 126 listed, 122 active, 42 official (active), 114 OpenAI compatible (active).
 “Not published” means the provider did not publish that figure. Do not invent a number.
 
 - 1vy | active | category=gateway | openai_compatible=Yes | allowance=$1 free credit on signup, 100+ models on one key (15% markup after) | tokens_per_day=Not published | limits=Not published | card=Not published | phone=Not published | free_type=Not published | base_url=https://api.1vy.ai/v1 | relay_risk=yes | url=https://1vy.ai/ | last_verified=2026-11-11
@@ -21,6 +21,8 @@ Counts: 124 listed, 120 active, 40 official (active), 112 OpenAI compatible (act
 - APIBridge | active | category=gateway | openai_compatible=Yes | allowance=10,000 tokens/day (limited time), 30+ models | tokens_per_day=10,000 | limits=Not published | card=Not published | phone=Not published | free_type=Not published | base_url=https://api.mobike.io/v1 | relay_risk=yes | url=https://www.mobike.io/ | last_verified=2026-10-23
 - APInex | active | category=gateway | openai_compatible=Yes | allowance=3M tokens/day on free-category models | tokens_per_day=3,000,000 | limits=5 requests/min per IP (free) | card=No | phone=Not published | free_type=Not published | base_url=https://api.apinex.bond/v1 | relay_risk=yes | url=https://apinex.bond/#pricing | last_verified=2026-10-23
 - ArcaneAPI | active | category=gateway | openai_compatible=Yes | allowance=$10 free credit on signup, 53 models | tokens_per_day=Not published | limits=100 req/min on Free; tokens/day unspecified | card=No | phone=Not published | free_type=Not published | base_url=Not published | relay_risk=yes | url=https://arcaneapi.com/ | last_verified=2026-11-11
+- Baichuan AI | active | category=official | openai_compatible=Yes | allowance=¥80 one-time signup credit (about 10M Baichuan2-Turbo tokens), valid 3 months | tokens_per_day=Not published | limits=Not published | card=No | phone=Not published | free_type=trial | base_url=https://api.baichuan-ai.com/v1 | relay_risk=no | url=https://platform.baichuan-ai.com/prices | last_verified=2026-11-16
+- Baidu Qianfan | active | category=official | openai_compatible=Yes | allowance=1M free tokens each on 17 models (ERNIE 4.5, DeepSeek, Qwen3, Kimi K2), one-time, valid 3 months | tokens_per_day=Not published | limits=Not published | card=Not published | phone=Not published | free_type=trial | base_url=https://qianfan.baidubce.com/v2 | relay_risk=no | url=https://cloud.baidu.cn/doc/qianfan/s/Imi2rpirg | last_verified=2026-11-16
 - Batchrate | active | category=gateway | openai_compatible=Yes | allowance=One-time 10M tokens after email verify | tokens_per_day=Not published | limits=Not published | card=Not published | phone=Not published | free_type=trial | base_url=https://api.batchrate.ai/v1 | relay_risk=no | url=https://batchrate.ai/ | last_verified=2026-10-13
 - Bay of Assets / Routeriva | active | category=gateway | openai_compatible=Not published | allowance=500K one-time trial tokens | tokens_per_day=Not published | limits=Not published | card=Not published | phone=Not published | free_type=trial | base_url=Not published | relay_risk=yes | url=https://bayofassets.com/ | last_verified=2026-10-22
 - BazaarLink | active | category=gateway | openai_compatible=Yes | allowance=Signup trial credits + 6 free models | tokens_per_day=Not published | limits=10 RPM / 60 units | card=No | phone=Not published | free_type=trial | base_url=https://api.bazaarlink.ai/v1 | relay_risk=yes | url=https://bazaarlink.ai/ | last_verified=2026-10-28

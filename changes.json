@@ -1,7 +1,33 @@
 {
   "source": "git",
-  "last_updated": "2026-11-14T03:44:57Z",
+  "last_updated": "2026-11-16T16:00:41Z",
   "days": [
+    {
+      "date": "2026-11-14",
+      "latest_iso": "2026-11-14T03:44:58+00:00",
+      "commits": [
+        "f3473911408f0cb2f008d0865715ef7a5fdebbf9"
+      ],
+      "added": [
+        {
+          "id": "amd-token-lab",
+          "name": "AMD Token Lab"
+        },
+        {
+          "id": "nflashx",
+          "name": "NFlashX"
+        },
+        {
+          "id": "qora-api",
+          "name": "Qora API"
+        }
+      ],
+      "removed": [],
+      "changed": [],
+      "catalogue_notes": [],
+      "notes": [],
+      "initial": null
+    },
     {
       "date": "2026-11-13",
       "latest_iso": "2026-11-13T22:05:19+00:00",
