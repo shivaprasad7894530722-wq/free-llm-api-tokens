@@ -3,6 +3,28 @@
   "last_updated": "2026-11-16T16:00:41Z",
   "days": [
     {
+      "date": "2026-11-16",
+      "latest_iso": "2026-11-16T16:00:42+00:00",
+      "commits": [
+        "338492210ff33f98c0359f3ca0caa7a9bba2ef7e"
+      ],
+      "added": [
+        {
+          "id": "baichuan",
+          "name": "Baichuan AI"
+        },
+        {
+          "id": "baidu-qianfan",
+          "name": "Baidu Qianfan"
+        }
+      ],
+      "removed": [],
+      "changed": [],
+      "catalogue_notes": [],
+      "notes": [],
+      "initial": null
+    },
+    {
       "date": "2026-11-14",
       "latest_iso": "2026-11-14T03:44:58+00:00",
       "commits": [

@@ -6,7 +6,14 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 14 Nov 2026 03:44:58 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2026 16:00:42 +0000</lastBuildDate>
+    <item>
+      <title>16 Nov 2026: 2 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-16</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-16</guid>
+      <pubDate>Mon, 16 Nov 2026 16:00:42 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 16 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Baichuan AI.&lt;/li&gt;&lt;li&gt;Added Baidu Qianfan.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>14 Nov 2026: 3 providers added</title>
       <link>https://freellmapi.link/new#2026-11-14</link>
