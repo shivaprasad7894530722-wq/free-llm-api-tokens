@@ -4,9 +4,10 @@
   "days": [
     {
       "date": "2026-11-17",
-      "latest_iso": "2026-11-17T03:31:38+00:00",
+      "latest_iso": "2026-11-17T08:38:11+00:00",
       "commits": [
-        "7256849ad4a3479452d5ab93318778c7e8efc2d1"
+        "7256849ad4a3479452d5ab93318778c7e8efc2d1",
+        "fab6d7d83632fc897916db22e882b9ff1ff1c21b"
       ],
       "added": [
         {
@@ -16,6 +17,10 @@
         {
           "id": "teapotrouter",
           "name": "Teapot Router"
+        },
+        {
+          "id": "synap",
+          "name": "Synap"
         }
       ],
       "removed": [],
@@ -30,8 +35,7 @@
       ],
       "catalogue_notes": [],
       "notes": [
-        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026).",
-        "Added Synap."
+        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026)."
       ],
       "initial": null
     },
