@@ -6,7 +6,14 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 16 Nov 2026 16:00:42 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Nov 2026 03:31:38 +0000</lastBuildDate>
+    <item>
+      <title>17 Nov 2026: 2 providers added, 1 updated</title>
+      <link>https://freellmapi.link/new#2026-11-17</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-17</guid>
+      <pubDate>Tue, 17 Nov 2026 03:31:38 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 17 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added 100milionseek.&lt;/li&gt;&lt;li&gt;Added Teapot Router.&lt;/li&gt;&lt;li&gt;Updated Gemini API (Google AI Studio): free allowance.&lt;/li&gt;&lt;li&gt;Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026).&lt;/li&gt;&lt;li&gt;Added Synap.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>16 Nov 2026: 2 providers added</title>
       <link>https://freellmapi.link/new#2026-11-16</link>

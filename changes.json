@@ -1,7 +1,40 @@
 {
   "source": "git",
-  "last_updated": "2026-11-17T03:31:37Z",
+  "last_updated": "2026-11-17T08:37:33Z",
   "days": [
+    {
+      "date": "2026-11-17",
+      "latest_iso": "2026-11-17T03:31:38+00:00",
+      "commits": [
+        "7256849ad4a3479452d5ab93318778c7e8efc2d1"
+      ],
+      "added": [
+        {
+          "id": "100milionseek",
+          "name": "100milionseek"
+        },
+        {
+          "id": "teapotrouter",
+          "name": "Teapot Router"
+        }
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "id": "gemini",
+          "name": "Gemini API (Google AI Studio)",
+          "fields": [
+            "free_allowance"
+          ]
+        }
+      ],
+      "catalogue_notes": [],
+      "notes": [
+        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026).",
+        "Added Synap."
+      ],
+      "initial": null
+    },
     {
       "date": "2026-11-16",
       "latest_iso": "2026-11-16T16:00:42+00:00",

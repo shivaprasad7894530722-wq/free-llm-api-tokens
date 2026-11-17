@@ -1,14 +1,15 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-17T03:31:37Z",
+  "last_updated": "2026-11-17T08:37:33Z",
   "changelog": [
     {
       "date": "2026-11-17",
       "items": [
         "Added 100milionseek.",
         "Added Teapot Router.",
-        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026)."
+        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026).",
+        "Added Synap."
       ]
     },
     {
@@ -2676,6 +2677,25 @@
       "category": "gateway",
       "first_reported": "2026-11-17",
       "last_updated": "2026-11-17"
+    },
+    {
+      "id": "synap",
+      "name": "Synap",
+      "url": "https://synap402.com/docs",
+      "openai_compatible": "yes",
+      "base_url": "https://synap402.com/v1",
+      "free_allowance": "100,000 tokens/day and 50 requests/day for the first 7 days, then 50,000 tokens/day and 10 requests/day on qwen3-coder-30b",
+      "tokens_per_day": 50000,
+      "limits": "10 requests/minute per key; 4,096 max output tokens; allowance resets 00:00 UTC; shared per account and per network address; global free cap",
+      "card_required": "No",
+      "notes": "Also has an Anthropic-style /v1/messages endpoint. Sign-up is Google sign-in or an email magic link. The free model is qwen3-coder-30b.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-17",
+      "last_updated": "2026-11-17",
+      "free_type": "ongoing",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified"
     }
   ]
 }
