@@ -1,8 +1,16 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-16T16:00:41Z",
+  "last_updated": "2026-11-17T03:31:37Z",
   "changelog": [
+    {
+      "date": "2026-11-17",
+      "items": [
+        "Added 100milionseek.",
+        "Added Teapot Router.",
+        "Gemini 4 Hydrogen and Gemini Decision 1 now listed as free of charge on the Free Tier (Nov 2026)."
+      ]
+    },
     {
       "date": "2026-11-16",
       "items": [
@@ -258,7 +266,7 @@
       "url": "https://ai.google.dev/gemini-api/docs/pricing",
       "openai_compatible": "yes",
       "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
-      "free_allowance": "Free tier on selected Gemini models",
+      "free_allowance": "Free tier on selected models, incl. Gemini 4 Hydrogen, Gemini Decision 1 (input) and Gemma 4",
       "tokens_per_day": null,
       "limits": "Per-model RPM/RPD on Google's rate-limit page",
       "card_required": "No",
@@ -266,7 +274,7 @@
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-03",
+      "last_updated": "2026-11-17",
       "free_type": "Unspecified",
       "phone_required": "Unspecified",
       "data_training": "Yes"
@@ -2636,6 +2644,38 @@
       "free_type": "trial",
       "phone_required": "Unspecified",
       "data_training": "Unspecified"
+    },
+    {
+      "id": "100milionseek",
+      "name": "100milionseek",
+      "url": "https://100milionseek.top/",
+      "openai_compatible": "yes",
+      "base_url": "https://100milionseek.top/v1",
+      "free_allowance": "100M tokens/day on deepseek-v4.1-flash-free (400M/day promo until 20 Nov 2026 19:14 UTC)",
+      "tokens_per_day": 100000000,
+      "limits": "Up to 5 concurrent requests; resets 00:00 UTC",
+      "card_required": "No",
+      "notes": "Unofficial DeepSeek relay. Email + human check. As of 17 Nov 2026 new sign-ups are paused while capacity is restored.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-17",
+      "last_updated": "2026-11-17"
+    },
+    {
+      "id": "teapotrouter",
+      "name": "Teapot Router",
+      "url": "https://teapotrouter.com/",
+      "openai_compatible": "yes",
+      "base_url": "https://api.teapotrouter.com/v1",
+      "free_allowance": "Small one-time trial credit on sign-up (amount unpublished)",
+      "tokens_per_day": null,
+      "limits": "Unspecified",
+      "card_required": "No",
+      "notes": "Homepage says sign-up includes trial credit; billing docs say to ask an admin for test credit. Also Anthropic/Claude Code compatible.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-17",
+      "last_updated": "2026-11-17"
     }
   ]
 }
