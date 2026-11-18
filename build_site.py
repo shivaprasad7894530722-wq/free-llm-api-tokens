@@ -361,7 +361,7 @@ def factbox(s: dict) -> str:
         ("Rate limits", esc(published(s.get("limits")))),
         ("Card required", esc(published(s.get("card_required")))),
         ("Phone required", esc(published(phone_of(s)))),
-        ("Offer type", esc(published(s.get("free_type")))),
+        ("Offer type", esc(free_type_label(s.get("free_type")))),
         ("Free-tier data used for training", esc(published(data_training_of(s)))),
         ("Base URL", esc(published(s.get("base_url"))) if not has_base(s) else f"<code>{esc(s['base_url'])}</code>"),
         ("Relay warning", "Yes — treat as a relay or reseller" if s.get("relay_risk") else "No"),
@@ -397,6 +397,30 @@ def is_unspecified(v) -> bool:
 
 def free_type_of(s: dict) -> str:
     return flag_value(s.get("free_type")).lower()
+
+
+FREE_TYPE_LABELS = {
+    "ongoing": "Free forever",
+    "trial": "Free credit",
+    "with_paid": "Free with paid plan",
+}
+
+
+def free_type_label(v) -> str:
+    key = flag_value(v).lower()
+    if key in {"unspecified", "none", ""}:
+        return "Not published"
+    return FREE_TYPE_LABELS.get(key, published(v))
+
+
+def free_type_badge(ft: str) -> str:
+    if ft == "trial":
+        return '<span class="b trial">Free credit</span>'
+    if ft == "ongoing":
+        return '<span class="b ongoing">Free forever</span>'
+    if ft == "with_paid":
+        return '<span class="b withpaid">Free with paid plan</span>'
+    return ""
 
 
 def phone_of(s: dict) -> str:
@@ -503,8 +527,8 @@ def write_schema_json() -> str:
                     "last_updated": {"type": "string", "description": "Date this entry was last checked against official pages."},
                     "free_type": {
                         "type": "string",
-                        "enum": ["ongoing", "trial", "Unspecified"],
-                        "description": "ongoing = renewing free tier; trial = one-time or time-limited credit. Unspecified if official pages are unclear.",
+                        "enum": ["ongoing", "trial", "with_paid", "Unspecified"],
+                        "description": "ongoing = Free forever (renewing free tier); trial = Free credit (one-time or time-limited); with_paid = Free with paid plan. Unspecified if official pages are unclear.",
                     },
                     "phone_required": {"$ref": "#/$defs/yesNo"},
                     "data_training": {
@@ -1197,8 +1221,8 @@ HOME_FAQS = [
         "Only some providers say so on their official pages. Use the “No phone needed” filter to see entries we could confirm do not require a phone. If the field says “Not published”, check their sign-up page — we do not guess.",
     ),
     (
-        "What is the difference between ongoing free and a trial?",
-        "“Ongoing free” is a renewing free tier. “Trial / one-time” is a signup credit or a time-limited allowance. We only set this when official pages make the type clear; otherwise it stays “Not published”.",
+        "What do the offer type badges mean?",
+        "“Free forever” is a renewing free tier. “Free credit” is a signup credit or a time-limited allowance. “Free with paid plan” is a free API that is only included with a paid product. We only set this when official pages make the type clear; otherwise it stays “Not published”.",
     ),
     (
         "Why does it say “Not published”?",
@@ -1339,10 +1363,7 @@ def provider_card_html(s: dict) -> str:
     if s.get("relay_risk"):
         badges += '<span class="b risk">Relay warning</span>'
     ft = free_type_of(s)
-    if ft == "trial":
-        badges += '<span class="b trial">Trial / one-time</span>'
-    elif ft == "ongoing":
-        badges += '<span class="b ongoing">Ongoing free</span>'
+    badges += free_type_badge(ft)
     if dropped:
         badges += '<span class="b end">Ended</span>'
     if has_base(s):
@@ -1381,7 +1402,7 @@ def provider_card_html(s: dict) -> str:
         f'<div><dt>Tokens per day</dt><dd>{esc(tpd)}</dd></div>'
         f'<div><dt>Card needed</dt><dd>{esc(published(s.get("card_required")))}</dd></div>'
         f'<div><dt>Phone needed</dt><dd>{esc(phone)}</dd></div>'
-        f'<div><dt>Offer type</dt><dd>{esc(published(s.get("free_type")))}</dd></div>'
+        f'<div><dt>Offer type</dt><dd>{esc(free_type_label(s.get("free_type")))}</dd></div>'
         f'</div>'
         f'<div class="base"><dt>Base URL</dt><div class="base-row">{base}</div></div>'
         f'<div class="extra"><dt>Limits</dt><dd>{esc(published(s.get("limits")))}</dd></div>'
@@ -1420,7 +1441,7 @@ def provider_table_html(data) -> str:
             f"<td>{esc(fmt_num(s.get('tokens_per_day')))}</td>"
             f"<td>{esc(published(s.get('card_required')))}</td>"
             f"<td>{esc(published(phone_of(s)))}</td>"
-            f"<td>{esc(published(s.get('free_type')))}</td>"
+            f"<td>{esc(free_type_label(s.get('free_type')))}</td>"
             f"<td>{base}</td>"
             f"<td>{'Yes' if s.get('relay_risk') else 'No'}</td>"
             f"<td>{esc(fmt_date(s.get('last_updated')))}</td>"
@@ -2427,7 +2448,7 @@ Every quota, price, rate limit and endpoint is copied from the provider’s own 
             f"openai_compatible={oai_label(s)} | allowance={published(s.get('free_allowance'))} | "
             f"tokens_per_day={fmt_num(s.get('tokens_per_day'))} | limits={published(s.get('limits'))} | "
             f"card={published(s.get('card_required'))} | phone={published(phone_of(s))} | "
-            f"free_type={published(s.get('free_type'))} | "
+            f"free_type={free_type_label(s.get('free_type'))} | "
             f"base_url={published(s.get('base_url'))} | "
             f"relay_risk={'yes' if s.get('relay_risk') else 'no'} | url={s['url']} | "
             f"last_verified={s.get('last_updated')}"

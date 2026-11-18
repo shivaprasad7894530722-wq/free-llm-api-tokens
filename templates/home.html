@@ -68,13 +68,14 @@ const client = new OpenAI({
         <div class="filters">
           <label class="chip"><input type="checkbox" id="oai"> OpenAI compatible</label>
           <label class="chip"><input type="checkbox" id="nocard"> No card needed</label>
-          <label class="chip"><input type="checkbox" id="ongoing"> Ongoing free</label>
+          <label class="chip"><input type="checkbox" id="ongoing"> Free forever</label>
           <label class="chip"><input type="checkbox" id="hastpd"> Has daily tokens</label>
           <details class="more-filters">
             <summary>More filters</summary>
             <div class="more-filters-body">
               <label class="chip"><input type="checkbox" id="nophone"> No phone needed</label>
-              <label class="chip"><input type="checkbox" id="trial"> Trial / one-time</label>
+              <label class="chip"><input type="checkbox" id="trial"> Free credit</label>
+              <label class="chip"><input type="checkbox" id="withpaid"> Free with paid plan</label>
               <label class="chip"><input type="checkbox" id="norisk"> Hide relays</label>
               <label class="chip"><input type="checkbox" id="showdropped"> Show ended offers</label>
             </div>
@@ -128,8 +129,8 @@ const client = new OpenAI({
       <p>Only some providers say so on their official pages. Use the “No phone needed” filter to see entries we could confirm do not require a phone. If the field says “Not published”, check their sign-up page — we do not guess.</p>
     </details>
     <details>
-      <summary>What is the difference between ongoing free and a trial?</summary>
-      <p>“Ongoing free” is a renewing free tier. “Trial / one-time” is a signup credit or a time-limited allowance. We only set this when official pages make the type clear; otherwise it stays “Not published”.</p>
+      <summary>What do the offer type badges mean?</summary>
+      <p>“Free forever” is a renewing free tier. “Free credit” is a signup credit or a time-limited allowance. “Free with paid plan” is a free API that is only included with a paid product. We only set this when official pages make the type clear; otherwise it stays “Not published”.</p>
     </details>
     <details>
       <summary>Why does it say “Not published”?</summary>
@@ -169,6 +170,13 @@ const flagOf = v => (v == null || String(v).trim() === "") ? "unspecified" : Str
 const phoneNotNeeded = s => flagOf(s.phone_required) === "no";
 const isOngoing = s => flagOf(s.free_type) === "ongoing";
 const isTrial = s => flagOf(s.free_type) === "trial";
+const isWithPaid = s => flagOf(s.free_type) === "with_paid";
+const FREE_TYPE_LABELS = {ongoing: "Free forever", trial: "Free credit", with_paid: "Free with paid plan"};
+const freeTypeLabel = v => {
+  const key = flagOf(v);
+  if (key === "unspecified" || key === "none") return "Not published";
+  return FREE_TYPE_LABELS[key] || published(v);
+};
 const allowanceText = s => published((s.free_allowance || "").replace(/^DROPPED:\s*/i, ""));
 const hasBase = s => s.base_url && String(s.base_url).toLowerCase() !== "unspecified";
 const starterCode = s => {
@@ -187,6 +195,7 @@ function render() {
   const nophone = document.getElementById("nophone").checked;
   const ongoing = document.getElementById("ongoing").checked;
   const trial = document.getElementById("trial").checked;
+  const withpaid = document.getElementById("withpaid").checked;
   const nr = document.getElementById("norisk").checked;
   const ht = document.getElementById("hastpd").checked;
   const showDropped = document.getElementById("showdropped").checked;
@@ -200,10 +209,11 @@ function render() {
     if (nophone && !phoneNotNeeded(s)) return false;
     if (ongoing && !isOngoing(s)) return false;
     if (trial && !isTrial(s)) return false;
+    if (withpaid && !isWithPaid(s)) return false;
     if (nr && s.relay_risk) return false;
     if (ht && !s.tokens_per_day) return false;
     if (q) {
-      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required, s.phone_required, s.free_type].join(" ").toLowerCase();
+      const hay = [s.name, s.url, s.base_url, s.free_allowance, s.limits, s.notes, s.card_required, s.phone_required, s.free_type, freeTypeLabel(s.free_type)].join(" ").toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -231,8 +241,9 @@ function render() {
           : '<span class="b no">OpenAI: not published</span>';
     const tpdB = s.tokens_per_day ? '<span class="b tpd">' + esc(fmtNum(s.tokens_per_day)) + ' / day</span>' : "";
     const ft = flagOf(s.free_type);
-    const typeB = ft === "trial" ? '<span class="b trial">Trial / one-time</span>'
-      : ft === "ongoing" ? '<span class="b ongoing">Ongoing free</span>' : "";
+    const typeB = ft === "trial" ? '<span class="b trial">Free credit</span>'
+      : ft === "ongoing" ? '<span class="b ongoing">Free forever</span>'
+      : ft === "with_paid" ? '<span class="b withpaid">Free with paid plan</span>' : "";
     const base = hasBase(s)
       ? '<code title="' + esc(s.base_url) + '">' + esc(s.base_url) + '</code><button type="button" class="copy" title="Copy base URL" aria-label="Copy base URL" data-c="' + esc(s.base_url) + '">Copy</button>'
       : '<span class="mut">Not published</span>';
@@ -262,7 +273,7 @@ function render() {
         '<div><dt>Tokens per day</dt><dd>' + (s.tokens_per_day ? s.tokens_per_day.toLocaleString("en-GB") : "Not published") + '</dd></div>' +
         '<div><dt>Card needed</dt><dd>' + esc(published(s.card_required)) + '</dd></div>' +
         '<div><dt>Phone needed</dt><dd>' + esc(published(s.phone_required)) + '</dd></div>' +
-        '<div><dt>Offer type</dt><dd>' + esc(published(s.free_type)) + '</dd></div>' +
+        '<div><dt>Offer type</dt><dd>' + esc(freeTypeLabel(s.free_type)) + '</dd></div>' +
       '</div>' +
       '<div class="base"><dt>Base URL</dt><div class="base-row">' + base + '</div></div>' +
       '<div class="extra"><dt>Limits</dt><dd>' + esc(published(s.limits)) + '</dd></div>' +
@@ -295,7 +306,7 @@ fetch("/data.json", {cache:"no-store"}).then(r => {
   DATA = d;
   document.getElementById("statCount").textContent = String(d.sites.length);
   document.getElementById("updated").textContent = utcStamp(d.last_updated);
-  ["q","oai","nocard","nophone","ongoing","trial","norisk","hastpd","showdropped","sort"].forEach(id =>
+  ["q","oai","nocard","nophone","ongoing","trial","withpaid","norisk","hastpd","showdropped","sort"].forEach(id =>
     document.getElementById(id).addEventListener("input", render)
   );
   render();

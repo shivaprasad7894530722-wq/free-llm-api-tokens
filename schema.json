@@ -159,9 +159,10 @@
           "enum": [
             "ongoing",
             "trial",
+            "with_paid",
             "Unspecified"
           ],
-          "description": "ongoing = renewing free tier; trial = one-time or time-limited credit. Unspecified if official pages are unclear."
+          "description": "ongoing = Free forever (renewing free tier); trial = Free credit (one-time or time-limited); with_paid = Free with paid plan. Unspecified if official pages are unclear."
         },
         "phone_required": {
           "$ref": "#/$defs/yesNo"

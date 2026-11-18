@@ -1,7 +1,66 @@
 {
   "source": "git",
-  "last_updated": "2026-11-18T03:35:51Z",
+  "last_updated": "2026-11-18T03:45:18Z",
   "days": [
+    {
+      "date": "2026-11-18",
+      "latest_iso": "2026-11-18T03:35:59+00:00",
+      "commits": [
+        "a8bce3c35c56b3da28f5818b552e8ff672967fa4"
+      ],
+      "added": [
+        {
+          "id": "flonno",
+          "name": "Flonno"
+        },
+        {
+          "id": "hpc-ai",
+          "name": "HPC-AI Model APIs"
+        }
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "id": "apinex",
+          "name": "APInex",
+          "fields": [
+            "free_allowance",
+            "tokens_per_day",
+            "limits",
+            "card_required",
+            "notes"
+          ]
+        },
+        {
+          "id": "iteracompute",
+          "name": "IteraCompute",
+          "fields": [
+            "free_allowance",
+            "notes"
+          ]
+        }
+      ],
+      "catalogue_notes": [],
+      "notes": [
+        "IteraCompute: free Auto access for new users ends 08:00 UTC on 24 Nov 2026.",
+        "APInex: daily free allowance now 25M tokens/day, unlocked by a single $5+ top-up; free tier 15 RPM.",
+        "Added DGrid.",
+        "Added Nebius Token Factory.",
+        "Added ReadyServer LLM API.",
+        "Added Scaleway Generative APIs.",
+        "Added Aiven AI Gateway.",
+        "Added Volcengine Ark.",
+        "Added Zhipu BigModel.",
+        "Added Ant Ling.",
+        "Cloudflare Workers AI: 10,000 Neurons/day resets 00:00 UTC; nine models now need paid billing.",
+        "OpenRouter: free-model limits are 20 requests/min and 50/day; 1,000/day after at least 10 credits purchased.",
+        "Z.ai: GLM-4.7-Flash, GLM-4.5-Flash and GLM-4.6V-Flash are free; GLM-5.3-Flash is paid.",
+        "Vercel AI Gateway: nvidia/nemotron-3.5-lightning-free has been free since 14 Oct 2026; a separate credit amount is not published.",
+        "IteraCompute: cutoff restated as 08:00 UTC on 24 Nov 2026; one request at a time; max output 8,192 tokens.",
+        "Offer type badges now use Free forever, Free credit, and Free with paid plan."
+      ],
+      "initial": null
+    },
     {
       "date": "2026-11-17",
       "latest_iso": "2026-11-17T08:38:11+00:00",
