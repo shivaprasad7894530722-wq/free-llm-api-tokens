@@ -1,8 +1,17 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-17T08:37:33Z",
+  "last_updated": "2026-11-18T03:35:51Z",
   "changelog": [
+    {
+      "date": "2026-11-18",
+      "items": [
+        "Added Flonno.",
+        "Added HPC-AI Model APIs.",
+        "IteraCompute: free Auto access for new users ends 24 Nov 2026 (00:00 PT).",
+        "APInex: daily free allowance now 25M tokens/day, unlocked by a single $5+ top-up; free tier 15 RPM."
+      ]
+    },
     {
       "date": "2026-11-17",
       "items": [
@@ -590,15 +599,15 @@
       "url": "https://apinex.bond/#pricing",
       "openai_compatible": "yes",
       "base_url": "https://api.apinex.bond/v1",
-      "free_allowance": "3M tokens/day on free-category models",
-      "tokens_per_day": 3000000,
-      "limits": "5 requests/min per IP (free)",
-      "card_required": "No",
-      "notes": "Cut from 10M to 3M/day on 23 Oct. Free models: free/gpt-6-luna, free/deepseek-v4.1-flash, free/gemini-3.8-flash. Paid 10/20/30-day plans. Model names are its own catalogue labels.",
+      "free_allowance": "25M free tokens/day after a single $5+ top-up; one-time Telegram trial tokens without top-up",
+      "tokens_per_day": 25000000,
+      "limits": "15 RPM per account (free tier)",
+      "card_required": "Top-up",
+      "notes": "Daily free tokens are locked until one top-up of $5 or more, then reset daily at 00:00 UTC. Free models (free/*) are metered by a per-model weight. Model names are its own catalogue labels.",
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-23",
+      "last_updated": "2026-11-18",
       "free_type": "Unspecified",
       "phone_required": "Unspecified",
       "data_training": "Unspecified"
@@ -1616,15 +1625,15 @@
       "url": "https://iteracompute.com/",
       "openai_compatible": "yes",
       "base_url": "https://api.iteracompute.com/v1",
-      "free_allowance": "30M tokens/month on Qwen3.8-27B",
+      "free_allowance": "30M tokens/month on the free Auto route (new free access ends 24 Nov 2026, 00:00 PT)",
       "tokens_per_day": null,
       "limits": "Unspecified",
       "card_required": "No",
-      "notes": "",
+      "notes": "From 24 Nov 2026 free Auto access is limited to accounts with a recharge completed before the cutoff or an active plan. Shared idle capacity; queues and rate limits apply.",
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-26",
-      "last_updated": "2026-10-26",
+      "last_updated": "2026-11-18",
       "free_type": "Unspecified",
       "phone_required": "Unspecified",
       "data_training": "Unspecified"
@@ -2696,6 +2705,38 @@
       "free_type": "ongoing",
       "phone_required": "Unspecified",
       "data_training": "Unspecified"
+    },
+    {
+      "id": "flonno",
+      "name": "Flonno",
+      "url": "https://www.flonno.com/",
+      "openai_compatible": "yes",
+      "base_url": "https://www.flonno.com/v1",
+      "free_allowance": "$1 one-time credit on signup after email verification (qwen3.8-27b)",
+      "tokens_per_day": null,
+      "limits": "60 requests/min (account)",
+      "card_required": "No",
+      "notes": "Single model (qwen3.8-27b). Also offers an Anthropic Messages subset on the same base.",
+      "relay_risk": true,
+      "category": "gateway",
+      "first_reported": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "hpc-ai",
+      "name": "HPC-AI Model APIs",
+      "url": "https://www.hpc-ai.com/blog/Introducing-Model-API",
+      "openai_compatible": "yes",
+      "base_url": "https://api.hpc-ai.com/inference/v1",
+      "free_allowance": "$2 one-time free credit (voucher claimed in Models Console)",
+      "tokens_per_day": null,
+      "limits": "5 RPM per model before first deposit (L0)",
+      "card_required": "Unspecified",
+      "notes": "Launch promotion; claim the voucher in the Models Console. Credit spends at model list prices.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-18",
+      "last_updated": "2026-11-18"
     }
   ]
 }
