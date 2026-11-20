@@ -4,9 +4,10 @@
   "days": [
     {
       "date": "2026-11-20",
-      "latest_iso": "2026-11-20T19:28:02+00:00",
+      "latest_iso": "2026-11-20T20:12:57+00:00",
       "commits": [
-        "8465c817ffed8883c0738a2602cdc32653d25eb9"
+        "8465c817ffed8883c0738a2602cdc32653d25eb9",
+        "1dc286141e4bdf53099e786034698d5290d19d89"
       ],
       "added": [
         {
@@ -52,6 +53,15 @@
           "name": "Ant Ling",
           "fields": [
             "free_allowance",
+            "notes"
+          ]
+        },
+        {
+          "id": "batchrate",
+          "name": "Batchrate",
+          "fields": [
+            "limits",
+            "card_required",
             "notes"
           ]
         }

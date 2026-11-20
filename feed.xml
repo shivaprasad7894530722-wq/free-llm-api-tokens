@@ -6,13 +6,13 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 20 Nov 2026 19:28:02 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 20 Nov 2026 20:12:57 +0000</lastBuildDate>
     <item>
-      <title>20 Nov 2026: 2 providers added, 4 updated</title>
+      <title>20 Nov 2026: 2 providers added, 5 updated</title>
       <link>https://freellmapi.link/new#2026-11-20</link>
       <guid isPermaLink="true">https://freellmapi.link/new#2026-11-20</guid>
-      <pubDate>Fri, 20 Nov 2026 19:28:02 +0000</pubDate>
-      <description>&lt;p&gt;Changes recorded on 20 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Logfare.&lt;/li&gt;&lt;li&gt;Added A4F.&lt;/li&gt;&lt;li&gt;Updated Inception (Mercury): official URL and notes.&lt;/li&gt;&lt;li&gt;Updated Maritaca AI: name, official URL, free allowance, rate limits and notes.&lt;/li&gt;&lt;li&gt;Updated 100milionseek: free allowance and notes.&lt;/li&gt;&lt;li&gt;Updated Ant Ling: free allowance and notes.&lt;/li&gt;&lt;li&gt;100milionseek: 400M tokens/day milestone window ended 19:14 UTC on 20 Nov 2026; allowance is back to 100M tokens/day.&lt;/li&gt;&lt;li&gt;Maritaca AI: S5-free is no longer listed on official pricing; API models are billed per token.&lt;/li&gt;&lt;li&gt;Ant Ling: Ling-3.2-flash launch free window was 2 weeks from 5 Nov 2026; official pricing updated 19 Nov 2026 lists paid rates. A remaining free-quota amount is not published.&lt;/li&gt;&lt;li&gt;Inception (Mercury): API remains available through 28 Dec 2026 and will not be served after that date.&lt;/li&gt;&lt;/ul&gt;</description>
+      <pubDate>Fri, 20 Nov 2026 20:12:57 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 20 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Logfare.&lt;/li&gt;&lt;li&gt;Added A4F.&lt;/li&gt;&lt;li&gt;Updated Inception (Mercury): official URL and notes.&lt;/li&gt;&lt;li&gt;Updated Maritaca AI: name, official URL, free allowance, rate limits and notes.&lt;/li&gt;&lt;li&gt;Updated 100milionseek: free allowance and notes.&lt;/li&gt;&lt;li&gt;Updated Ant Ling: free allowance and notes.&lt;/li&gt;&lt;li&gt;Updated Batchrate: rate limits, card requirement and notes.&lt;/li&gt;&lt;li&gt;100milionseek: 400M tokens/day milestone window ended 19:14 UTC on 20 Nov 2026; allowance is back to 100M tokens/day.&lt;/li&gt;&lt;li&gt;Maritaca AI: S5-free is no longer listed on official pricing; API models are billed per token.&lt;/li&gt;&lt;li&gt;Ant Ling: Ling-3.2-flash launch free window was 2 weeks from 5 Nov 2026; official pricing updated 19 Nov 2026 lists paid rates. A remaining free-quota amount is not published.&lt;/li&gt;&lt;li&gt;Inception (Mercury): API remains available through 28 Dec 2026 and will not be served after that date.&lt;/li&gt;&lt;/ul&gt;</description>
     </item>
     <item>
       <title>18 Nov 2026: 10 providers added, 8 updated</title>
