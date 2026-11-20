@@ -1,7 +1,70 @@
 {
   "source": "git",
-  "last_updated": "2026-11-18T03:45:18Z",
+  "last_updated": "2026-11-20T19:27:36Z",
   "days": [
+    {
+      "date": "2026-11-20",
+      "latest_iso": "2026-11-20T19:28:02+00:00",
+      "commits": [
+        "8465c817ffed8883c0738a2602cdc32653d25eb9"
+      ],
+      "added": [
+        {
+          "id": "logfare",
+          "name": "Logfare"
+        },
+        {
+          "id": "a4f",
+          "name": "A4F"
+        }
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "id": "inception",
+          "name": "Inception (Mercury)",
+          "fields": [
+            "url",
+            "notes"
+          ]
+        },
+        {
+          "id": "maritaca",
+          "name": "Maritaca AI",
+          "fields": [
+            "name",
+            "url",
+            "free_allowance",
+            "limits",
+            "notes"
+          ]
+        },
+        {
+          "id": "100milionseek",
+          "name": "100milionseek",
+          "fields": [
+            "free_allowance",
+            "notes"
+          ]
+        },
+        {
+          "id": "ant-ling",
+          "name": "Ant Ling",
+          "fields": [
+            "free_allowance",
+            "notes"
+          ]
+        }
+      ],
+      "catalogue_notes": [],
+      "notes": [
+        "100milionseek: 400M tokens/day milestone window ended 19:14 UTC on 20 Nov 2026; allowance is back to 100M tokens/day.",
+        "Maritaca AI: S5-free is no longer listed on official pricing; API models are billed per token.",
+        "Ant Ling: Ling-3.2-flash launch free window was 2 weeks from 5 Nov 2026; official pricing updated 19 Nov 2026 lists paid rates. A remaining free-quota amount is not published.",
+        "Inception (Mercury): API remains available through 28 Dec 2026 and will not be served after that date."
+      ],
+      "initial": null
+    },
     {
       "date": "2026-11-18",
       "latest_iso": "2026-11-18T03:46:18+00:00",

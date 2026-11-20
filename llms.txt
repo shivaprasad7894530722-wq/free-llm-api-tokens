@@ -5,12 +5,12 @@
 Canonical site: https://freellmapi.link/
 Contact: hello@lumiono.com
 Publisher: Free LLM API Tokens (independent tracker; not affiliated with any listed provider)
-Last tracker snapshot: 18 Nov 2026, 03:45 UTC
+Last tracker snapshot: 20 Nov 2026, 19:27 UTC
 Methodology: https://freellmapi.link/about
 
 ## Pages
 
-- [Provider list](https://freellmapi.link/): Searchable catalogue of 139 providers (135 active offers in the current snapshot).
+- [Provider list](https://freellmapi.link/): Searchable catalogue of 141 providers (136 active offers in the current snapshot).
 - [What’s new](https://freellmapi.link/new): Providers added, changed or removed, grouped by date (from git history of data.json).
 - [RSS feed](https://freellmapi.link/feed.xml): The same changelog as a feed.
 - [Model pages](https://freellmapi.link/models): Free API pages for model families named by at least two providers in our data.
