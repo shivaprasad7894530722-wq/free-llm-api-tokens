@@ -1044,16 +1044,17 @@
       "base_url": "https://api.batchrate.ai/v1",
       "free_allowance": "One-time 10M tokens after email verify",
       "tokens_per_day": null,
-      "limits": "Unspecified",
-      "card_required": "Unspecified",
-      "notes": "Files/Batches API only.",
+      "limits": "Batch only: 24h completion window; Rush (within 1h) at 1.5x rates",
+      "card_required": "No",
+      "notes": "Files/Batches API only (direct chat completions not supported). One-time 10M free tokens after email verification, no card, no time limit; shared by input and output on chat models, not Whisper.",
       "relay_risk": false,
       "category": "gateway",
       "first_reported": "2026-10-13",
-      "last_updated": "2026-10-13",
+      "last_updated": "2026-11-20",
       "free_type": "trial",
       "phone_required": "Unspecified",
-      "data_training": "Unspecified"
+      "data_training": "Unspecified",
+      "source": "https://batchrate.ai/pricing"
     },
     {
       "id": "paraloncloud",
