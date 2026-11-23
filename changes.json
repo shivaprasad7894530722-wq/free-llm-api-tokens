@@ -3,6 +3,102 @@
   "last_updated": "2026-11-23T07:12:11Z",
   "days": [
     {
+      "date": "2026-11-23",
+      "latest_iso": "2026-11-23T07:12:31+00:00",
+      "commits": [
+        "ef83ca4fe4f8f7920a2bc1187d4eca8427264411"
+      ],
+      "added": [
+        {
+          "id": "kimi",
+          "name": "Kimi (Moonshot)"
+        },
+        {
+          "id": "iflytek-spark",
+          "name": "iFlytek Spark"
+        },
+        {
+          "id": "xiaomi-mimo",
+          "name": "Xiaomi MiMo"
+        }
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "id": "groq",
+          "name": "Groq",
+          "fields": [
+            "notes"
+          ]
+        },
+        {
+          "id": "openrouter",
+          "name": "OpenRouter",
+          "fields": [
+            "notes"
+          ]
+        },
+        {
+          "id": "nvidia",
+          "name": "NVIDIA Build / NIM",
+          "fields": [
+            "notes"
+          ]
+        },
+        {
+          "id": "siliconflow",
+          "name": "SiliconFlow",
+          "fields": [
+            "url",
+            "free_allowance",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "alibaba",
+          "name": "Alibaba Cloud Model Studio",
+          "fields": [
+            "url",
+            "free_allowance",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "modelscope",
+          "name": "ModelScope API-Inference",
+          "fields": [
+            "url",
+            "free_allowance",
+            "limits",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "tencent-tokenhub",
+          "name": "Tencent Cloud TokenHub",
+          "fields": [
+            "openai_compatible",
+            "base_url",
+            "notes"
+          ]
+        }
+      ],
+      "catalogue_notes": [],
+      "notes": [
+        "Alibaba Cloud Model Studio: new-user free quota is 1 million tokens per eligible model for 90 days, Singapore region only; listed models include qwen4-max, qwen3.8-max, qwen3.8-flash, qwen3.8-27b, deepseek-v4.1-flash and glm-5.3.",
+        "Groq: qwen/qwen3.8-27b is on the free-tier rate-limit table at 30 requests/min, 1,000 requests/day and 200,000 tokens/day.",
+        "OpenRouter: baidu/ernie-5.5-flash-preview:free and inclusionai/ling-3.2-flash:free are listed among current :free models.",
+        "NVIDIA Build / NIM: free hosted endpoints include moonshotai/kimi-k3.1-pro and z-ai/glm-5.3-flash. The free endpoint for deepseek-ai/deepseek-v4.1-flash is listed as deprecated.",
+        "Tencent Cloud TokenHub: official OpenAI-compatible base URL added. Claiming or enabling a model freezes $30 for Hunyuan language models and $10 for other language models.",
+        "SiliconFlow: official pricing FAQ states new accounts can start with $1 in free credits. Latest DeepSeek V4, Qwen 3.8, GLM-5.3 and Kimi models are listed at paid per-token rates.",
+        "ModelScope API-Inference: usage is deducted in Magicubes; concurrency is dynamically adjusted; official examples include Qwen3.5 models."
+      ],
+      "initial": null
+    },
+    {
       "date": "2026-11-20",
       "latest_iso": "2026-11-20T20:12:57+00:00",
       "commits": [

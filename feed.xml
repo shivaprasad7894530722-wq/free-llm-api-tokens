@@ -6,7 +6,14 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 20 Nov 2026 20:12:57 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Nov 2026 07:12:31 +0000</lastBuildDate>
+    <item>
+      <title>23 Nov 2026: 3 providers added, 7 updated</title>
+      <link>https://freellmapi.link/new#2026-11-23</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-23</guid>
+      <pubDate>Mon, 23 Nov 2026 07:12:31 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 23 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Kimi (Moonshot).&lt;/li&gt;&lt;li&gt;Added iFlytek Spark.&lt;/li&gt;&lt;li&gt;Added Xiaomi MiMo.&lt;/li&gt;&lt;li&gt;Updated Groq: notes.&lt;/li&gt;&lt;li&gt;Updated OpenRouter: notes.&lt;/li&gt;&lt;li&gt;Updated NVIDIA Build / NIM: notes.&lt;/li&gt;&lt;li&gt;Updated SiliconFlow: official URL, free allowance, notes and offer type.&lt;/li&gt;&lt;li&gt;Updated Alibaba Cloud Model Studio: official URL, free allowance, notes and offer type.&lt;/li&gt;&lt;li&gt;Updated ModelScope API-Inference: official URL, free allowance, rate limits, notes and offer type.&lt;/li&gt;&lt;li&gt;Updated Tencent Cloud TokenHub: OpenAI compatibility, base URL and notes.&lt;/li&gt;&lt;li&gt;Alibaba Cloud Model Studio: new-user free quota is 1 million tokens per eligible model for 90 days, Singapore region only; listed models include qwen4-max, qwen3.8-max, qwen3.8-flash, qwen3.8-27b, deepseek-v4.1-flash and glm-5.3.&lt;/li&gt;&lt;li&gt;Groq: qwen/qwen3.8-27b is on the free-tier rate-limit table at 30 requests/min, 1,000 requests/day and 200,000 tokens/day.&lt;/li&gt;&lt;li&gt;OpenRouter: baidu/ernie-5.5-flash-preview:free and inclusionai/ling-3.2-flash:free are listed among current :free models.&lt;/li&gt;&lt;li&gt;NVIDIA Build / NIM: free hosted endpoints include moonshotai/kimi-k3.1-pro and z-ai/glm-5.3-flash. The free endpoint for deepseek-ai/deepseek-v4.1-flash is listed as deprecated.&lt;/li&gt;&lt;li&gt;Tencent Cloud TokenHub: official OpenAI-compatible base URL added. Claiming or enabling a model freezes $30 for Hunyuan language models and $10 for other language models.&lt;/li&gt;&lt;li&gt;SiliconFlow: official pricing FAQ states new accounts can start with $1 in free credits. Latest DeepSeek V4, Qwen 3.8, GLM-5.3 and Kimi models are listed at paid per-token rates.&lt;/li&gt;&lt;li&gt;ModelScope API-Inference: usage is deducted in Magicubes; concurrency is dynamically adjusted; official examples include Qwen3.5 models.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>20 Nov 2026: 2 providers added, 5 updated</title>
       <link>https://freellmapi.link/new#2026-11-20</link>
