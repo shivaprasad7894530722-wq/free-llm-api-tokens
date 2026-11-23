@@ -1,6 +1,6 @@
 {
   "source": "git",
-  "last_updated": "2026-11-23T07:12:11Z",
+  "last_updated": "2026-11-23T08:41:29Z",
   "days": [
     {
       "date": "2026-11-23",
@@ -94,7 +94,10 @@
         "NVIDIA Build / NIM: free hosted endpoints include moonshotai/kimi-k3.1-pro and z-ai/glm-5.3-flash. The free endpoint for deepseek-ai/deepseek-v4.1-flash is listed as deprecated.",
         "Tencent Cloud TokenHub: official OpenAI-compatible base URL added. Claiming or enabling a model freezes $30 for Hunyuan language models and $10 for other language models.",
         "SiliconFlow: official pricing FAQ states new accounts can start with $1 in free credits. Latest DeepSeek V4, Qwen 3.8, GLM-5.3 and Kimi models are listed at paid per-token rates.",
-        "ModelScope API-Inference: usage is deducted in Magicubes; concurrency is dynamically adjusted; official examples include Qwen3.5 models."
+        "ModelScope API-Inference: usage is deducted in Magicubes; concurrency is dynamically adjusted; official examples include Qwen3.5 models.",
+        "Re-verified all listings against official pages; removed 6 dead or paid-only providers (Flexlora, FreeTheAI, Teapot Router, YepAPI, Mango Inference, Novita AI).",
+        "Updated Aion Labs (Stripe card check), Bay of Assets -> Routeriva, rout.my (650K tokens/day), Mervex (200 RPD), AIHubMix (12 -free models), UnoRouter (144 :free), xKiro (26 free models), Ramp Router ($500 credits), Vireonix (20M in/200K out per hour), BlazeAPI (free.blazeapi.org), Bytez, Cerebras, Hyperbolic, Cohere, Hetzner, AnyAPI, Onomeo, Gonka Broker, Agnes AI, DreamPrompting, APIBridge, BazaarLink, and OrcaRouter.",
+        "Added 9 verified providers: AxForge, BlockRun, BeatAPI, Merkium, LLMTR, cheapllm.shop, SimpleLLM, PLaMo API (Preferred Networks), and SEA-LION API (AI Singapore)."
       ],
       "initial": null
     },
