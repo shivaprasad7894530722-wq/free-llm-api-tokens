@@ -140,7 +140,7 @@ except Exception:
     sha, msg = "", "manual deploy"
 
 compact = dict(separators=(",", ":"), ensure_ascii=False)
-code = """async () => {
+code = r"""async () => {
   const P = 'free-llm-api-tokens';
   const BODIES = %s;
   const ROUTES = %s;
