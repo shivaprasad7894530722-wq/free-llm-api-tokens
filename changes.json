@@ -4,9 +4,10 @@
   "days": [
     {
       "date": "2026-11-23",
-      "latest_iso": "2026-11-23T07:12:31+00:00",
+      "latest_iso": "2026-11-23T08:41:44+00:00",
       "commits": [
-        "ef83ca4fe4f8f7920a2bc1187d4eca8427264411"
+        "ef83ca4fe4f8f7920a2bc1187d4eca8427264411",
+        "c2ac3668df0f219738d494ad1b1654f871f5315d"
       ],
       "added": [
         {
@@ -20,9 +21,70 @@
         {
           "id": "xiaomi-mimo",
           "name": "Xiaomi MiMo"
+        },
+        {
+          "id": "axforge",
+          "name": "AxForge"
+        },
+        {
+          "id": "blockrun",
+          "name": "BlockRun"
+        },
+        {
+          "id": "beatapi",
+          "name": "BeatAPI"
+        },
+        {
+          "id": "merkium",
+          "name": "Merkium"
+        },
+        {
+          "id": "llmtr",
+          "name": "LLMTR"
+        },
+        {
+          "id": "cheapllm",
+          "name": "cheapllm.shop"
+        },
+        {
+          "id": "simplellm",
+          "name": "SimpleLLM"
+        },
+        {
+          "id": "plamo",
+          "name": "PLaMo API (Preferred Networks)"
+        },
+        {
+          "id": "sea-lion",
+          "name": "SEA-LION API (AI Singapore)"
         }
       ],
-      "removed": [],
+      "removed": [
+        {
+          "id": "yepapi",
+          "name": "YepAPI"
+        },
+        {
+          "id": "freetheai",
+          "name": "FreeTheAI"
+        },
+        {
+          "id": "flexlora",
+          "name": "Flexlora"
+        },
+        {
+          "id": "mango-inference",
+          "name": "Mango Inference"
+        },
+        {
+          "id": "novita",
+          "name": "Novita AI"
+        },
+        {
+          "id": "teapotrouter",
+          "name": "Teapot Router"
+        }
+      ],
       "changed": [
         {
           "id": "groq",
@@ -83,6 +145,268 @@
             "openai_compatible",
             "base_url",
             "notes"
+          ]
+        },
+        {
+          "id": "cohere",
+          "name": "Cohere",
+          "fields": [
+            "limits"
+          ]
+        },
+        {
+          "id": "cerebras",
+          "name": "Cerebras",
+          "fields": [
+            "limits",
+            "notes"
+          ]
+        },
+        {
+          "id": "unorouter",
+          "name": "UnoRouter",
+          "fields": [
+            "free_allowance",
+            "free_type"
+          ]
+        },
+        {
+          "id": "bazaarlink",
+          "name": "BazaarLink",
+          "fields": [
+            "free_allowance"
+          ]
+        },
+        {
+          "id": "dreamprompting",
+          "name": "DreamPrompting",
+          "fields": [
+            "limits",
+            "free_type"
+          ]
+        },
+        {
+          "id": "anyapi",
+          "name": "AnyAPI",
+          "fields": [
+            "card_required",
+            "free_type"
+          ]
+        },
+        {
+          "id": "gonka",
+          "name": "Gonka Broker",
+          "fields": [
+            "card_required",
+            "notes",
+            "free_type",
+            "phone_required"
+          ]
+        },
+        {
+          "id": "vireonix",
+          "name": "Vireonix",
+          "fields": [
+            "free_allowance",
+            "limits",
+            "free_type"
+          ]
+        },
+        {
+          "id": "infron",
+          "name": "Infron",
+          "fields": [
+            "free_type"
+          ]
+        },
+        {
+          "id": "orcarouter",
+          "name": "OrcaRouter",
+          "fields": [
+            "free_allowance",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "aihubmix",
+          "name": "AIHubMix",
+          "fields": [
+            "free_allowance",
+            "free_type"
+          ]
+        },
+        {
+          "id": "agnes",
+          "name": "Agnes AI",
+          "fields": [
+            "url",
+            "openai_compatible",
+            "base_url",
+            "free_allowance",
+            "limits",
+            "card_required",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "xkiro",
+          "name": "xKiro",
+          "fields": [
+            "free_allowance",
+            "card_required",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "blazeapi",
+          "name": "BlazeAPI",
+          "fields": [
+            "url",
+            "base_url",
+            "free_allowance",
+            "limits",
+            "card_required",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "onomeo",
+          "name": "Onomeo",
+          "fields": [
+            "limits",
+            "card_required",
+            "free_type"
+          ]
+        },
+        {
+          "id": "ramp",
+          "name": "Ramp Router",
+          "fields": [
+            "free_allowance",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "bytez",
+          "name": "Bytez",
+          "fields": [
+            "openai_compatible",
+            "base_url",
+            "limits",
+            "free_type"
+          ]
+        },
+        {
+          "id": "aionlabs",
+          "name": "Aion Labs",
+          "fields": [
+            "limits",
+            "card_required",
+            "notes",
+            "free_type",
+            "data_training"
+          ]
+        },
+        {
+          "id": "bayofassets",
+          "name": "Routeriva",
+          "fields": [
+            "name",
+            "url",
+            "openai_compatible",
+            "base_url",
+            "free_allowance",
+            "card_required",
+            "notes"
+          ]
+        },
+        {
+          "id": "apibridge",
+          "name": "APIBridge",
+          "fields": [
+            "free_allowance",
+            "free_type"
+          ]
+        },
+        {
+          "id": "routmy",
+          "name": "rout.my",
+          "fields": [
+            "free_allowance",
+            "tokens_per_day",
+            "limits",
+            "card_required",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "inferall",
+          "name": "InferAll",
+          "fields": [
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "mervex",
+          "name": "Mervex",
+          "fields": [
+            "free_allowance",
+            "limits",
+            "card_required",
+            "free_type"
+          ]
+        },
+        {
+          "id": "hetzner-inference",
+          "name": "Hetzner Inference API (Experiments)",
+          "fields": [
+            "base_url",
+            "notes",
+            "free_type",
+            "data_training"
+          ]
+        },
+        {
+          "id": "hyperbolic",
+          "name": "Hyperbolic",
+          "fields": [
+            "limits"
+          ]
+        },
+        {
+          "id": "amd-token-lab",
+          "name": "AMD Token Lab",
+          "fields": [
+            "url",
+            "free_type"
+          ]
+        },
+        {
+          "id": "nflashx",
+          "name": "NFlashX",
+          "fields": [
+            "free_type"
+          ]
+        },
+        {
+          "id": "qora-api",
+          "name": "Qora API",
+          "fields": [
+            "free_type"
+          ]
+        },
+        {
+          "id": "100milionseek",
+          "name": "100milionseek",
+          "fields": [
+            "free_type"
           ]
         }
       ],
