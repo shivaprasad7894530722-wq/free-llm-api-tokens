@@ -1,7 +1,53 @@
 {
   "source": "git",
-  "last_updated": "2026-11-24T03:31:02Z",
+  "last_updated": "2026-11-25T05:36:59Z",
   "days": [
+    {
+      "date": "2026-11-24",
+      "latest_iso": "2026-11-24T03:31:14+00:00",
+      "commits": [
+        "bbbd0f46e20ab3308f64483cf2fb220377c970e9"
+      ],
+      "added": [
+        {
+          "id": "oneaiapikey",
+          "name": "One AI API Key"
+        },
+        {
+          "id": "freemodel",
+          "name": "FreeModel"
+        },
+        {
+          "id": "plugsky",
+          "name": "Plugsky"
+        },
+        {
+          "id": "dahl-inference",
+          "name": "Dahl Inference"
+        },
+        {
+          "id": "kiosapi",
+          "name": "Kiosapi.id"
+        },
+        {
+          "id": "meganova",
+          "name": "MegaNova"
+        },
+        {
+          "id": "moark",
+          "name": "Moark (Gitee AI)"
+        },
+        {
+          "id": "wallaby",
+          "name": "Wallaby"
+        }
+      ],
+      "removed": [],
+      "changed": [],
+      "catalogue_notes": [],
+      "notes": [],
+      "initial": null
+    },
     {
       "date": "2026-11-23",
       "latest_iso": "2026-11-23T08:41:44+00:00",

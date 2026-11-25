@@ -6,7 +6,14 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 23 Nov 2026 08:41:44 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 24 Nov 2026 03:31:14 +0000</lastBuildDate>
+    <item>
+      <title>24 Nov 2026: 8 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-24</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-24</guid>
+      <pubDate>Tue, 24 Nov 2026 03:31:14 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 24 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added One AI API Key.&lt;/li&gt;&lt;li&gt;Added FreeModel.&lt;/li&gt;&lt;li&gt;Added Plugsky.&lt;/li&gt;&lt;li&gt;Added Dahl Inference.&lt;/li&gt;&lt;li&gt;Added Kiosapi.id.&lt;/li&gt;&lt;li&gt;Added MegaNova.&lt;/li&gt;&lt;li&gt;Added Moark (Gitee AI).&lt;/li&gt;&lt;li&gt;Added Wallaby.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>23 Nov 2026: 12 providers added, 36 updated, 6 removed</title>
       <link>https://freellmapi.link/new#2026-11-23</link>
