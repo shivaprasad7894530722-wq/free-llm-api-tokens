@@ -6,7 +6,14 @@
     <atom:link href="https://freellmapi.link/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Providers added, changed or removed on the Free LLM API Tokens tracker, grouped by date.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 24 Nov 2026 03:31:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 25 Nov 2026 05:37:11 +0000</lastBuildDate>
+    <item>
+      <title>25 Nov 2026: 10 providers added</title>
+      <link>https://freellmapi.link/new#2026-11-25</link>
+      <guid isPermaLink="true">https://freellmapi.link/new#2026-11-25</guid>
+      <pubDate>Wed, 25 Nov 2026 05:37:11 +0000</pubDate>
+      <description>&lt;p&gt;Changes recorded on 25 Nov 2026.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Added Packet.ai Token Factory.&lt;/li&gt;&lt;li&gt;Added Qiniu Cloud Conatus Free.&lt;/li&gt;&lt;li&gt;Added Sarvam AI (Token Factory).&lt;/li&gt;&lt;li&gt;Added AI Horde.&lt;/li&gt;&lt;li&gt;Added LLM.kiwi.&lt;/li&gt;&lt;li&gt;Added APIsFreeLLM.&lt;/li&gt;&lt;li&gt;Added Sail Research.&lt;/li&gt;&lt;li&gt;Added Cerebellum.&lt;/li&gt;&lt;li&gt;Added Tinker (Thinking Machines Lab).&lt;/li&gt;&lt;li&gt;Added Infomaniak AI Services.&lt;/li&gt;&lt;/ul&gt;</description>
+    </item>
     <item>
       <title>24 Nov 2026: 8 providers added</title>
       <link>https://freellmapi.link/new#2026-11-24</link>

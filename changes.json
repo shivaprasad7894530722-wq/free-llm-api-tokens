@@ -3,6 +3,60 @@
   "last_updated": "2026-11-25T05:36:59Z",
   "days": [
     {
+      "date": "2026-11-25",
+      "latest_iso": "2026-11-25T05:37:11+00:00",
+      "commits": [
+        "8d8975e81bb664898f533a5331bad8f7a19d29f4"
+      ],
+      "added": [
+        {
+          "id": "packet",
+          "name": "Packet.ai Token Factory"
+        },
+        {
+          "id": "qiniu-conatus",
+          "name": "Qiniu Cloud Conatus Free"
+        },
+        {
+          "id": "sarvam",
+          "name": "Sarvam AI (Token Factory)"
+        },
+        {
+          "id": "ai-horde",
+          "name": "AI Horde"
+        },
+        {
+          "id": "llm-kiwi",
+          "name": "LLM.kiwi"
+        },
+        {
+          "id": "apisfreellm",
+          "name": "APIsFreeLLM"
+        },
+        {
+          "id": "sailresearch",
+          "name": "Sail Research"
+        },
+        {
+          "id": "cerebellum",
+          "name": "Cerebellum"
+        },
+        {
+          "id": "tinker",
+          "name": "Tinker (Thinking Machines Lab)"
+        },
+        {
+          "id": "infomaniak",
+          "name": "Infomaniak AI Services"
+        }
+      ],
+      "removed": [],
+      "changed": [],
+      "catalogue_notes": [],
+      "notes": [],
+      "initial": null
+    },
+    {
       "date": "2026-11-24",
       "latest_iso": "2026-11-24T03:31:14+00:00",
       "commits": [
