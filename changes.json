@@ -3,6 +3,56 @@
   "last_updated": "2026-11-26T02:47:15Z",
   "days": [
     {
+      "date": "2026-11-26",
+      "latest_iso": "2026-11-26T02:47:40+00:00",
+      "commits": [
+        "059cbec8b7429473b6e5586850fd10b522728e0f"
+      ],
+      "added": [
+        {
+          "id": "publicai",
+          "name": "Public AI Inference Utility"
+        },
+        {
+          "id": "baseten",
+          "name": "Baseten"
+        }
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "id": "fireworks",
+          "name": "Fireworks AI",
+          "fields": [
+            "url",
+            "free_allowance",
+            "limits",
+            "card_required",
+            "notes",
+            "free_type"
+          ]
+        },
+        {
+          "id": "100milionseek",
+          "name": "100milionseek",
+          "fields": [
+            "free_allowance",
+            "tokens_per_day",
+            "limits",
+            "notes",
+            "phone_required",
+            "data_training"
+          ]
+        }
+      ],
+      "catalogue_notes": [],
+      "notes": [
+        "Fireworks AI: official billing FAQ again describes a $1 starter credit.",
+        "100milionseek: 1T milestone raises the daily allowance to 500 million tokens until 3 Dec 2026 02:14 UTC."
+      ],
+      "initial": null
+    },
+    {
       "date": "2026-11-25",
       "latest_iso": "2026-11-25T05:37:11+00:00",
       "commits": [
