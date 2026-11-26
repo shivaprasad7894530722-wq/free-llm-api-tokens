@@ -1,8 +1,17 @@
 {
   "schema_version": 2,
   "data_use": "Personal and research use of this list is allowed. Bulk copying or commercial reuse requires permission. See https://freellmapi.link/terms",
-  "last_updated": "2026-11-25T05:36:59Z",
+  "last_updated": "2026-11-26T02:47:15Z",
   "changelog": [
+    {
+      "date": "2026-11-26",
+      "items": [
+        "Fireworks AI: official billing FAQ again describes a $1 starter credit.",
+        "100milionseek: 1T milestone raises the daily allowance to 500 million tokens until 3 Dec 2026 02:14 UTC.",
+        "Added Public AI Inference Utility.",
+        "Added Baseten."
+      ]
+    },
     {
       "date": "2026-11-25",
       "items": [
@@ -593,21 +602,22 @@
     {
       "id": "fireworks",
       "name": "Fireworks AI",
-      "url": "https://fireworks.ai/",
+      "url": "https://docs.fireworks.ai/faq-new/billing-pricing/what-happens-when-i-finish-my-1-dollar-credit",
       "openai_compatible": "yes",
       "base_url": "https://api.fireworks.ai/inference/v1",
-      "free_allowance": "None (signup credit removed)",
+      "free_allowance": "$1 starter credit",
       "tokens_per_day": null,
-      "limits": "Unspecified",
-      "card_required": "Unspecified",
-      "notes": "Signup credit removed (reported 15 Oct).",
+      "limits": "Tokens/day not published",
+      "card_required": "No",
+      "notes": "Official billing FAQ describes a $1 starter credit. After the credit is used, a payment method and additional credits are needed to continue.",
       "relay_risk": false,
       "category": "official",
       "first_reported": "2026-10-03",
-      "last_updated": "2026-10-15",
-      "free_type": "Unspecified",
+      "last_updated": "2026-11-26",
+      "free_type": "trial",
       "phone_required": "Unspecified",
-      "data_training": "Unspecified"
+      "data_training": "Unspecified",
+      "source": "https://docs.fireworks.ai/faq-new/billing-pricing/what-happens-when-i-finish-my-1-dollar-credit"
     },
     {
       "id": "alibaba",
@@ -2669,17 +2679,19 @@
       "url": "https://100milionseek.top/",
       "openai_compatible": "yes",
       "base_url": "https://100milionseek.top/v1",
-      "free_allowance": "100M tokens/day on deepseek-v4.1-flash-free",
-      "tokens_per_day": 100000000,
-      "limits": "Up to 5 concurrent requests; resets 00:00 UTC",
+      "free_allowance": "500 million tokens/day until 3 Dec 2026 02:14 UTC (1T milestone window); standard allowance is 100 million tokens/day",
+      "tokens_per_day": 500000000,
+      "limits": "Free plan: 5 requests/minute and 5 concurrent; daily cap resets 00:00 UTC",
       "card_required": "No",
-      "notes": "Unofficial DeepSeek relay. Email + human check. The 400M tokens/day milestone window ended 19:14 UTC on 20 Nov 2026; the standard allowance is 100M tokens/day. Official homepage presents sign-up as available.",
+      "notes": "Unofficial DeepSeek relay. Email plus a human check. The official homepage says the 1T milestone was reached at 02:14 UTC on 26 Nov 2026, raising every account to 500 million tokens/day until 3 Dec 2026 02:14 UTC, after which the standard 100 million tokens/day allowance applies again. Official page says prompts and responses are not stored.",
       "relay_risk": true,
       "category": "gateway",
       "first_reported": "2026-11-17",
-      "last_updated": "2026-11-23",
+      "last_updated": "2026-11-26",
       "free_type": "ongoing",
-      "source": "https://100milionseek.top/"
+      "source": "https://100milionseek.top/",
+      "phone_required": "No",
+      "data_training": "No"
     },
     {
       "id": "synap",
@@ -3524,6 +3536,46 @@
       "phone_required": "Unspecified",
       "data_training": "No",
       "source": "https://www.infomaniak.com/en/hosting/ai-services"
+    },
+    {
+      "id": "publicai",
+      "name": "Public AI Inference Utility",
+      "url": "https://platform.publicai.co/plans",
+      "openai_compatible": "yes",
+      "base_url": "https://api.publicai.co/v1",
+      "free_allowance": "$2 starter credit for every new user account",
+      "tokens_per_day": null,
+      "limits": "Free tier: 100 requests/minute per API key",
+      "card_required": "No",
+      "notes": "Official OpenAI-compatible API run by the nonprofit Metagov. Hosted models include Swiss AI Apertus, AISingapore SEA-LION and Allen AI Olmo. Token usage is billed against wallet credits at per-model prices on the Billing page. Requests require a User-Agent header. Contributing prompts to the Data Flywheel is opt-in.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-26",
+      "last_updated": "2026-11-26",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified",
+      "source": "https://platform.publicai.co/plans"
+    },
+    {
+      "id": "baseten",
+      "name": "Baseten",
+      "url": "https://docs.baseten.co/organization/billing",
+      "openai_compatible": "yes",
+      "base_url": "https://inference.baseten.co/v1",
+      "free_allowance": "New workspaces receive credits for testing and deployment (amount not published)",
+      "tokens_per_day": null,
+      "limits": "Tokens/day not published. Official docs return HTTP 429 when a rate limit is exceeded.",
+      "card_required": "No",
+      "notes": "Official OpenAI-compatible Model APIs. Hosted models include GLM 5.3, DeepSeek V4.1 Flash, Kimi K3 and GPT OSS 120B. An Anthropic-compatible Messages endpoint is documented at https://inference.baseten.co. Official billing docs say there is no separate perpetual free plan; starting credits are applied to the invoice, and models are deactivated if credits run out with no payment method.",
+      "relay_risk": false,
+      "category": "official",
+      "first_reported": "2026-11-26",
+      "last_updated": "2026-11-26",
+      "free_type": "trial",
+      "phone_required": "Unspecified",
+      "data_training": "Unspecified",
+      "source": "https://docs.baseten.co/organization/billing"
     }
   ]
 }
